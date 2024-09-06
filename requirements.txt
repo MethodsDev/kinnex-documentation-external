@@ -1,4 +1,1 @@
-pip install sphinx
-pip install -U ablog
-pip install sphinx-autoapi
 pip install sphinx-book-theme
