@@ -3,8 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-.. figure :: _images/mdl_logo.png
-   :scale: 45 %
+.. figure:: _images/mdl_logo.png
    :alt: Novel Methods and R&D
    :align: left
 
