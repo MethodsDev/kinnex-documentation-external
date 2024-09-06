@@ -3,19 +3,17 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-.. image :: images/MDL_logo2.png
-   :height: 100px
-   :width: 200 px
-   :scale: 50 %
-   :loading: embed
-   :alt: alternate text
+.. figure :: _images/mdl_logo.png
+   :scale: 45 %
+   :alt: Novel Methods and R&D
    :align: left
 
 
-Welcome to MDL documentation!
-+++++++++++++++++++++++++++++
 
-The purpose of this documentation is walk-through the various available computational methods and resources available for Kinnex products, to establish standard best-practices to explore the resulting datatypes and to introduce updated guides for analysing various Kinnex prodcuts.
+MDL documentation and resources for supporting Pacbio Kinnex
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+The purpose of this documentation is to walk-through the various available computational methods and resources available for Kinnex products, to establish standard best-practices to explore the resulting datatypes and to introduce updated guides for analysing various Kinnex prodcuts.
 
 From receiving sequencing data from Revio PacBio sequencing platforms, the document steps through various pre-processing workflows for obtaining cleaned s-reads suitable for downstream processing and various tertiary analysis workflows and vigenttes developed by the MDL team at BCL to explore Kinnex datatypes.
 
