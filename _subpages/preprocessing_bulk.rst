@@ -15,7 +15,7 @@ Overall Workflow:
    - Exploring isoform switches and isoform visualization with isoformSwitchAnalysisR
    - MDLgenomeview for inspecting read support
 
-.. figure:: _images/preprocess.svg
+.. figure:: ../_images/bulk_workflow.png
    :alt: Novel Methods and R&D
    :align: left
 
