@@ -7,7 +7,7 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = 'kinnex-docs-external'
-copyright = '2024, akhorgad'
+copyright = '2024, Methods Dev Lab'
 author = 'akhorgad'
 
 # -- General configuration ---------------------------------------------------
