@@ -3,18 +3,42 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
+.. image:: _images/kinnex.png
+   :alt: Novel Methods and R&D
+   :align: center
+
 .. figure:: _images/mdl_logo.png
    :alt: Novel Methods and R&D
    :align: left
 
 
-
 MDL documentation and resources for supporting Pacbio Kinnex
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-The purpose of this documentation is to walk-through the various available computational methods and resources available for Kinnex products, to establish standard best-practices to explore the resulting datatypes and to introduce updated guides for analysing various Kinnex prodcuts.
+The purpose of this documentation is to walk-through the various available computational methods and resources available for Kinnex products, 
+to establish standard best-practices to explore the resulting datatypes and 
+to introduce updated guides for analysing various Kinnex prodcuts.
 
-From receiving sequencing data from Revio PacBio sequencing platforms, the document steps through various pre-processing workflows for obtaining cleaned s-reads suitable for downstream processing and various tertiary analysis workflows and vigenttes developed by the MDL team at BCL to explore Kinnex datatypes.
+From receiving sequencing data from `PacBio's Revio <https://www.pacb.com/revio/>`_ sequencing platform, 
+the document steps through various pre-processing workflows for obtaining cleaned s-reads suitable for downstream processing and 
+various tertiary analysis workflows and vigenttes developed by the `MDL team <https://methodsdevlab.org/>`_ at `Broad Clinical Labs <https://broadclinicallabs.org/>`_ 
+to explore Kinnex datatypes.
+
+.. grid:: 2 
+
+    .. grid-item-card::  Kinnex Full Length 
+      :link: _subpages/preprocessing_bulk 
+      :link-type: doc
+
+      ``Pre-processing workflows`` to extract clean s-reads
+
+    .. grid-item-card::  Kinnex Single Cell
+      :link: _subpages/preprocessing_bulk
+      :link-type: doc
+
+      Single-cell ``preliminary processing`` workflows
+
+
 
 .. toctree::
    :maxdepth: 2
@@ -23,6 +47,7 @@ From receiving sequencing data from Revio PacBio sequencing platforms, the docum
    _subpages/pb_guidelines
    _subpages/preprocessing_bulk
    _subpages/readQC
+   _subpages/secondary_tertiary_processing.rst
 
 
 Doc set-up Notes:
@@ -42,7 +67,7 @@ Doc set-up Notes:
    
    a. Read level SQANTI with RNAQC+
 
-4. Analysis Vignettes for Kinnex Full Lnegth product type: 
+4. Analysis Vignettes for Kinnex Full Length product type: 
 
    a. Aligning to the genome - minimap2
    b. Isoform ID with IsoQuant 
@@ -64,7 +89,8 @@ Indices and tables
 * :ref:`search`
 
 
-Note:
+Foot Note:
+~~~~~~~~~~
 This is a dev-test version of rtd-website to house MDL documentation. First we are trying to create the scanpy theme.
 The theme for scanpy is sphinx-book-theme, with patches for readthedocs-sphinx-search
 
