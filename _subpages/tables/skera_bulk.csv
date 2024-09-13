@@ -1,0 +1,10 @@
+﻿Option name,example value,description
+input_bam,this.input_bam,"Replace ""input_bam"" with the column that contains the path to the input file in the sample table."
+arraysize,8,"Size of the MAS array, could be 8, 16 or 12 depending upon the library type"
+mas_adapters_fasta,"""gs://mdl-preprocess-refs/MAS_adapters/mas8_primers.fasta""",MAS adapters FASTA file for de-concatenation. Ref files can be found at `gs://mdl-preprocess-refs/MAS_adapters/`
+sample_id,this.movie_name,"Replace ""sample_id"" with the column that contains the name of the samples in the sample table. Recommended id is the movie name"
+gcs_output_dir,"""gs://mdl_terra_sandbox/test_data""",Output directory to organize intermediates and QC plots
+num_threads,8,Number of threads (set atleast equal to the number of cpu)
+cpu,8,Number of cpus
+,,
+,,

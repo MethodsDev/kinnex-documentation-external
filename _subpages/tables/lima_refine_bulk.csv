@@ -1,0 +1,12 @@
+﻿Option name,example value,description
+input_bam,this.skera_bam,"Replace ""skera_bam"" with the datatable column or a gs://path to s-reads generated with skera in part1."
+sample_id,this. sample_id,"Replace ""sample_id"" with the column or the sample name."
+trimPolyA,"""True""","Boolean set as ""True""/""False"" to remove polyA tails"
+clipAdapters,"""True""","Boolean set as ""True""/""False"" to remove MAS adapters"
+bulk_barcodes_fasta,"""gs://mdl-preprocess-refs/REF-10x_primers/10x_3kit_primers.fasta""",Provide  bulk_barcodes.fasta corresponding to the single cell kit used in library prep. Ref files can be found at  
+gcs_output_dir,"""gs://output_dir/""",Output directory to organize intermediates and QC plots
+num_threads,16,Number of threads (number of cpus are set equal to the number of threads)
+,,
+Outputs:,,
+lima_out,"""gs://output_dir/lima""",Output directory for lima outs
+refine_out,"""gs://output_dir/refine""",Output directory for refine outs
