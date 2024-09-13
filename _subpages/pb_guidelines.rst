@@ -5,7 +5,8 @@ SMRT Link v13 document
 ----------------------
 Release documentation
 ~~~~~~~~~~~~~~~~~~~~~
-`SMRT Link v13.0 release notes` <https://www.pacb.com/wp-content/uploads/SMRT-Link-Release-Notes-v13.0.pdf>
+`Preparing Single Cell kit <https://www.pacb.com/wp-content/uploads/Procedure-checklist-Preparing-Kinnex-libraries-using-Kinnex-single-cell-RNA-kit.pdf>`
+`SMRT Link v13.0 release notes <https://www.pacb.com/wp-content/uploads/SMRT-Link-Release-Notes-v13.0.pdf>`
 
 SMRT Link v13.0 software installation
 
