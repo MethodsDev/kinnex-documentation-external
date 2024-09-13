@@ -3,21 +3,25 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-.. image:: _images/kinnex.png
-   :alt: Novel Methods and R&D
-   :align: center
-
 .. figure:: _images/mdl_logo.png
    :alt: Novel Methods and R&D
-   :align: left
+   :scale: 25 %
+   :align: center
 
+.. image:: _images/kinnex_logo.png
+   :alt: Novel Methods and R&D
+   :scale:  75% 
+   :align: center
 
 MDL documentation and resources for supporting Pacbio Kinnex
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 The purpose of this documentation is to walk-through the various available computational methods and resources available for Kinnex products, 
 to establish standard best-practices to explore the resulting datatypes and 
-to introduce updated guides for analysing various Kinnex prodcuts.
+to introduce updated guides for analysing various Kinnex prodcuts. 
+
+For additional information on Kinnex, here is the orginal Nature biotechnolgy publication for Kinnex or `MAS-ISO-seq` (Multiplexed ArrayS ISOform sequencing) as it was orginally called, authored by Aziz Al'Khafaji from the Methods Development Lab (MDL) at Broad and serves as a great resource to learn more about the protocol and the resulting datatypes :
+   `High-throughput RNA isoform sequencing using programmed cDNA concatenation <https://doi.org/10.1038/s41587-023-01815-7>`_
 
 From receiving sequencing data from `PacBio's Revio <https://www.pacb.com/revio/>`_ sequencing platform, 
 the document steps through various pre-processing workflows for obtaining cleaned s-reads suitable for downstream processing and 
@@ -42,12 +46,17 @@ to explore Kinnex datatypes.
 
 .. toctree::
    :maxdepth: 2
+   :numbered:
    :caption: Index:
 
    _subpages/pb_guidelines
    _subpages/preprocessing_bulk
    _subpages/readQC
-   _subpages/secondary_tertiary_processing.rst
+   _subpages/secondary_processing
+   _subpages/tertiary_processing
+   _subpages/longIds_vignette
+   _subpages/genomeview
+
 
 
 Doc set-up Notes:
