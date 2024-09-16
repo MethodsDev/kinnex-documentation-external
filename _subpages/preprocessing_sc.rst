@@ -1,11 +1,8 @@
-Page Title
-+++++++++++
+b. Kinnex Single Cell
+=====================
 
-Heading1
-========
-
-Sub-heading1
----------------
+Kinnex Single Cell wOrkflow overview:
+-------------------------------------
 Option1 for sub1:
 ~~~~~~~~~~~~~~~~
 Option2 for sub1:

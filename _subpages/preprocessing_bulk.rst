@@ -15,7 +15,7 @@ Overall Workflow in a nutshell
    :align: left
 
 Preliminary analysis
-~~~~~~~~~~~~~~~~~~~~
+--------------------
 The pre-processing workflows extract clean s-reads using 3 tools as below which can then be provided to the alignment applications and other downstream workflows similar to those used to analyze Isoseq data.
 
    - `skera <https://skera.how/>`_ for de-concatenating the MAS arrays into individual cDNA molecules and generate segmented reads (s-reads),
@@ -73,5 +73,3 @@ The direct command executed here is:
    :header-rows: 1
 
 
-b. Kinnex Single Cell
-=====================

@@ -1,33 +1,17 @@
 
 Secondary Processing
 =====================
-Page Title
-++++++++
-
-Heading1
-=======
 
 Sub-heading1
 ---------------
 Option1 for sub1:
-~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~
 Option2 for sub1:
-~~~~~~~~~~~~~
-Option3 for sub1:
-~~~~~~~~~~~~~
-
-Heading2
-=======
-
-Sub-heading1
----------------
-
-Sub-heading2
----------------
+~~~~~~~~~~~~~~~~~
 
 
 High-level Workflow:
-~~~~~~~~~~~~~~~~~~~~
+--------------------
    
    - Performing Sample QC and PCA with `Ptr` utility from `Trinity toolkit <https://github.com/trinityrnaseq/trinityrnaseq/wiki>`_.
    - `minimap2 <https://lh3.github.io/minimap2/minimap2.html>`_ for aligning reads
