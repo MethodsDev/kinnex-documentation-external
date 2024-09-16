@@ -1,8 +1,12 @@
-Best practices for Kinnex:
-==========================
+Best practices and Resources for Kinnex:
+++++++++++++++++++++++++++++++++++++++++
+
+Kinnex Full Length Wet-Lab protocol:
+====================================
 
 SMRT Link v13 document
 ----------------------
+
 Release documentation
 ~~~~~~~~~~~~~~~~~~~~~
 `Preparing Single Cell kit <https://www.pacb.com/wp-content/uploads/Procedure-checklist-Preparing-Kinnex-libraries-using-Kinnex-single-cell-RNA-kit.pdf>`
@@ -16,3 +20,6 @@ Developer documentation
 SMRT Tools v13.0 reference guide
 SMRT Link v13.0 API use cases
 SMRT Link Python API reference v13.0
+
+Kinnex Single Cell Wet-Lab protocol:
+====================================
