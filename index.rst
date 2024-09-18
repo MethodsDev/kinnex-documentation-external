@@ -37,7 +37,7 @@ to explore Kinnex datatypes.
       ``Pre-processing workflows`` to extract clean s-reads
 
     .. grid-item-card::  Kinnex Single Cell
-      :link: _subpages/preprocessing_bulk
+      :link: _subpages/preprocessing_sc
       :link-type: doc
 
       Single-cell ``preliminary processing`` workflows
@@ -51,6 +51,7 @@ to explore Kinnex datatypes.
 
    _subpages/pb_guidelines
    _subpages/preprocessing_bulk
+   _subpages/preprocessing_sc
    _subpages/readQC
    _subpages/secondary_processing
    _subpages/tertiary_processing
