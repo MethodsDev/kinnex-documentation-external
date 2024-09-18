@@ -1,3 +1,6 @@
+Analysis workflows
+++++++++++++++++++
+
 Kinnex Single Cell
 =====================
 .. image:: ../_images/kinnex_sc_pb.png
