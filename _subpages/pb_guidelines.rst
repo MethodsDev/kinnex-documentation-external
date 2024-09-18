@@ -1,14 +1,12 @@
 Best practices and Resources for Kinnex:
 ++++++++++++++++++++++++++++++++++++++++
 
-Kinnex Full Length Wet-Lab protocol:
-====================================
+a. Kinnex Full Length Wet-Lab protocol:
+=======================================
 
-SMRT Link v13 document
-----------------------
+PacBio Documents and Resources
+-------------------------------
 
-Release documentation
-~~~~~~~~~~~~~~~~~~~~~
 `Preparing Single Cell kit <https://www.pacb.com/wp-content/uploads/Procedure-checklist-Preparing-Kinnex-libraries-using-Kinnex-single-cell-RNA-kit.pdf>`
 `SMRT Link v13.0 release notes <https://www.pacb.com/wp-content/uploads/SMRT-Link-Release-Notes-v13.0.pdf>`
 
@@ -21,5 +19,20 @@ SMRT Tools v13.0 reference guide
 SMRT Link v13.0 API use cases
 SMRT Link Python API reference v13.0
 
-Kinnex Single Cell Wet-Lab protocol:
-====================================
+- `Technical Overview <https://pacbio.cn/wp-content/uploads/Technical-overview-Kinnex-kits-for-single-cell-RNA-full-length-RNA-and-16S-rRNA-sequencing.pdf>`_ for all Kinnex kits 
+
+Special Notes from MDL:
+~~~~~~~~~~~~~~~~~~~~~~~
+
+
+b. Kinnex Single Cell Wet-Lab protocol:
+=======================================
+
+PacBio Documents and Resources
+-------------------------------
+
+`Checklist for preparing Kinnex libraries using Kinnex-single-cell-RNA kit: 
+<https://www.pacb.com/wp-content/uploads/Procedure-checklist-Preparing-Kinnex-libraries-using-Kinnex-single-cell-RNA-kit.pdf>`_
+
+Special Notes from MDL:
+~~~~~~~~~~~~~~~~~~~~~~~

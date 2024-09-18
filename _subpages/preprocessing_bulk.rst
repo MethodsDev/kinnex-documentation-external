@@ -4,8 +4,30 @@ The analysis workflows for Kinnex products are similar for pre-processing with a
 The preliminary processing mainly leverages various applications from PacBio Analysis Toolkit. 
 Most workflows have WDL wrappers publicly accessible via Dockstore with test data and reference files to follow along placed in public requester-pays Google Storage bucket.
 
-a. Kinnex Full Length 
+Kinnex Full Length 
 =====================
+
+.. image:: ../_images/kinnex_bulk_pb.png
+   :scale: 45%
+   :alt: Novel Methods and R&D
+   :align: right
+
+The PacBio Kinnex™ full-length RNA kit takes total RNA as input and 
+outputs a sequencing-ready library that results in an 8-fold throughput increase 
+compared to typical IsoSeq libraries. 
+
+Complete application note published by PAcbio for Kinnex Full Length can be found here : 
+`Application Note <https://www.pacb.com/wp-content/uploads/Application-note-Kinnex-full-length-RNA-kit-for-isoform-sequencing.pdf>`_
+
+Quick Notes:
+
+• Input 300 ng total RNA, RIN ≥7
+• Generate up to 12-plex barcoded cDNA using (Iso-Seq express 2.0 kit)
+• 2-day Kinnex library preparation using Kinnex full-length RNA kit 
+• Barcoded Kinnex adapters support up to 4-plex multiplexing
+• Total 48 samples per flowcell
+• ~40 million cDNA sequences
+  
 
 Overall Workflow in a nutshell
 ------------------------------
@@ -26,13 +48,11 @@ The pre-processing workflows extract clean s-reads using 3 tools as below which 
 ~~~~~~~~~
 The pbskera workflow, as detailed below, processes raw HiFi reads generated with Sequel2e and Revio Long Read sequencers. The HiFi reads are a current default, and can be plugged in directly into the workflow to get segmented s-reads. 
 
-{workflow details}
-   Workflow on Dockstore : `skera_w_QCplots.wdl <https://dockstore.org/my-workflows/github.com/MethodsDev/masseq_data_processing/pbskera_main>`_
+Workflow configuration for runnning these over cloud platforms supporting Cromwell like Terra can be found here:-
 
-   Workflow definiion on Github: `Kinnex Preliminary Processing <https://github.com/broadinstitute/kinnex-preliminary-processing>`_
-
-   Test Data can be found here (public, requester-pays) : 
-      `gs://mdl-preprocess-refs/test_data/m12345_123456_123456_s1.hifi_reads.bcM0003.bam` 
+      | Dockstore : `skera_w_QCplots.wdl <https://dockstore.org/my-workflows/github.com/MethodsDev/masseq_data_processing/pbskera_main>`_
+      | Github: `Kinnex Preliminary Processing <https://github.com/MethodsDev/masseq_data_processing>`_
+      | Test Data can be found here (public, requester-pays) : `gs://mdl-preprocess-refs/test_data/m12345_123456_123456_s1.hifi_reads.bcM0003.bam` 
 
 
 The direct command executed here is:
@@ -53,9 +73,12 @@ The direct command executed here is:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 This workflow uses 2 tools to extract clean s-reads from the skera.bam received above. 
 
-   Workflow on Dockstore : `bulk_demux.wdl <https://dockstore.org/workflows/github.com/MethodsDev/masseq_data_processing/bulk_demux>`_
-   Workflow definiion on Github: `Kinnex Preliminary Processing <https://github.com/broadinstitute/kinnex-preliminary-processing>`_
-   Test Data can be found here : `gs://mdl-preprocess-refs/test_data/m12345_123456_123456_s1.hifi_reads.bcM0003.bam` (public, requester-pays)
+Workflow configuration for runnning these over cloud platforms supporting Cromwell like Terra can be found here:-
+   
+      | Dockstore : `bulk_demux.wdl <https://dockstore.org/workflows/github.com/MethodsDev/masseq_data_processing/bulk_demux>`_
+      | Github : `Kinnex Preliminary Processing <https://github.com/MethodsDev/masseq_data_processing>`_
+      | Test Data: `gs://mdl-preprocess-refs/test_data/m12345_123456_123456_s1.hifi_reads.bcM0003.bam` (public, requester-pays)
+
 
 The direct command executed here is:
 
@@ -71,5 +94,4 @@ The direct command executed here is:
 .. csv-table:: lima
    :file: ../_subpages/tables/lima_refine_bulk.csv
    :header-rows: 1
-
 
