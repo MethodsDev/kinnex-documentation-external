@@ -1,11 +1,9 @@
 Vignette for extracting Long Ids
 ++++++++++++++++++++++++++++++++
 
-Sub-heading1
-------------
-Option1 for sub1:
-~~~~~~~~~~~~~~~~~
-Option2 for sub1:
-~~~~~~~~~~~~~~~~~
+.. toctree::
+   :maxdepth: 1
+   
+   ../jupyter-notebooks/id_mapping_from_gffcompare.ipynb
 
 

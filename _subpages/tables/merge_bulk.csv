@@ -1,0 +1,12 @@
+﻿option,example value,description
+barcode_to_sample,"""gs://kinnex_example_data/bulk8_test_data/
+kinnex_bulk8_test_idmap.csv""",csv with sampleid to barcode mapping as described above 
+bulk_barcodes_fasta,"""gs://mdl-preprocess-refs/Bulk_Lima_barcodes/
+bulk12_barcodes.fasta""",
+datasetId,"""kinnex_bulk8_test""",
+gcs_output_dir,"""gs://bucket/out_path""",GS location where merge folder will be created to hold merged reads and QC tables and plot
+lima_out,"""gs://kinnex_example_data/bulk8_test_data/lima""",
+refine_out,"""gs://kinnex_example_data/bulk8_test_data/refine""",
+mergeBams,"""True""","Boolean value default ""True"" to merge, ""False"" for only generate counts plot"
+cpu,"""${8}""",
+num_threads,"""${8}""",
