@@ -7,7 +7,7 @@ Kinnex Single Cell
 
 The PacBio Kinnex™ single-cell RNA kit takes as input singlecell cDNA and outputs a sequencing-ready library that
 results in a 16-fold throughput increase compared to
-regular single-cell Iso-Seq® libraries.
+regular single-cell Iso-Seq® libraries. More details on the sequecining platform can be found here: `PacBio's Single Cell FAQs <https://www.pacb.com/products-and-services/applications/rna-sequencing/single-cell-rna-sequencing/>`_
 
 Complete application note published by Pacbio can be found here:
 `Application note <https://www.pacb.com/wp-content/uploads/Application-note-Kinnex-single-cell-RNA-kit-for-single-cell-isoform-sequencing.pdf>`_
@@ -66,12 +66,41 @@ The direct command executed here is:
    :file: ../_subpages/tables/skera_bulk.csv
    :header-rows: 1
 
+
+Example of QC plots generated :
+
+.. list-table:: 
+    :widths: 35 32 33
+
+    * - .. figure:: ../_images/m84014_240128_083549_s3_sub0005.bcM0003.readlen_hist.png
+           :alt: m84014_240128_083549_s3_sub0005.bcM0003.readlen_hist
+
+           Read Length Histogram
+
+      - .. figure:: ../_images/m84014_240128_083549_s3_sub0005.bcM0003.ligations_heatmap.png
+           :alt: m84014_240128_083549_s3_sub0005.bcM0003.ligations_heatmap
+
+           Ligation Heatmap
+
+      - .. figure:: ../_images/m84014_240128_083549_s3_sub0005.bcM0003.concat_hist.png
+           :alt: m84014_240128_083549_s3_sub0005.bcM0003.ligations_heatmap
+
+           Concatenation Histogram
+
+
+For a 16-mer we expect the plots to be similar to as above, with maximum number of reads assigned to a complete 16-mer configuration.
+In addition, to the readlength plot, the concatenation histogram should also indicate high percentages (>90%) to be assigned to a concatenation factor of 16.
+The ligation heatmap distributes the number of reads by adapter pairs found in the array. They should cleanly align along the diagonal for a well-performing array.
+
+
+
+
 `pblima  + isoseq tag + isoseq refine + isoseq correct`
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Single cell Vignettes:
 ~~~~~~~~~~~~~~~~~~~~~~
-All vignettes developed my MDL:  `https://github.com/MethodsDev/mdl-vignettes/tree/main/single_cell`_
+All vignettes developed my MDL: `vigenttes <https://github.com/MethodsDev/mdl-vignettes/tree/main/single_cell>`_
 
 Option1 for sub1:
 ~~~~~~~~~~~~~~~~~

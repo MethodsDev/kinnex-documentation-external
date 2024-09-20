@@ -28,6 +28,8 @@ the document steps through various pre-processing workflows for obtaining cleane
 various tertiary analysis workflows and vigenttes developed by the `MDL team <https://methodsdevlab.org/>`_ at `Broad Clinical Labs <https://broadclinicallabs.org/>`_ 
 to explore Kinnex datatypes.
 
+`Repository of Public Datasets for Kinnex, Sequel2e and previous MAS-ISO-seq versions <https://downloads.pacbcloud.com/public/dataset/>`_
+
 .. grid:: 2 
 
     .. grid-item-card::  Kinnex Full Length 
@@ -51,12 +53,13 @@ to explore Kinnex datatypes.
 
    _subpages/pb_guidelines
    _subpages/preprocessing_bulk
-   _subpages/preprocessing_sc
-   _subpages/readQC
    _subpages/secondary_processing
-   _subpages/tertiary_processing
+   _subpages/bulk_tertiary_processing
+   _subpages/single_cell_tertiary_processing
    _subpages/longIds_vignette
+   _subpages/readQC
    _subpages/genomeview
+   
 
 
 

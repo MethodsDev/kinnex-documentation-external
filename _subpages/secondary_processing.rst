@@ -1,28 +1,12 @@
 
 Secondary Processing
-=====================
+====================
+The cleaned s-read obtained from the Primary analysis can then be aligned to reference genome using  minimap2 `(publication link here)<https://academic.oup.com/bioinformatics/article/34/18/3094/4994778>`_.
+As good practice the aligned reads should be QCed 
 
-Sub-heading1
----------------
-Option1 for sub1:
-~~~~~~~~~~~~~~~~~
-Option2 for sub1:
-~~~~~~~~~~~~~~~~~
-
-
-High-level Workflow:
---------------------
-   
-   - Performing Sample QC and PCA with `Ptr` utility from `Trinity toolkit <https://github.com/trinityrnaseq/trinityrnaseq/wiki>`_.
    - `minimap2 <https://lh3.github.io/minimap2/minimap2.html>`_ for aligning reads
-   - `Isoquant <https://github.com/ablab/IsoQuant>`_ for Reference guided Isoform Discovery.
-   - `Stringtie <https://ccb.jhu.edu/software/stringtie/index.shtml?t=manual>`_ merge to merge reconstructed assemblies to generate new Ref
-   - Quantification with `Isoquant <https://github.com/ablab/IsoQuant>`_ against reconstructed ref
-   - `Gffcompare <https://github.com/gpertea/gffcompare>`_ to compare against reference and fetch Ref Ids
-   - Differential Expression analysis using DEseq2 implementation from the Trinity
-   - Exploring isoform switches and isoform visualization with isoformSwitchAnalysisR
-   - MDLgenomeview for inspecting read support
-
+   - LongRNAseqQC : (link page here in toctree)
+   - MDLgenomeview for inspecting read support (link notebook here)
 
 `isoseq master code: https://github.com/PacificBiosciences/IsoSeq/tree/master`
 
