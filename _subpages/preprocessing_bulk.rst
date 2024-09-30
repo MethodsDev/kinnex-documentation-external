@@ -5,8 +5,8 @@ The preliminary processing mainly leverages various applications from PacBio Ana
 Most workflows have WDL wrappers publicly accessible via Dockstore with test data and reference files to follow along placed in public requester-pays Google Storage bucket.
 
 
-Kinnex Full Length 
-===================
+Kinnex Full Length (bulk) sequencing
+====================================
 
 .. image:: ../_images/kinnex_bulk_pb.png
    :scale: 45%
@@ -17,7 +17,7 @@ The PacBio Kinnex™ full-length RNA kit takes total RNA as input and
 outputs a sequencing-ready library that results in an 8-fold throughput increase 
 compared to typical IsoSeq libraries. 
 
-Complete application note published by PAcbio for Kinnex Full Length can be found here : 
+Complete application note published by Pacbio for Kinnex Full Length can be found here : 
 `Application Note <https://www.pacb.com/wp-content/uploads/Application-note-Kinnex-full-length-RNA-kit-for-isoform-sequencing.pdf>`_
 
 Quick Notes:
@@ -28,7 +28,12 @@ Quick Notes:
 • Barcoded Kinnex adapters support up to 4-plex multiplexing
 • Total 48 samples per flowcell
 • ~40 million cDNA sequences
-  
+
+Here is a schematic representation of the multi-plexing scheme:
+.. figure:: ../_images/bulk_multiplexing_scheme.png
+   :scale: 45%
+   :title: bulk_mutiplexing
+   :align: right
 
 Overall Workflow in a nutshell
 ------------------------------

@@ -1,0 +1,9 @@
+﻿Option name,example value,description
+inputReads,this.ubam,"Replace ""ubam"" with the column that contains the path to the input file in the sample table. Formats supported are ubam and fastq(.gz)"
+referenceGenome,"""gs://mdl-refs/GRCh38/GRCh38_no_alt.fa""",Reference FASTA file for the assembly.
+juncBED,"""gs://mdl-refs/GRCh38/GRCh38.gencode.v39.annotation.sorted.bed""",(Optional) Reference BED splice junctions file for the assembly
+sampleName,this.sample_id,"Replace ""sample_id"" with the column that contains the name of the samples in the sample table."
+readType,"""PacBioIsoSeq""","Type of reads provided, one of ""PacBioCLR"" ""ONTGenomic"" ""PacBioHiFi"" SplicedLongReads"" ""ONTDirectRNA"" ""PacBioIsoSeq"""
+customArguments,"""-G 1250k""","(Optional) String to be added to the minimap2 call, in the example, to allow introns up to 1M250bp long which is a bit more than the longest human intron size in gencode"
+keepUnmapped,FALSE,(true/false) Whether to keep the reads for which no alignment was found or not.
+allowSecondary,FALSE,(true/false) Whether to include secondary alignments.

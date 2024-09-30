@@ -1,0 +1,18 @@
+﻿Option name,example value,description
+inputBAM,this.minimap2_bam,"Replace ""minimap2_bam"" with the column that contains the path to the input BAM file in the sample table."
+inputBAMindex,this.minimap2_bam_index,"Replace ""minimap2_bam_index"" with the column that contains the path to the input BAM file's index in the sample table."
+referenceFasta,"""gs://mdl-refs/GRCh38/GRCh38_no_alt.fa""",Reference FASTA file for the assembly.
+referenceAnnotation,"""gs://mdl-refs/GRCh38/GRCh38.gencode.v39.annotation.gtf""","(!Important Optional) Reference annotation file, needed for reference guided assignments. Must be omitted for de novo classification"
+noModelConstruction,"""false""","This should be set to ""false"" if you want de novo reconstruction of transcripts for reads that don't match any reference transcript, or to ""true"" if you want to disable reconstruction"
+sampleName,this.sample_id,"Replace ""sample_id"" with the column that contains the name of the samples in the sample table."
+dataType,"""pacbio_ccs""","Type of reads provided, one of ""pacbio_ccs"" or ""pacbio"", ""nanopore"" or ""ONT"" ""assembly"" or ""transcript"""
+geneQuantification,"""unique_splicing_consistent""","(Optional) Gene quantification strategy. Values supported are ""unique_only"", ""with_ambiguous"", ""unique_splicing_consistent"", ""unique_inconsistent"", ""all"""
+transcriptQuantification,"""unique_only""","(Optional) Transcript quantification strategy. Values supported are ""unique_only"", ""with_ambiguous"", ""unique_splicing_consistent"", ""unique_inconsistent"", ""all"""
+importedBamTags,"""CB,XM""",(Optional) Comma separated list of any BAM tags to carry over from the BAM to the IsoQuant outputs
+readGroup,"""tag:CB""",(Optional) How to group reads in the feature counts matrix outputs. Can be in the form of:
+,,"""tag:CB"" groups reads by BAM file read tag, for example cell barcode CB"
+,,"""read_id:_"" groups reads by read name suffix: set read_id:DELIM where DELIM is the symbol/string by which the read id will be split"
+reportWhetherCanonical,"""false""",(Optional) Report whether read or constructed transcript model contains non-canonical splice junction (requires more time).
+strandedness,,"(Optional) Reads strandness type, supported values are: ""forward"", ""reverse"", ""none"""
+cpu,16,(Optional) Number of CPUs to request for the machine
+numThreads,32,"(Optional) Number of threads to run IsoQuant on, default would be 2*cpu"
