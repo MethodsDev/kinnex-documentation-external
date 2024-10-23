@@ -30,6 +30,7 @@ Quick Notes:
 • ~40 million cDNA sequences
 
 Here is a schematic representation of the multi-plexing scheme:
+
 .. figure:: ../_images/bulk_multiplexing_scheme.png
    :scale: 45%
    :title: bulk_mutiplexing
