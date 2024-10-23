@@ -33,7 +33,6 @@ Here is a schematic representation of the multi-plexing scheme:
 
 .. figure:: ../_images/bulk_multiplexing_scheme.png
    :scale: 45%
-   :title: bulk_mutiplexing
    :align: right
 
 Overall Workflow in a nutshell
