@@ -56,9 +56,9 @@ to explore Kinnex datatypes.
    _subpages/secondary_processing
    _subpages/bulk_tertiary_processing
    _subpages/single_cell_tertiary_processing
-   _subpages/longIds_vignette
+   _jupyter-notebooks/id_mapping_from_gffcompare
    _subpages/readQC
-   _subpages/genomeview
+   _jupyter-notebooks/genomeview_demo
    
 
 
