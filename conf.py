@@ -22,7 +22,7 @@ author = 'akhorgad@broadinstitute.org'
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = ["sphinx_design", "myst_nb"]
+extensions = ["sphinx_design", "myst_nb",  "sphinxemoji.sphinxemoji"]
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ["_templates"]
