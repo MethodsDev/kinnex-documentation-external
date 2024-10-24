@@ -10,6 +10,9 @@ As good practice the aligned reads should be QCed
 
 `isoseq master code: https://github.com/PacificBiosciences/IsoSeq/tree/master`
 
+`minimap2`
+~~~~~~~~~~
+
 
 
 
