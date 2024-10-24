@@ -54,17 +54,19 @@ to explore Kinnex datatypes.
    _subpages/pb_guidelines
    _subpages/preprocessing_bulk
    _subpages/secondary_processing
+   _subpages/readQC
    _subpages/bulk_tertiary_processing
    _subpages/single_cell_tertiary_processing
    jupyter-notebooks/id_mapping_from_gffcompare
-   _subpages/readQC
    jupyter-notebooks/genomeview_demo
+   _subpages/todo.rst
    
 
 
 
-Doc set-up Notes:
+Doc set-up Notes
 =================
+To be removed during cleanup!!
 
 1. Link to best practices for Kinnex
 
@@ -102,8 +104,9 @@ Indices and tables
 * :ref:`search`
 
 
-Foot Note:
-~~~~~~~~~~
+Foot Note
+==========
+
 This is a dev-test version of rtd-website to house MDL documentation. First we are trying to create the scanpy theme.
 The theme for scanpy is sphinx-book-theme, with patches for readthedocs-sphinx-search
 
