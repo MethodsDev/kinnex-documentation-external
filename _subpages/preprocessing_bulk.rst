@@ -38,7 +38,7 @@ Here is a schematic representation of the multi-plexing scheme:
 Overall Workflow in a nutshell
 ------------------------------
 
-.. figure:: ../_images/bulk_workflow.png
+.. figure:: ../_images/kinnex_bulk.png
    :alt: Novel Methods and R&D
    :align: left
 
