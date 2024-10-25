@@ -36,7 +36,7 @@ Oct 24th:
 Oct25th:
 --------
 
-.. figure:: ../_images/dataset.png
+.. figure:: ../_images/test_datasets.png
    :alt: Novel Methods and R&D
    :align: left
 
