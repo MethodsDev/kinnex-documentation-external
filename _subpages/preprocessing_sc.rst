@@ -25,9 +25,9 @@ Quick notes:
 
 Kinnex Single Cell workflow overview:
 -------------------------------------
-.. figure:: ../_images/sc_workflow.png
+.. figure:: ../_images/kinnex_sc.png
    :alt: Novel Methods and R&D
-   :align: center
+   :align: left
 
 
 Preliminary analysis

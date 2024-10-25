@@ -121,7 +121,7 @@ As GffCompare here is run with `-r` option, the 3rd column contains information 
 
 `isoformSwitchAnalysisR`
 ~~~~~~~~~~~~~~~~~~~~~~~~~
-
+R vignette
 
 `Generating functional annotations`
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
