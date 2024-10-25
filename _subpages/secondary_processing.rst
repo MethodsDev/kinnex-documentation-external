@@ -15,4 +15,7 @@ As good practice the aligned reads should be QCed
 
 
 
+https://dockstore.org/workflows/github.com/broadinstitute/MDL-workflows/Minimap2_LR:main
+
+
 
