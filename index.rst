@@ -47,12 +47,12 @@ to explore Kinnex datatypes.
 
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
    :numbered:
    :caption: Index:
 
    _subpages/pb_guidelines
-   _subpages/preprocessing_bulk
+   _subpages/preprocessing_index
    _subpages/secondary_processing
    _subpages/readQC
    _subpages/bulk_tertiary_processing

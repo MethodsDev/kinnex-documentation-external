@@ -4,7 +4,7 @@ Vignette for Tertiary processing for SC-Kinnex
 Creating sparse matrices for use with Seurat
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. code::
+.. code:: bash
 
     # from:
     # https://github.com/MethodsDev/scIsoquantMatrixBuilder
@@ -18,7 +18,7 @@ Analysing sparse matrices created above
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 The code below is an ``R`` code, blocks can be copied to ``Rmd`` to excute locally:
 
-.. code::
+.. code:: bash
 
     # {r setup, include=FALSE}
         knitr::opts_chunk$set(echo = TRUE)
@@ -29,7 +29,8 @@ The code below is an ``R`` code, blocks can be copied to ``Rmd`` to excute local
 
 Input counts matrix created above from step1:
 
-.. code::
+.. code:: bash
+    
     #{r}
         data_dir = "scKinnex.genes-sc_matrix_from_isoquant/"
         output_prefix = "scKinnex.genes"
@@ -37,7 +38,7 @@ Input counts matrix created above from step1:
 
 Reading data in using Read10x() :
 
-.. code::
+.. code:: bash
 
     #{r}
         data = Read10X(data.dir=data_dir,
@@ -47,13 +48,14 @@ Reading data in using Read10x() :
                strip.suffix = FALSE)
 
 Creating seurat object from counts matrix:
-.. code::
+
+.. code:: bash
 
     #{r}
     seurat_obj <- CreateSeuratObject(counts = data, project = "project", min.cells = 3, min.features = 200)
     seurat_obj
 
-.. code::
+.. code:: bash
 
     #{r}
     # before filtering
@@ -62,7 +64,7 @@ Creating seurat object from counts matrix:
 
 Filtering on UMI counts:
 
-.. code::
+.. code:: bash
 
     #{r}
     UMI_count_high = 15000
@@ -79,7 +81,7 @@ Filtering on UMI counts:
 
 Filtering on feature counts:
 
-.. code::
+.. code:: bash
 
     #{r}
     feature_count_high = 2000
@@ -96,30 +98,30 @@ Filtering on feature counts:
 
 
 
-.. code::
+.. code:: bash
 
     #{r}
     seurat_obj[["percent.mt"]] <- PercentageFeatureSet(seurat_obj, pattern = "^MT-")
 
-.. code::
+.. code:: bash
 
     #{r}
     # Visualize QC metrics as a violin plot
     VlnPlot(seurat_obj, features = c("nFeature_RNA", "nCount_RNA", "percent.mt"), ncol = 3)
 
-.. code::
+.. code:: bash
 
     #{r}
     plot1 <- FeatureScatter(seurat_obj, feature1 = "nCount_RNA", feature2 = "percent.mt")
     plot2 <- FeatureScatter(seurat_obj, feature1 = "nCount_RNA", feature2 = "nFeature_RNA")
     plot1 + plot2
 
-.. code::
+.. code:: bash
 
     #{r}
     seurat_obj <- NormalizeData(seurat_obj, normalization.method = "LogNormalize", scale.factor = 10000)
 
-.. code::
+.. code:: bash
 
     #{r}
     seurat_obj <- FindVariableFeatures(seurat_obj, selection.method = "vst", nfeatures = 2000)
@@ -134,14 +136,14 @@ Filtering on feature counts:
 
 
 Saving object.RDS
-.. code::
+.. code:: bash
 
     #{r}
     # save before filtering
 
     saveRDS(seurat_obj, file = paste0(output_prefix, "-seurat_obj-preCellFiltering.rds"))
 
-.. code::
+.. code:: bash
 
     #{r}
     # filter cells
@@ -156,21 +158,22 @@ Saving object.RDS
 
     seurat_obj
 
-.. code::
+.. code:: bash
 
     #{r}
     # after filtering
     seurat_obj@meta.data %>% summarize(median(nCount_RNA), median(nFeature_RNA))
 
 
-.. code::
+.. code:: bash
 
     #{r}
     all.features <- rownames(seurat_obj)
     seurat_obj <- ScaleData(seurat_obj, features = all.features)
 
 Performing  PCA :
-.. code::
+
+.. code:: bash
 
     #{r}
     seurat_obj <- RunPCA(seurat_obj, features = VariableFeatures(object = seurat_obj))
@@ -181,7 +184,8 @@ Performing  PCA :
 
 
 Generating UMAP : 
-.. code::
+
+.. code:: bash
 
     #{r}
     seurat_obj <- FindNeighbors(seurat_obj, dims = 1:10)
@@ -196,7 +200,7 @@ Generating UMAP :
     FeaturePlot(seurat_obj, features = c("percent.mt"))
 
 
-.. code::
+.. code:: bash
 
     #{r}
     # counts and fractions of cells
@@ -209,7 +213,8 @@ Generating UMAP :
 
 
 DE, find markers:
-.. code::
+
+.. code:: bash
 
     #{r}
     # find markers for every cluster compared to all remaining cells, report only the positive
@@ -219,7 +224,7 @@ DE, find markers:
         group_by(cluster) %>%
         dplyr::filter(avg_log2FC > 1)   
 
-.. code::
+.. code:: bash
 
     #{r}
     top_20_markers = seurat_obj.markers %>%
@@ -229,7 +234,7 @@ DE, find markers:
 
     top_20_markers
 
-.. code::
+.. code:: bash
 
     #{r}
     max_cluster <- max(as.numeric(top_20_markers$cluster)) - 1
@@ -247,17 +252,16 @@ DE, find markers:
         cat("\n")
     }
 
-Run above list through: http://xteam.xbio.top/ACT
-to get cell type predictions.
+Run above list through: http://xteam.xbio.top/ACT to get cell type predictions.
 
-.. code::
+.. code:: bash
 
     #{r}
     # save files for later read/cell tracking
 
     write.table( Idents(seurat_obj), paste0(output_prefix, "-cell_cluster_assignments.tsv"), quote=F, row.names=T, sep="\t")
 
-.. code::
+.. code:: bash
 
     #{r}
     saveRDS(seurat_obj, file = paste0(output_prefix, "-seurat_obj.rds"))
@@ -265,7 +269,8 @@ to get cell type predictions.
 
 Examining specific gene sets example
 Note, this helps to have the gene-symbol annotated gene features.
-.. code::
+
+.. code:: bash
 
     #{r}
     # example definition of marker genes for certain cell types
@@ -286,7 +291,7 @@ Note, this helps to have the gene-symbol annotated gene features.
 
     marker_genes[["VC"]] = c("CLDN5", "COLEC12", "EPAS1", "VCAM1")
 
-.. code::
+.. code:: bash
 
     #{r}
 
@@ -308,8 +313,7 @@ Note, this helps to have the gene-symbol annotated gene features.
     return(gene_ids)
     }
 
-
-.. code::
+.. code:: bash
 
     #{r}
     # paint umaps according to the features of interest
