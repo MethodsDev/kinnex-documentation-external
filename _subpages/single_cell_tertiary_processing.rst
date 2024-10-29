@@ -1,5 +1,5 @@
 Vignette for Tertiary processing for SC-Kinnex
-----------------------------------------------
+===============================================
 
 Creating sparse matrices for use with Seurat
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -30,7 +30,7 @@ The code below is an ``R`` code, blocks can be copied to ``Rmd`` to excute local
 Input counts matrix created above from step1:
 
 .. code:: bash
-    
+
     #{r}
         data_dir = "scKinnex.genes-sc_matrix_from_isoquant/"
         output_prefix = "scKinnex.genes"
