@@ -71,5 +71,3 @@ html_favicon = "_images/mdl_logo.png"
 
 
 
-
-

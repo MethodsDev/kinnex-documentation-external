@@ -19,7 +19,7 @@ Workflow configuration for runnning the minimap2 workflow over cloud platforms s
 The workflow is designed to be run on a sample. Technical replicates must be merged before.
 
 
-      | Dockstore : `Minimap2_LR.wdl <https://dockstore.org/workflows/github.com/broadinstitute/MDL-workflows/Minimap2_LR>`_
+      | Dockstore : `Minimap2_LR.wdl <https://dockstore.org/workflows/github.com/broadinstitute/MDL-workflows/Minimap2_LR:main>`_
       | Github: `minimap2_LR <https://github.com/broadinstitute/MDL-workflows/blob/main/LR-tools/minimap2_LR/minimap2_LR.wdl>`_
       | Test Data can be found here (public, requester-pays) : `add file path`
 
@@ -53,7 +53,7 @@ The workflow is designed to be run on a sample. Technical replicates must be mer
 
 
 
-https://dockstore.org/workflows/github.com/broadinstitute/MDL-workflows/Minimap2_LR:main
+
 
 
 
