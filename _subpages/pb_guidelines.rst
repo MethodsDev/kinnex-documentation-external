@@ -1,14 +1,14 @@
 Best practices and Resources for Kinnex
-++++++++++++++++++++++++++++++++++++++++
+=======================================
 
 Kinnex Full Length Wet-Lab protocol
-====================================
+------------------------------------
 
 - Kinnex Full Length best practices document:
 - `Procedure Checklist for Kinnex Full Length kit: <https://www.pacb.com/wp-content/uploads/Procedure-checklist-Preparing-Kinnex-libraries-using-the-Kinnex-full-length-RNA-kit.pdf>`_
 
 Kinnex Single Cell Wet-Lab protocol
-====================================
+------------------------------------
 
 - Kinnex single cells best practices document:
 - `Procedure Checklist Preparing Single Cell kit <https://www.pacb.com/wp-content/uploads/Procedure-checklist-Preparing-Kinnex-libraries-using-Kinnex-single-cell-RNA-kit.pdf>`_
