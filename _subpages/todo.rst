@@ -1,6 +1,9 @@
 
 To-do Tasks/ Feedback
 =====================
+
+`All available emoticons <https://sphinxemojicodes.readthedocs.io/en/stable/>`_
+
 |:bulb:| - discussion
 
 |:green_circle:| - completed
