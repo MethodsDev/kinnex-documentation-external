@@ -1,6 +1,6 @@
 
-Secondary Processing
-====================
+Single Cell Downstream Processing
+==================================
 The cleaned s-read obtained from the Primary analysis can then be aligned to reference genome using  minimap2 `(publication link here)<https://academic.oup.com/bioinformatics/article/34/18/3094/4994778>`_.
 As good practice the aligned reads should be QCed 
 
@@ -9,6 +9,12 @@ As good practice the aligned reads should be QCed
    - ITV Integrative Transcriptomics View for inspecting read support (link notebook here)
 
 `isoseq master code: https://github.com/PacificBiosciences/IsoSeq/tree/master`
+
+`Test Data` 
+~~~~~~~~~~~
+For the downstream processing of Kinnex single cell product we are using the PacBio dataset `Revio-Kinnex-PBMC-10x3p<https://downloads.pacbcloud.com/public/dataset/Kinnex-single-cell-RNA/DATA-Revio-Kinnex-PBMC-10x3p/>`_ 
+More information on the dataset and other example datasets provided by PacBio for Single Cell can be found here `Kinnex-singe-cell-RNA<https://downloads.pacbcloud.com/public/dataset/Kinnex-single-cell-RNA/>`_
+Here is the `ATCC guide on PBMCs<https://www.atcc.org/cell-products/primary-cells/immune-cells/peripheral-blood-mononuclear-cells#t=productTab&numberOfResults=24>`_ 
 
 `minimap2`
 ~~~~~~~~~~
