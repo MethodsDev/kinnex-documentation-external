@@ -11,7 +11,7 @@ Workflow configuration for runnning the main workflow over cloud platforms suppo
 
       | Dockstore : `LongRNAqcPlusFromBAM.wdl <https://dockstore.org/workflows/github.com/broadinstitute/MDL-workflows/LongRNAqcPlusFromBAM:main>`_
       | Github: `LongRNAqcPlusFromBAM <https://github.com/broadinstitute/MDL-workflows/blob/main/LR-tools/LongRNAqc/LongRNAqcPlusFromBAM.wdl>`_
-      | Test Data can be found here (public, requester-pays) : `gs://mdl-preprocess-refs/` 
+      | Test Data can be found here (public, requester-pays) : (add download link from github or gs here)
 
 **Input arguments for LongRNAqcPlusFromBAM**
 
@@ -45,7 +45,7 @@ Workflow configuration for runnning LongRNAqc+ on Terra can be found here:-
 
 **Example of plots generated as a part of the output_report.pdf populated in `QC_plots` feild **
 
-.. figure:: _images/category_hist_sc.png
+.. figure:: ../_images/category_hist_sc.png
    :alt: Novel Methods and R&D
    :scale: 25 %
    :align: left
