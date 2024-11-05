@@ -43,4 +43,9 @@ Workflow configuration for runnning LongRNAqc+ on Terra can be found here:-
 
 
 
+**Example of plots generated as a part of the output_report.pdf populated in `QC_plots` feild **
 
+.. figure:: _images/category_hist_sc.png
+   :alt: Novel Methods and R&D
+   :scale: 25 %
+   :align: left
