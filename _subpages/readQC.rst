@@ -28,6 +28,7 @@ Workflow configuration for runnning LongRNAqc+ on Terra can be found here:-
       | Github: `LongRNAqcPlotting.wdl <https://github.com/broadinstitute/MDL-workflows/blob/main/LR-tools/LongRNAqc/LongRNAqcPlotting.wdl>`_
       | Test Data can be found here (public, requester-pays) : `add file path` 
 
+
 **Example of input arguments for LongRNAqc+ workflow for alignment with human ref genome**
 
 .. code:: bash
@@ -43,9 +44,9 @@ Workflow configuration for runnning LongRNAqc+ on Terra can be found here:-
 
 
 
-**Example of plots generated as a part of the output_report.pdf populated in `QC_plots` feild **
+**Example of plots generated as a part of the output_report.pdf populated in `QC_plots` field**
 
 .. figure:: ../_images/category_hist_sc.png
    :alt: Novel Methods and R&D
-   :scale: 25 %
+   :scale: 50 %
    :align: left
