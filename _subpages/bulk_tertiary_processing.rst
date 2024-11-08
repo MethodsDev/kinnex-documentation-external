@@ -23,7 +23,7 @@ The current recommended high-level workflow is as below:
 
 `Test Data`
 ~~~~~~~~~~~
-The test dataset used for demonstarting downstream processing worklfows for FUll Lnegth correpsond to HG002 from the `Genome-in-a-Bottle project <https://www.nist.gov/programs-projects/genome-bottle>`_ 
+The test dataset used for demonstarting downstream processing worklfows for Full Length correpsond to HG002 from the `Genome-in-a-Bottle project <https://www.nist.gov/programs-projects/genome-bottle>`_ 
 and `UHRR Universal Human Reference RNA <https://www.thermofisher.com/order/catalog/product/QS0639>`_ cell lines. 
 
 (Add information on the kits used here)

@@ -17,6 +17,7 @@ Workflow configuration for runnning the main workflow over cloud platforms suppo
 
 .. csv-table:: `LongRNAqcPlusFromBAM`
    :file: ../_subpages/tables/longRNAqcmain.csv
+   :widths: 20,25,55
    :header-rows: 1
 
 
@@ -46,7 +47,34 @@ Workflow configuration for runnning LongRNAqc+ on Terra can be found here:-
 
 **Example of plots generated as a part of the output_report.pdf populated in `QC_plots` field**
 
-.. figure:: ../_images/category_hist_sc.png
-   :alt: Novel Methods and R&D
-   :scale: 50 %
+.. list-table:: 
+    :widths: 50 50
+
+    * - .. figure:: ../_images/longRNAqc.1.png
+           :alt: Kinnex Full Length - FSM
+
+           Normalized transcript length distriubtions - FS
+
+      - .. figure:: ../_images/longRNAqc.2.png
+           :alt: Kinnex Full Length - NIC
+
+           Normalized transcript length distriubtions - NIC 
+
+
+.. list-table:: 
+    :widths: 50 50
+
+    * - .. figure:: ../_images/longRNAqc.5.png
+           :alt: Kinnex Full Length - Category wise
+
+           Isoform Distribution across SQANTI Structural Categories
+
+      - .. figure:: ../_images/longRNAqc.4.png
+           :alt: Kinnex Full Length - FSM
+
+           Isoform Distribution Across FSM's and Samples
+
+
+.. figure:: ../_images/longRNAqc.3.png
+   :scale: 45%
    :align: left
