@@ -47,7 +47,7 @@ The workflow is designed to be run on a sample. Technical replicates must be mer
    :header-rows: 1
 
 
-**Example of input arguments for minimap2 workflow for alognment with human ref genome**
+**Example of input arguments for minimap2 workflow for alignment with Human Ref genome**
 
 .. code:: bash
   :number-lines: 

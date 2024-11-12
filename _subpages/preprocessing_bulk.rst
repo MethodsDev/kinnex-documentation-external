@@ -139,7 +139,7 @@ It requires an inputfile.csv with the sample to barcode combination used for mul
    :file: ../test_data/idmap_bcM0001.csv
    :header-rows: 1
 
-The workflow calls the script below which leverages pysam utils to merge reads and rename by the sample_ids provided in the idmap,csv file above the here is:
+The workflow calls the script below which leverages pysam utils to merge reads and rename by the sample_ids provided in the idmap.csv file above the here is:
 
 .. code:: python
    :number-lines: 
