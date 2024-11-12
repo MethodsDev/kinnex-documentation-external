@@ -93,13 +93,12 @@ In addition, to the readlength plot, the concatenation histogram should also ind
 The ligation heatmap distributes the number of reads by adapter pairs found in the array. They should cleanly align along the diagonal for a well-performing array.
 
 
+`pblima  + isoseq tag + isoseq refine + isoseq correct`
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 .. figure:: ../_images/sc_schematic_worklfow.png
    :scale: 45%
    :align: right
-
-
-`pblima  + isoseq tag + isoseq refine + isoseq correct`
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 This workflow uses 2 tools to extract clean s-reads from the skera.bam received above namely `lima<https://lima.how/get-started.html>`_ and `isoseq<https://isoseq.how/umi/>`_.  
 
@@ -117,8 +116,8 @@ Workflow configuration for runnning these over cloud platforms supporting Cromwe
 
   {
    "pb_sc_lima_isoseq.sample_id": "${this.movie_name}",
-   "pb_sc_lima_isoseq.barcodes_list": "gs://mdl_terra_sandbox/10x_barcodes/3M-february-2018-REVERSE-COMPLEMENTED.txt.gz",
-   "pb_sc_lima_isoseq.primer_fasta": "gs://mdl_terra_sandbox/REF-10x_primers/10x_3kit_primers.fasta",
+   "pb_sc_lima_isoseq.barcodes_list": "gs://mdl-preprocess-refs/10x_barcodes/3M-february-2018-REVERSE-COMPLEMENTED.txt.gz",
+   "pb_sc_lima_isoseq.primer_fasta": "gs://mdl-preprocess-refs/REF-10x_primers/10x_3kit_primers.fasta",
    "pb_sc_lima_isoseq.gcs_output_dir": "${this.out_path}",
    "pb_sc_lima_isoseq.skera_bam": "${this.skera_bam}",
    "pb_sc_lima_isoseq.read_design": "T-12U-16B"
