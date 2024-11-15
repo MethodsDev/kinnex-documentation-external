@@ -77,7 +77,6 @@ Creating seurat object from counts matrix
 
 
 Terminal Out:
-
 11390 features across 500 samples within 1 assay 
 Active assay: RNA (11390 features, 0 variable features)
 1 layer present: counts
@@ -90,7 +89,6 @@ Active assay: RNA (11390 features, 0 variable features)
 
 
 Terminal Out:
-
 median(nCount_RNA)        median(nFeature_RNA)
 <dbl>                     <dbl>
 2794.17                   799
@@ -218,7 +216,6 @@ Saving object.RDS
     UMI_count_high
 
 Terminal Out:
-
 [1] 415
 [1] 500
 [1] 1200
