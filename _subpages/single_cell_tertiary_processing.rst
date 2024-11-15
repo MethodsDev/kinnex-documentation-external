@@ -77,6 +77,7 @@ Creating seurat object from counts matrix
 
 
 Terminal Out:
+
 11390 features across 500 samples within 1 assay 
 Active assay: RNA (11390 features, 0 variable features)
 1 layer present: counts
@@ -89,6 +90,7 @@ Active assay: RNA (11390 features, 0 variable features)
 
 
 Terminal Out:
+
 median(nCount_RNA)        median(nFeature_RNA)
 <dbl>                     <dbl>
 2794.17                   799
@@ -216,6 +218,7 @@ Saving object.RDS
     UMI_count_high
 
 Terminal Out:
+
 [1] 415
 [1] 500
 [1] 1200
@@ -289,13 +292,15 @@ Graphs the output of a dimensional reduction technique (PCA by default). Cells a
 
 
 .. figure:: ../_images/DimPlot.png
-   :scale: 50%
-   :align: left
+    :height: 500px
+    :width: 1000px
+    :align: center
 
 
 .. figure:: ../_images/ElbowPlot.png
-   :scale: 50%
-   :align: right
+   :height: 500px
+   :width: 1000px
+   :align: center
 
 
 Generating UMAP : 
@@ -315,7 +320,7 @@ Generating UMAP :
 
     FeaturePlot(seurat_obj, features = c("percent.mt"))
 
-Feature Count plots from terminal out part1 :
+Feature Count plots from terminal out:
 
 .. list-table:: 
     :widths: 50 50 
@@ -330,12 +335,12 @@ Feature Count plots from terminal out part1 :
 
            nFeature_RNA_FeaturePlot
 
-Feature Count plots from terminal out part2:
+Feature Count plots from terminal out:
 
 .. list-table:: 
     :widths: 50 50
 
-      - .. figure:: ../_images/nFeature_RNA_FeaturePlot.png
+    * - .. figure:: ../_images/nFeature_RNA_FeaturePlot.png
            :alt: nFeature_RNA_FeaturePlot
 
            nFeature_RNA_FeaturePlot
@@ -423,6 +428,43 @@ find markers for every cluster compared to all remaining cells, report only the 
 
 
 Run above list through: http://xteam.xbio.top/ACT to get cell type predictions.
+To read more on the ACT tool, the publication can be found here, 
+`"Annotation of cell types (ACT): a convenient web server for cell type annotation". <https://genomemedicine.biomedcentral.com/articles/10.1186/s13073-023-01249-5>`_
+The detailed report can be navigated using `"Help" <http://xteam.xbio.top/ACT/help.jsp>`_ page for ACT. 
+
+
+.. figure:: ../_images/cluster0_genelist.png
+   :scale: 90%
+   :align: center
+
+.. figure:: ../_images/Treeofcellontology_cluster0.png
+   :scale: 100%
+   :align: center
+
+.. figure:: ../_images/cluster1_genelist.png
+   :scale: 90%
+   :align: center
+
+.. figure:: ../_images/Treeofcellontology_cluster1.png
+   :scale: 100%
+   :align: center
+
+
+.. figure:: ../_images/cluster2_genelist.png
+   :scale: 90%
+   :align: center
+
+.. figure:: ../_images/Treeofcellontology_cluster2.png
+   :scale: 100%
+   :align: center
+
+.. figure:: ../_images/cluster3_genelist.png
+   :scale: 90%
+   :align: center
+
+.. figure:: ../_images/Treeofcellontology_cluster3.png
+   :scale: 100%
+   :align: center
 
 .. code:: bash
 
