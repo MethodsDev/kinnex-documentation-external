@@ -4,10 +4,25 @@ Vignette for Tertiary processing for SC-Kinnex
 Creating sparse matrices for use with Seurat
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+Setting the environment:
+.. code:: bash
+
+    sudo apt install r-base
+    sudo R -e 'install.packages("BiocManager", repos="http://cran.us.r-project.org")'
+    sudo R -e 'BiocManager::install("argparse")'
+    conda create -n scIsoseqUtil
+    conda activate scIsoseqUtil
+    conda install bioconda::r-argparse
+    pip install pysam
+
+
+
 .. code:: bash
 
     # from:
     # https://github.com/MethodsDev/scIsoquantMatrixBuilder
+
+    wget https://github.com/MethodsDev/kinnex-documentation-external/archive/refs/heads/main.zip
 
     scIsoseqUtil.py --sample_id ${sample_id} \
                     --bam ${sample_id}.aligned.sorted.bam \
@@ -28,6 +43,7 @@ The code below is an ``R`` code, blocks can be copied to ``Rmd`` to excute local
 
 
 Input counts matrix created above from step1:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code:: bash
 
@@ -37,7 +53,7 @@ Input counts matrix created above from step1:
 
 
 Reading data in using Read10x() :
-
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 .. code:: bash
 
     #{r}
@@ -48,12 +64,19 @@ Reading data in using Read10x() :
                strip.suffix = FALSE)
 
 Creating seurat object from counts matrix:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code:: bash
 
     #{r}
     seurat_obj <- CreateSeuratObject(counts = data, project = "project", min.cells = 3, min.features = 200)
     seurat_obj
+
+
+Terminal Out:
+11390 features across 500 samples within 1 assay 
+Active assay: RNA (11390 features, 0 variable features)
+ 1 layer present: counts
 
 .. code:: bash
 
@@ -62,7 +85,15 @@ Creating seurat object from counts matrix:
     seurat_obj@meta.data %>% summarize(median(nCount_RNA), median(nFeature_RNA))    
 
 
+Terminal Out:
+
+median(nCount_RNA)        median(nFeature_RNA)
+<dbl>                     <dbl>              
+2794.17                  	799
+
+
 Filtering on UMI counts:
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code:: bash
 
@@ -79,7 +110,13 @@ Filtering on UMI counts:
     geom_hline(yintercept=UMI_count_low) 
 
 
+.. figure:: ../_images/sc_vi1-nCountRNA.png
+   :scale: 45%
+   :align: left
+
+
 Filtering on feature counts:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code:: bash
 
@@ -95,7 +132,9 @@ Filtering on feature counts:
     geom_hline(yintercept=feature_count_high) +
     geom_hline(yintercept=feature_count_low)
 
-
+.. figure:: ../_images/sc_vi2-nFeatureRNA.png
+   :scale: 45%
+   :align: left
 
 
 .. code:: bash
@@ -109,6 +148,11 @@ Filtering on feature counts:
     # Visualize QC metrics as a violin plot
     VlnPlot(seurat_obj, features = c("nFeature_RNA", "nCount_RNA", "percent.mt"), ncol = 3)
 
+.. figure:: ../_images/VlnPlot.png
+   :scale: 45%
+   :align: left
+
+
 .. code:: bash
 
     #{r}
@@ -116,10 +160,27 @@ Filtering on feature counts:
     plot2 <- FeatureScatter(seurat_obj, feature1 = "nCount_RNA", feature2 = "nFeature_RNA")
     plot1 + plot2
 
+.. figure:: ../_images/FeatureScatter.png
+   :scale: 45%
+   :align: left
+
+
+NormalizeData : Normalize the count data present in a given assay.
+Normalization methods =
+“LogNormalize”: Feature counts for each cell are divided by the total counts for that cell and multiplied by the scale.factor. 
+This is then natural-log transformed using log1p.
+
 .. code:: bash
 
     #{r}
     seurat_obj <- NormalizeData(seurat_obj, normalization.method = "LogNormalize", scale.factor = 10000)
+
+
+FindVariableFeatures: Identifies features that are outliers on a 'mean variability plot'.
+selection.method =
+“vst”: First, fits a line to the relationship of log(variance) and log(mean) using local polynomial regression (loess). 
+Then standardizes the feature values using the observed mean and expected variance (given by the fitted line). 
+Feature variance is then calculated on the standardized values after clipping to a maximum (see clip.max parameter).
 
 .. code:: bash
 
@@ -134,14 +195,34 @@ Filtering on feature counts:
     plot2 <- LabelPoints(plot = plot1, points = top10, repel = TRUE)
     plot1 + plot2
 
+.. figure:: ../_images/sc_vi5-top10RNA
+   :scale: 45%
+   :align: left
+
 
 Saving object.RDS
+~~~~~~~~~~~~~~~~~
 .. code:: bash
 
     #{r}
     # save before filtering
 
     saveRDS(seurat_obj, file = paste0(output_prefix, "-seurat_obj-preCellFiltering.rds"))
+
+.. code:: bash
+
+    length(seurat_obj$percent.mt < 15)
+    feature_count_low
+    feature_count_high
+    UMI_count_low
+    UMI_count_high
+
+Terminal Out:
+[1] 415
+[1] 500
+[1] 1200
+[1] 1900
+[1] 5000
 
 .. code:: bash
 
@@ -158,11 +239,29 @@ Saving object.RDS
 
     seurat_obj
 
+Temrinal Output:
+An object of class Seurat 
+11390 features across 415 samples within 1 assay 
+Active assay: RNA (11390 features, 2000 variable features)
+ 1 layer present: counts
+
+
 .. code:: bash
 
     #{r}
     # after filtering
     seurat_obj@meta.data %>% summarize(median(nCount_RNA), median(nFeature_RNA))
+
+
+Temrinal Output:
+median(nCount_RNA)      median(nFeature_RNA)
+<dbl>                   <int>
+2838.12	                811	
+
+
+ScaleData: 
+Scales and centers features in the dataset. 
+If variables are provided in vars.to.regress, they are individually regressed against each feature, and the resulting residuals are then scaled and centered.
 
 
 .. code:: bash
@@ -171,7 +270,16 @@ Saving object.RDS
     all.features <- rownames(seurat_obj)
     seurat_obj <- ScaleData(seurat_obj, features = all.features)
 
+
 Performing  PCA :
+~~~~~~~~~~~~~~~~~
+
+RunPCA: Run Principal Component Analysis on gene expression using IRLBA. For details about stored PCA calculation parameters, see `PrintPCAParams`.
+
+VizDimLoadings: Visualize top genes associated with reduction components
+
+DimPlot:
+Graphs the output of a dimensional reduction technique (PCA by default). Cells are colored by their identity class.
 
 .. code:: bash
 
@@ -183,7 +291,18 @@ Performing  PCA :
     ElbowPlot(seurat_obj)
 
 
+.. figure:: ../_images/UMAP_DimPlot.png
+   :scale: 45%
+   :align: left
+
+
+.. figure:: ../_images/VlnPlot.png
+   :scale: 45%
+   :align: right
+
+
 Generating UMAP : 
+~~~~~~~~~~~~~~~~~
 
 .. code:: bash
 
@@ -200,6 +319,32 @@ Generating UMAP :
     FeaturePlot(seurat_obj, features = c("percent.mt"))
 
 
+
+.. list-table:: 
+    :widths: 25 25 25 25
+
+    * - .. figure:: ../_images/UMAP_DimPlot.png
+           :alt: UMAP_DimPlot.png
+           :width: 95%
+
+           UMAP_DimPlot
+
+      - .. figure:: ../_images/nFeature_RNA_FeaturePlot.png
+           :alt: nFeature_RNA_FeaturePlot.png
+
+           nFeature_RNA_FeaturePlot
+
+      - .. figure:: ../_images/nFeature_RNA_FeaturePlot.png
+           :alt: nFeature_RNA_FeaturePlot
+
+           nFeature_RNA_FeaturePlot
+
+      - .. figure:: ../_images/percent_mt_FeaturePlot.png
+           :alt: percent_mt_FeaturePlot
+
+           percent_mt_FeaturePlot
+
+
 .. code:: bash
 
     #{r}
@@ -212,7 +357,18 @@ Generating UMAP :
     saveRDS(seurat_obj, file = paste0(output_prefix, "-seurat_obj.rds"))
 
 
+Terminal Out:
+seurat_clusters n frac
+<fctr> <int> <dbl>
+0	219	0.52771084		
+1	128	0.30843373		
+2	45	0.10843373		
+3	23	0.05542169	
+
+
 DE, find markers:
+~~~~~~~~~~~~~~~~~
+find markers for every cluster compared to all remaining cells, report only the positive ones
 
 .. code:: bash
 
@@ -251,6 +407,14 @@ DE, find markers:
         cat(gene.symbols, sep=",")
         cat("\n")
     }
+
+
+Terminal Out:
+0:IL7R,LTB,PRKCQ-AS1,RPL34,RCAN3,GAS5,TCF7,LEF1,MAL,CD27,CCR7,ANKRD44-AS1,RGCC,RGS10,NOSIP,TMEM123,CAMK4
+1:NKG7,GZMH,CST7,GZMA,GNLY,FGFBP2,CCL5,CCL4,PRF1,EFHD2,PLEK,HOPX,PFN1,GZMM,CALM1,GZMB,SH3BGRL3,CTSW,XCL2,TRGC2
+2:CD79A,IGHM,CD79B,BANK1,HLA-DQA1,BCL11A,HLA-DRA,TCL1A,TNFRSF13C,HLA-DMB,HLA-DRB1,SWAP70,VPREB3,RALGPS2
+3:CSTA,SERPINA1,CFD,VCAN,RGS2,MNDA,CD68,CYP27A1,RETN,CPVL,CLEC12A,LMO2,GRN,LST1,CYBB,NCF2,LILRA5,FCN1
+
 
 Run above list through: http://xteam.xbio.top/ACT to get cell type predictions.
 
