@@ -5,6 +5,7 @@ Creating sparse matrices for use with Seurat
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Setting the environment:
+
 .. code:: bash
 
     sudo apt install r-base
