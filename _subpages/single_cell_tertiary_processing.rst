@@ -318,7 +318,7 @@ Generating UMAP :
 
     FeaturePlot(seurat_obj, features = c("percent.mt"))
 
-
+Feature Count plots from terminal out part1 :
 
 .. list-table:: 
     :widths: 50 50 
@@ -333,7 +333,7 @@ Generating UMAP :
 
            nFeature_RNA_FeaturePlot
 
-Feature Count plots from terminal out:
+Feature Count plots from terminal out part2:
 
 .. list-table:: 
     :widths: 50 50
