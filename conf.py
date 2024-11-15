@@ -76,6 +76,20 @@ html_theme_options = {
         "binderhub_url": "https://mybinder.org",
         "colab_url": "https://colab.research.google.com/",
         "notebook_interface": "jupyterlab",
-    }
+    },
+    "icon_links": [
+        {
+            "name": "GitHub",
+            "url": "https://github.com/MethodsDev/kinnex-documentation-external",
+            "icon": "fa-brands fa-github",
+        }
+    ],
+    "use_edit_page_button": True,
+    "use_source_button": True,
+    "use_issues_button": True,
+    # "use_repository_button": True,
+    "use_download_button": True,
+    "use_sidenotes": True
 }
+
 
