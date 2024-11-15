@@ -75,8 +75,11 @@ Creating seurat object from counts matrix
 
 
 Terminal Out:
+
 11390 features across 500 samples within 1 assay 
+
 Active assay: RNA (11390 features, 0 variable features)
+
 1 layer present: counts
 
 .. code:: bash
@@ -89,7 +92,9 @@ Active assay: RNA (11390 features, 0 variable features)
 Terminal Out:
 
 median(nCount_RNA)        median(nFeature_RNA)
-<dbl>                     <dbl>              
+
+<dbl>                     <dbl>
+
 2794.17                  	799
 
 
@@ -174,6 +179,7 @@ This is then natural-log transformed using log1p.
 
 
 FindVariableFeatures: Identifies features that are outliers on a 'mean variability plot'.
+
 selection.method =
 “vst”: First, fits a line to the relationship of log(variance) and log(mean) using local polynomial regression (loess). 
 Then standardizes the feature values using the observed mean and expected variance (given by the fitted line). 
@@ -193,7 +199,6 @@ Feature variance is then calculated on the standardized values after clipping to
     plot1 + plot2
 
 .. figure:: ../_images/sc_vi5-top10RNA.png
-   :scale: 45%
    :align: left
 
 
@@ -237,9 +242,13 @@ Terminal Out:
     seurat_obj
 
 Temrinal Output:
+
 An object of class Seurat 
+
 11390 features across 415 samples within 1 assay 
+
 Active assay: RNA (11390 features, 2000 variable features)
+
 1 layer present: counts
 
 
@@ -251,12 +260,16 @@ Active assay: RNA (11390 features, 2000 variable features)
 
 
 Temrinal Output:
+
 median(nCount_RNA)      median(nFeature_RNA)
+
 <dbl>                   <int>
+
 2838.12	                811	
 
 
 ScaleData: 
+
 Scales and centers features in the dataset. 
 If variables are provided in vars.to.regress, they are individually regressed against each feature, and the resulting residuals are then scaled and centered.
 
@@ -276,6 +289,7 @@ RunPCA: Run Principal Component Analysis on gene expression using IRLBA. For det
 VizDimLoadings: Visualize top genes associated with reduction components
 
 DimPlot:
+
 Graphs the output of a dimensional reduction technique (PCA by default). Cells are colored by their identity class.
 
 .. code:: bash
@@ -355,8 +369,11 @@ Generating UMAP :
 
 
 Terminal Out:
+
 seurat_clusters n frac
+
 <fctr> <int> <dbl>
+
 0	219	0.52771084		
 1	128	0.30843373		
 2	45	0.10843373		
@@ -365,6 +382,7 @@ seurat_clusters n frac
 
 DE, find markers:
 ~~~~~~~~~~~~~~~~~
+
 find markers for every cluster compared to all remaining cells, report only the positive ones
 
 .. code:: bash
@@ -407,9 +425,13 @@ find markers for every cluster compared to all remaining cells, report only the 
 
 
 Terminal Out:
+
 0:IL7R,LTB,PRKCQ-AS1,RPL34,RCAN3,GAS5,TCF7,LEF1,MAL,CD27,CCR7,ANKRD44-AS1,RGCC,RGS10,NOSIP,TMEM123,CAMK4
+
 1:NKG7,GZMH,CST7,GZMA,GNLY,FGFBP2,CCL5,CCL4,PRF1,EFHD2,PLEK,HOPX,PFN1,GZMM,CALM1,GZMB,SH3BGRL3,CTSW,XCL2,TRGC2
+
 2:CD79A,IGHM,CD79B,BANK1,HLA-DQA1,BCL11A,HLA-DRA,TCL1A,TNFRSF13C,HLA-DMB,HLA-DRB1,SWAP70,VPREB3,RALGPS2
+
 3:CSTA,SERPINA1,CFD,VCAN,RGS2,MNDA,CD68,CYP27A1,RETN,CPVL,CLEC12A,LMO2,GRN,LST1,CYBB,NCF2,LILRA5,FCN1
 
 
@@ -429,6 +451,7 @@ Run above list through: http://xteam.xbio.top/ACT to get cell type predictions.
 
 
 Examining specific gene sets example
+
 Note, this helps to have the gene-symbol annotated gene features.
 
 .. code:: bash
