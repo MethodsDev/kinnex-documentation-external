@@ -112,7 +112,6 @@ Filtering on UMI counts
 
 
 .. figure:: ../_images/sc_vi1-nCountRNA.png
-   :scale: 45%
    :align: left
 
 
@@ -134,7 +133,6 @@ Filtering on feature counts
     geom_hline(yintercept=feature_count_low)
 
 .. figure:: ../_images/sc_vi2-nFeatureRNA.png
-   :scale: 45%
    :align: left
 
 
@@ -150,7 +148,6 @@ Filtering on feature counts
     VlnPlot(seurat_obj, features = c("nFeature_RNA", "nCount_RNA", "percent.mt"), ncol = 3)
 
 .. figure:: ../_images/VlnPlot.png
-   :scale: 45%
    :align: left
 
 
@@ -162,7 +159,6 @@ Filtering on feature counts
     plot1 + plot2
 
 .. figure:: ../_images/FeatureScatter.png
-   :scale: 45%
    :align: left
 
 
@@ -293,12 +289,12 @@ Graphs the output of a dimensional reduction technique (PCA by default). Cells a
 
 
 .. figure:: ../_images/UMAP_DimPlot.png
-   :scale: 45%
+   :scale: 50%
    :align: left
 
 
 .. figure:: ../_images/VlnPlot.png
-   :scale: 45%
+   :scale: 50%
    :align: right
 
 
