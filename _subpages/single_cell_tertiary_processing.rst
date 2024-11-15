@@ -32,6 +32,7 @@ Setting the environment:
 
 Analysing sparse matrices created above
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 The code below is an ``R`` code, blocks can be copied to ``Rmd`` to excute locally:
 
 .. code:: bash
@@ -54,7 +55,8 @@ Input counts matrix created above from step1
 
 
 Reading data in using Read10x()
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 .. code:: bash
 
     #{r}
@@ -77,9 +79,7 @@ Creating seurat object from counts matrix
 Terminal Out:
 
 11390 features across 500 samples within 1 assay 
-
 Active assay: RNA (11390 features, 0 variable features)
-
 1 layer present: counts
 
 .. code:: bash
@@ -92,10 +92,8 @@ Active assay: RNA (11390 features, 0 variable features)
 Terminal Out:
 
 median(nCount_RNA)        median(nFeature_RNA)
-
 <dbl>                     <dbl>
-
-2794.17                  	799
+2794.17                   799
 
 
 Filtering on UMI counts
@@ -201,7 +199,7 @@ Feature variance is then calculated on the standardized values after clipping to
     plot1 + plot2
 
 .. image:: ../_images/sc_vi5-top10RNA.png
-   :align: left
+   :align: center
 
 
 Saving object.RDS
@@ -224,13 +222,9 @@ Saving object.RDS
 Terminal Out:
 
 [1] 415
-
 [1] 500
-
 [1] 1200
-
 [1] 1900
-
 [1] 5000
 
 .. code:: bash
@@ -252,11 +246,8 @@ Terminal Out:
 Temrinal Output:
 
 An object of class Seurat 
-
 11390 features across 415 samples within 1 assay 
-
 Active assay: RNA (11390 features, 2000 variable features)
-
 1 layer present: counts
 
 
@@ -270,9 +261,7 @@ Active assay: RNA (11390 features, 2000 variable features)
 Temrinal Output:
 
 median(nCount_RNA)      median(nFeature_RNA)
-
 <dbl>                   <int>
-
 2838.12	                811	
 
 
@@ -383,15 +372,10 @@ Feature Count plots from terminal out:
 Terminal Out:
 
 seurat_clusters n frac
-
 <fctr> <int> <dbl>
-
 0	219	0.52771084	
-
 1	128	0.30843373		
-
 2	45	0.10843373	
-
 3	23	0.05542169	
 
 
