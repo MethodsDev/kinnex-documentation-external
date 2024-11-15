@@ -116,7 +116,7 @@ Filtering on UMI counts
     geom_hline(yintercept=UMI_count_low) 
 
 
-.. figure:: ../_images/sc_vi1-nCountRNA.png
+.. image:: ../_images/sc_vi1-nCountRNA.png
    :align: center
 
 
@@ -137,7 +137,7 @@ Filtering on feature counts
     geom_hline(yintercept=feature_count_high) +
     geom_hline(yintercept=feature_count_low)
 
-.. figure:: ../_images/sc_vi2-nFeatureRNA.png
+.. image:: ../_images/sc_vi2-nFeatureRNA.png
    :align: center
 
 
@@ -152,7 +152,7 @@ Filtering on feature counts
     # Visualize QC metrics as a violin plot
     VlnPlot(seurat_obj, features = c("nFeature_RNA", "nCount_RNA", "percent.mt"), ncol = 3)
 
-.. figure:: ../_images/VlnPlot.png
+.. image:: ../_images/VlnPlot.png
    :align: center
 
 
@@ -163,7 +163,7 @@ Filtering on feature counts
     plot2 <- FeatureScatter(seurat_obj, feature1 = "nCount_RNA", feature2 = "nFeature_RNA")
     plot1 + plot2
 
-.. figure:: ../_images/FeatureScatter.png
+.. image:: ../_images/FeatureScatter.png
    :align: center
 
 
@@ -200,7 +200,7 @@ Feature variance is then calculated on the standardized values after clipping to
     plot2 <- LabelPoints(plot = plot1, points = top10, repel = TRUE)
     plot1 + plot2
 
-.. figure:: ../_images/sc_vi5-top10RNA.png
+.. image:: ../_images/sc_vi5-top10RNA.png
    :align: left
 
 
