@@ -166,9 +166,7 @@ Filtering on feature counts
 
 
 NormalizeData : Normalize the count data present in a given assay.
-
 Normalization methods =
-
 “LogNormalize”: Feature counts for each cell are divided by the total counts for that cell and multiplied by the scale.factor. 
 This is then natural-log transformed using log1p.
 
@@ -264,12 +262,9 @@ median(nCount_RNA)      median(nFeature_RNA)
 <dbl>                   <int>
 2838.12	                811	
 
-
 ScaleData: 
-
 Scales and centers features in the dataset. 
 If variables are provided in vars.to.regress, they are individually regressed against each feature, and the resulting residuals are then scaled and centered.
-
 
 .. code:: bash
 
@@ -282,11 +277,8 @@ Performing  PCA :
 ~~~~~~~~~~~~~~~~~
 
 RunPCA: Run Principal Component Analysis on gene expression using IRLBA. For details about stored PCA calculation parameters, see `PrintPCAParams`.
-
 VizDimLoadings: Visualize top genes associated with reduction components
-
 DimPlot:
-
 Graphs the output of a dimensional reduction technique (PCA by default). Cells are colored by their identity class.
 
 .. code:: bash
@@ -449,7 +441,6 @@ Run above list through: http://xteam.xbio.top/ACT to get cell type predictions.
 
 
 Examining specific gene sets example
-
 Note, this helps to have the gene-symbol annotated gene features.
 
 .. code:: bash
