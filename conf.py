@@ -69,5 +69,13 @@ html_theme = "sphinx_book_theme"
 html_logo = "_images/bcl_logo.png"
 html_favicon = "_images/mdl_logo.png"
 
-
+html_theme_options = {
+    "repository_url": "https://github.com/MethodsDev/kinnex-documentation-external",
+    "repository_branch": "main",
+    "launch_buttons": {
+        "binderhub_url": "https://mybinder.org",
+        "colab_url": "https://colab.research.google.com/",
+        "notebook_interface": "jupyterlab",
+    }
+}
 
