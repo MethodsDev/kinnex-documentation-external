@@ -22,10 +22,10 @@ Sep4th:
 
 Sep 25th:
 ---------
-4. Use PacBio dataset for single cell analysis, from cleaned s-reads but push it through the R-vignette we have |:o:|
-5. for bulk use cell lines from tech transfer  - start from Isoquant counts - ref guided |:o:|
+4. Use PacBio dataset for single cell analysis, from cleaned s-reads but push it through the R-vignette we have |:salad:|
+5. for bulk use cell lines from tech transfer  - start from Isoquant counts - ref guided |:salad:|
 6. Ok to use google collab - find out approx. mem usage and $ required to run our vigenettes - using personal collab account |:bulb:| 
-7. updated version of MDL genomeview - add static page |:stop_sign:|
+7. updated version of MDL genomeview ITV - add static page |:stop_sign:|
 8. Add RNA seq QC+ page |:salad:|
 
 Oct 24th:
@@ -35,7 +35,7 @@ Oct 24th:
 11. Clearly mark vigenttes vs wdls |:salad:|
 12. swap out MDL genomeview to ITV in workflows and other |:salad:|
 13. can we have overarching workflow for all secondary analysis steps? merge- minimap2 - LongRNAseqQC? |:bulb:|
-14. Referrence to other wiki’s that our not a vignette
+14. Reference to other wiki’s that our not a vignette
 15. Add all links referrences glossary at the end
 
 Oct25th:
@@ -44,6 +44,16 @@ Oct25th:
 .. figure:: ../_images/test_datasets.png
    :alt: Novel Methods and R&D
    :align: left
+
+
+
+Nov15th:
+--------
+16. Add the script to combine isoquant tanscript and gene counts |:o
+17. long reads vigentte - debug collab env
+18. literature review for isoform switching tools publichsed for single cell 
+19. isoformSwitchAnlysisR for single cell
+
 
 
 Other possibilities for Full Length:
