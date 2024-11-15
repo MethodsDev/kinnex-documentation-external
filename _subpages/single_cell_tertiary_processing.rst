@@ -76,7 +76,7 @@ Creating seurat object from counts matrix:
 Terminal Out:
 11390 features across 500 samples within 1 assay 
 Active assay: RNA (11390 features, 0 variable features)
- 1 layer present: counts
+1 layer present: counts
 
 .. code:: bash
 
@@ -195,7 +195,7 @@ Feature variance is then calculated on the standardized values after clipping to
     plot2 <- LabelPoints(plot = plot1, points = top10, repel = TRUE)
     plot1 + plot2
 
-.. figure:: ../_images/sc_vi5-top10RNA
+.. figure:: ../_images/sc_vi5-top10RNA.png
    :scale: 45%
    :align: left
 
@@ -243,7 +243,7 @@ Temrinal Output:
 An object of class Seurat 
 11390 features across 415 samples within 1 assay 
 Active assay: RNA (11390 features, 2000 variable features)
- 1 layer present: counts
+1 layer present: counts
 
 
 .. code:: bash

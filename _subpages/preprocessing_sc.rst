@@ -100,7 +100,7 @@ The ligation heatmap distributes the number of reads by adapter pairs found in t
    :scale: 45%
    :align: right
 
-This workflow uses 2 tools to extract clean s-reads from the skera.bam received above namely `lima<https://lima.how/get-started.html>`_ and `isoseq<https://isoseq.how/umi/>`_.  
+This workflow uses 2 tools to extract clean s-reads from the skera.bam received above namely `lima <https://lima.how/get-started.html>`_ and `isoseq <https://isoseq.how/umi/>`_.  
 
 Workflow configuration for runnning these over cloud platforms supporting Cromwell like Terra can be found here:-
    
