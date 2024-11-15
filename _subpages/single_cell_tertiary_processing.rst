@@ -222,10 +222,15 @@ Saving object.RDS
     UMI_count_high
 
 Terminal Out:
+
 [1] 415
+
 [1] 500
+
 [1] 1200
+
 [1] 1900
+
 [1] 5000
 
 .. code:: bash
@@ -347,9 +352,10 @@ Generating UMAP :
 
            nFeature_RNA_FeaturePlot
 
+Feature Count plots from terminal out:
 
 .. list-table:: 
-    :widths: 50 50 
+    :widths: 50 50
 
       - .. figure:: ../_images/nFeature_RNA_FeaturePlot.png
            :alt: nFeature_RNA_FeaturePlot
@@ -380,9 +386,12 @@ seurat_clusters n frac
 
 <fctr> <int> <dbl>
 
-0	219	0.52771084		
+0	219	0.52771084	
+
 1	128	0.30843373		
-2	45	0.10843373		
+
+2	45	0.10843373	
+
 3	23	0.05542169	
 
 
@@ -430,15 +439,14 @@ find markers for every cluster compared to all remaining cells, report only the 
     }
 
 
-Terminal Out:
+.. code:: bash
 
-0:IL7R,LTB,PRKCQ-AS1,RPL34,RCAN3,GAS5,TCF7,LEF1,MAL,CD27,CCR7,ANKRD44-AS1,RGCC,RGS10,NOSIP,TMEM123,CAMK4
+    Terminal Out:
 
-1:NKG7,GZMH,CST7,GZMA,GNLY,FGFBP2,CCL5,CCL4,PRF1,EFHD2,PLEK,HOPX,PFN1,GZMM,CALM1,GZMB,SH3BGRL3,CTSW,XCL2,TRGC2
-
-2:CD79A,IGHM,CD79B,BANK1,HLA-DQA1,BCL11A,HLA-DRA,TCL1A,TNFRSF13C,HLA-DMB,HLA-DRB1,SWAP70,VPREB3,RALGPS2
-
-3:CSTA,SERPINA1,CFD,VCAN,RGS2,MNDA,CD68,CYP27A1,RETN,CPVL,CLEC12A,LMO2,GRN,LST1,CYBB,NCF2,LILRA5,FCN1
+    0:IL7R,LTB,PRKCQ-AS1,RPL34,RCAN3,GAS5,TCF7,LEF1,MAL,CD27,CCR7,ANKRD44-AS1,RGCC,RGS10,NOSIP,TMEM123,CAMK4
+    1:NKG7,GZMH,CST7,GZMA,GNLY,FGFBP2,CCL5,CCL4,PRF1,EFHD2,PLEK,HOPX,PFN1,GZMM,CALM1,GZMB,SH3BGRL3,CTSW,XCL2,TRGC2
+    2:CD79A,IGHM,CD79B,BANK1,HLA-DQA1,BCL11A,HLA-DRA,TCL1A,TNFRSF13C,HLA-DMB,HLA-DRB1,SWAP70,VPREB3,RALGPS2
+    3:CSTA,SERPINA1,CFD,VCAN,RGS2,MNDA,CD68,CYP27A1,RETN,CPVL,CLEC12A,LMO2,GRN,LST1,CYBB,NCF2,LILRA5,FCN1
 
 
 Run above list through: http://xteam.xbio.top/ACT to get cell type predictions.
