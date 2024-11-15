@@ -208,6 +208,9 @@ VizDimLoadings(seurat_obj, dims = 1:2, reduction = "pca")
 DimPlot(seurat_obj, reduction = "pca") + NoLegend()
 #DimHeatmap(seurat_obj, dims = 1, cells = NULL, balanced = TRUE)
 
+ggsave(filename='DimPlot.png',path='/Users/akhorgad/mdl-docs-external/_images/', plot = last_plot())
+
+
 # DimHeatmap(
 #   object,
 #   dims = 1,
@@ -228,6 +231,7 @@ DimPlot(seurat_obj, reduction = "pca") + NoLegend()
 
 
 ElbowPlot(seurat_obj)
+ggsave(filename='ElbowPlot.png',path='/Users/akhorgad/mdl-docs-external/_images/', plot = last_plot())
 ```
 Generating UMAP :
 ```{r}
@@ -236,11 +240,17 @@ seurat_obj <- FindClusters(seurat_obj, resolution = 0.5)
 seurat_obj <- RunUMAP(seurat_obj, dims = 1:10)
 DimPlot(seurat_obj, reduction = "umap")
 
+ggsave(filename='UMAP_DimPlot.png',path='/Users/akhorgad/mdl-docs-external/_images/', plot = last_plot())
+
 FeaturePlot(seurat_obj, features = c("nFeature_RNA"))
+ggsave(filename='nFeature_RNA_FeaturePlot.png',path='/Users/akhorgad/mdl-docs-external/_images/', plot = last_plot())
 
 FeaturePlot(seurat_obj, features = c("nCount_RNA"))
+ggsave(filename='nCount_RNA_FeaturePlot.png',path='/Users/akhorgad/mdl-docs-external/_images/', plot = last_plot())
 
 FeaturePlot(seurat_obj, features = c("percent.mt"))
+ggsave(filename='percent_mt_FeaturePlot.png',path='/Users/akhorgad/mdl-docs-external/_images/', plot = last_plot())
+
 ```
 
 # counts and fractions of cells
