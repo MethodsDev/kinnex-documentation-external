@@ -28,11 +28,11 @@ knitr::opts_chunk$set(echo = TRUE)
     library(tidyverse)
     library(Seurat)
 ```
-PW dir= '/Users/akhorgad/mdl-docs-external/test_data'
+PW dir= '/Users/akhorgad/Desktop/MDL/scIsoquantMatrixBuilder_Results/'
 
 Input counts matrix created above from step1:
 ```{r}
-data_dir = "/Users/akhorgad/mdl-docs-external/test_data/scIsoquantMatrixBuilder_Results/PBMC_BioIVT_10x3p.genes-sc_matrix_from_isoquant/"
+data_dir = "/Users/akhorgad/Desktop/MDL/scIsoquantMatrixBuilder_Results/PBMC_BioIVT_10x3p_500cells.genes-sc_matrix_from_isoquant/"
 output_prefix = "scKinnex.genes"
 ```
 Reading data in using Read10x() :
@@ -43,6 +43,8 @@ data = Read10X(data.dir=data_dir,
            unique.features = TRUE,
            strip.suffix = FALSE)
 ```
+
+
 Creating seurat object from counts matrix:
 ```{r}
 seurat_obj <- CreateSeuratObject(counts = data, project = "scKinnex", min.cells = 3, min.features = 200)
@@ -50,8 +52,8 @@ seurat_obj
 ```
 Terminal Out:
 Warning: Feature names cannot have underscores ('_'), replacing with dashes ('-')An object of class Seurat 
-3853 features across 274 samples within 1 assay 
-Active assay: RNA (3853 features, 0 variable features)
+11390 features across 500 samples within 1 assay 
+Active assay: RNA (11390 features, 0 variable features)
  1 layer present: counts
  
 ```{r}
@@ -62,12 +64,12 @@ Terminal Out:
 
 median(nCount_RNA)        median(nFeature_RNA)
 <dbl>                     <dbl>              
-309.4                   	204	
+2794.17                  	799	
 
 Filtering on UMI counts:
 ```{r}
-UMI_count_high = 450
-UMI_count_low = 260
+UMI_count_high = 5000
+UMI_count_low = 1900
 
 
 seurat_obj@meta.data %>% select(nCount_RNA) %>% arrange(desc(nCount_RNA)) %>% mutate(i=row_number()) %>%
@@ -80,8 +82,9 @@ geom_hline(yintercept=UMI_count_low)
 
 Filtering on feature counts:
 ```{r}
-feature_count_high = 300
-feature_count_low = 180
+
+feature_count_high = 1200
+feature_count_low = 500
 
 
 seurat_obj@meta.data %>% select(nFeature_RNA) %>% arrange(desc(nFeature_RNA)) %>% mutate(i=row_number()) %>%
@@ -91,25 +94,41 @@ ggtitle("nFeature_RNA: gene count per cell") +
 geom_hline(yintercept=feature_count_high) +
 geom_hline(yintercept=feature_count_low)
 ```
+
+PercentageFeatureSet - Calculate the percentage of all counts that belong to a given set of features
 ```{r}
 seurat_obj[["percent.mt"]] <- PercentageFeatureSet(seurat_obj, pattern = "^MT-")
 ```
 
 
 # Visualize QC metrics as a violin plot
+VlnPlot: Draws a violin plot of single cell data (gene expression, metrics, PC scores, etc.)
 ```{r}
 
 VlnPlot(seurat_obj, features = c("nFeature_RNA", "nCount_RNA", "percent.mt"), ncol = 3)
+ggsave(filename='VlnPlot.png',path='/Users/akhorgad/Desktop/MDL/scIsoquantMatrixBuilder_Results/', plot = last_plot())
+
 ```
+
+
 ```{r}
 plot1 <- FeatureScatter(seurat_obj, feature1 = "nCount_RNA", feature2 = "percent.mt")
 plot2 <- FeatureScatter(seurat_obj, feature1 = "nCount_RNA", feature2 = "nFeature_RNA")
 plot1 + plot2
+ggsave(filename='FeatureScatter.png',path='/Users/akhorgad/Desktop/MDL/scIsoquantMatrixBuilder_Results/', plot = last_plot())
 ```
-NormalizeData 
+
+NormalizeData : Normalize the count data present in a given assay.
+Normalization methods =
+“LogNormalize”: Feature counts for each cell are divided by the total counts for that cell and multiplied by the scale.factor. This is then natural-log transformed using log1p
 ```{r}
-seurat_obj <- NormalizeData(seurat_obj, normalization.method = "LogNormalize", scale.factor = 10000)
+seurat_obj <- NormalizeData(seurat_obj, normalization.method = "LogNormalize", scale.factor = 10000, verbose = TRUE)
+
 ```
+
+FindVariableFeatures: Identifies features that are outliers on a 'mean variability plot'.
+selection.method =
+“vst”: First, fits a line to the relationship of log(variance) and log(mean) using local polynomial regression (loess). Then standardizes the feature values using the observed mean and expected variance (given by the fitted line). Feature variance is then calculated on the standardized values after clipping to a maximum (see clip.max parameter).
 ```{r}
 seurat_obj <- FindVariableFeatures(seurat_obj, selection.method = "vst", nfeatures = 2000)
 
@@ -119,7 +138,8 @@ top10 <- head(VariableFeatures(seurat_obj), 10)
 # plot variable features with and without labels
 plot1 <- VariableFeaturePlot(seurat_obj)
 plot2 <- LabelPoints(plot = plot1, points = top10, repel = TRUE)
-plot1 + plot2
+plot2
+
 ```
 Saving object.RDS .. code:: bash
 
@@ -129,9 +149,7 @@ Saving object.RDS .. code:: bash
 #saveRDS(seurat_obj, file = paste0(output_prefix, “-seurat_obj-preCellFiltering.rds”))
 ```
 
-filter cells
-
-
+filtering cells
 ```{r}
 length(seurat_obj$percent.mt < 15)
 feature_count_low
@@ -145,7 +163,6 @@ UMI_count_high
 ```{r}
 #### examine the above plots to decide on filtering thresholds below
 
-
 seurat_obj <- subset(seurat_obj,
                     subset = nFeature_RNA > feature_count_low & nFeature_RNA < feature_count_high &
                     nCount_RNA > UMI_count_low & nCount_RNA < UMI_count_high &
@@ -153,21 +170,43 @@ seurat_obj <- subset(seurat_obj,
 
 seurat_obj
 ```
+Temrinal Output:
+An object of class Seurat 
+11390 features across 415 samples within 1 assay 
+Active assay: RNA (11390 features, 2000 variable features)
+ 1 layer present: counts
+
 ```{r}
 seurat_obj@meta.data %>% summarize(median(nCount_RNA), median(nFeature_RNA))
 
 ```
+Temrinal Output:
+median(nCount_RNA)      median(nFeature_RNA)
+<dbl>                   <int>
+2838.12	                811	
+
+ScaleData: 
+Scales and centers features in the dataset. If variables are provided in vars.to.regress, they are individually regressed against each feature, and the resulting residuals are then scaled and centered.
 ```{r}
 all.features <- rownames(seurat_obj)
 seurat_obj <- ScaleData(seurat_obj, features = all.features)
 ```
 
 Performing PCA :
+
+RunPCA: Run Principal Component Analysis on gene expression using IRLBA. For details about stored PCA calculation parameters, see `PrintPCAParams`.
+
+VizDimLoadings: Visualize top genes associated with reduction components
+
+DimPlot:
+Graphs the output of a dimensional reduction technique (PCA by default). Cells are colored by their identity class.
 ```{r}
 seurat_obj <- RunPCA(seurat_obj, features = VariableFeatures(object = seurat_obj))
+
 VizDimLoadings(seurat_obj, dims = 1:2, reduction = "pca")
+
 DimPlot(seurat_obj, reduction = "pca") + NoLegend()
-#DimHeatmap(seurat_obj, dims = 1:2, cells = 100, balanced = TRUE)
+#DimHeatmap(seurat_obj, dims = 1, cells = NULL, balanced = TRUE)
 
 # DimHeatmap(
 #   object,
@@ -210,7 +249,7 @@ cluster_counts_n_fracs = seurat_obj@meta.data %>% group_by(seurat_clusters) %>% 
 
 cluster_counts_n_fracs
 
-saveRDS(seurat_obj, file = paste0(output_prefix, "-seurat_obj.rds"))
+#saveRDS(seurat_obj, file = paste0(output_prefix, "-seurat_obj.rds"))
 ```
 
 DE, find markers:
@@ -252,4 +291,9 @@ for (clnum in 0:max_cluster) {
 ```
 
 Run above list through: http://xteam.xbio.top/ACT to get cell type predictions.
+Select Tissue type blood
+
+```{r}
+
+```
 
