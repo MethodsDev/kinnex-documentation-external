@@ -117,7 +117,7 @@ Filtering on UMI counts
 
 
 .. figure:: ../_images/sc_vi1-nCountRNA.png
-   :align: left
+   :align: center
 
 
 Filtering on feature counts
@@ -138,7 +138,7 @@ Filtering on feature counts
     geom_hline(yintercept=feature_count_low)
 
 .. figure:: ../_images/sc_vi2-nFeatureRNA.png
-   :align: left
+   :align: center
 
 
 .. code:: bash
@@ -153,7 +153,7 @@ Filtering on feature counts
     VlnPlot(seurat_obj, features = c("nFeature_RNA", "nCount_RNA", "percent.mt"), ncol = 3)
 
 .. figure:: ../_images/VlnPlot.png
-   :align: left
+   :align: center
 
 
 .. code:: bash
@@ -164,11 +164,13 @@ Filtering on feature counts
     plot1 + plot2
 
 .. figure:: ../_images/FeatureScatter.png
-   :align: left
+   :align: center
 
 
 NormalizeData : Normalize the count data present in a given assay.
+
 Normalization methods =
+
 “LogNormalize”: Feature counts for each cell are divided by the total counts for that cell and multiplied by the scale.factor. 
 This is then natural-log transformed using log1p.
 
@@ -241,6 +243,7 @@ Terminal Out:
 
     seurat_obj
 
+
 Temrinal Output:
 
 An object of class Seurat 
@@ -302,12 +305,12 @@ Graphs the output of a dimensional reduction technique (PCA by default). Cells a
     ElbowPlot(seurat_obj)
 
 
-.. figure:: ../_images/UMAP_DimPlot.png
+.. figure:: ../_images/DimPlot.png
    :scale: 50%
    :align: left
 
 
-.. figure:: ../_images/VlnPlot.png
+.. figure:: ../_images/ElbowPlot.png
    :scale: 50%
    :align: right
 
@@ -332,11 +335,10 @@ Generating UMAP :
 
 
 .. list-table:: 
-    :widths: 25 25 25 25
+    :widths: 50 50 
 
     * - .. figure:: ../_images/UMAP_DimPlot.png
            :alt: UMAP_DimPlot.png
-           :width: 95%
 
            UMAP_DimPlot
 
@@ -344,6 +346,10 @@ Generating UMAP :
            :alt: nFeature_RNA_FeaturePlot.png
 
            nFeature_RNA_FeaturePlot
+
+
+.. list-table:: 
+    :widths: 50 50 
 
       - .. figure:: ../_images/nFeature_RNA_FeaturePlot.png
            :alt: nFeature_RNA_FeaturePlot
