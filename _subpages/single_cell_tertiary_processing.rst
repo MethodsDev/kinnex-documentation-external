@@ -42,7 +42,7 @@ The code below is an ``R`` code, blocks can be copied to ``Rmd`` to excute local
 
 
 
-Input counts matrix created above from step1:
+Input counts matrix created above from step1
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code:: bash
@@ -52,7 +52,7 @@ Input counts matrix created above from step1:
         output_prefix = "scKinnex.genes"
 
 
-Reading data in using Read10x() :
+Reading data in using Read10x()
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 .. code:: bash
 
@@ -63,7 +63,7 @@ Reading data in using Read10x() :
                unique.features = TRUE,
                strip.suffix = FALSE)
 
-Creating seurat object from counts matrix:
+Creating seurat object from counts matrix
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code:: bash
@@ -92,7 +92,7 @@ median(nCount_RNA)        median(nFeature_RNA)
 2794.17                  	799
 
 
-Filtering on UMI counts:
+Filtering on UMI counts
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code:: bash
@@ -115,7 +115,7 @@ Filtering on UMI counts:
    :align: left
 
 
-Filtering on feature counts:
+Filtering on feature counts
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code:: bash
