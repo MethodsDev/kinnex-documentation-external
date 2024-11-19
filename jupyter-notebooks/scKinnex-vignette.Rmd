@@ -28,11 +28,11 @@ knitr::opts_chunk$set(echo = TRUE)
     library(tidyverse)
     library(Seurat)
 ```
-PW dir= '/Users/akhorgad/Desktop/MDL/scIsoquantMatrixBuilder_Results/'
+PW dir= '/Users/akhorgad/Desktop/MDL/RTD/scIsoquantMatrixBuilder_Results'
 
 Input counts matrix created above from step1:
 ```{r}
-data_dir = "/Users/akhorgad/Desktop/MDL/scIsoquantMatrixBuilder_Results/PBMC_BioIVT_10x3p_500cells.genes-sc_matrix_from_isoquant/"
+data_dir = "/Users/akhorgad/Desktop/MDL/RTD/scIsoquantMatrixBuilder_Results/PBMC_BioIVT_10x3p_500cells.genes-sc_matrix_from_isoquant/"
 output_prefix = "scKinnex.genes"
 ```
 Reading data in using Read10x() :
@@ -106,7 +106,7 @@ VlnPlot: Draws a violin plot of single cell data (gene expression, metrics, PC s
 ```{r}
 
 VlnPlot(seurat_obj, features = c("nFeature_RNA", "nCount_RNA", "percent.mt"), ncol = 3)
-ggsave(filename='VlnPlot.png',path='/Users/akhorgad/Desktop/MDL/scIsoquantMatrixBuilder_Results/', plot = last_plot())
+ggsave(filename='VlnPlot.png',path='/Users/akhorgad/Desktop/MDL/RTD/scIsoquantMatrixBuilder_Results', plot = last_plot())
 
 ```
 
@@ -115,7 +115,7 @@ ggsave(filename='VlnPlot.png',path='/Users/akhorgad/Desktop/MDL/scIsoquantMatrix
 plot1 <- FeatureScatter(seurat_obj, feature1 = "nCount_RNA", feature2 = "percent.mt")
 plot2 <- FeatureScatter(seurat_obj, feature1 = "nCount_RNA", feature2 = "nFeature_RNA")
 plot1 + plot2
-ggsave(filename='FeatureScatter.png',path='/Users/akhorgad/Desktop/MDL/scIsoquantMatrixBuilder_Results/', plot = last_plot())
+ggsave(filename='FeatureScatter.png',path='/Users/akhorgad/Desktop/MDL/RTD/scIsoquantMatrixBuilder_Results', plot = last_plot())
 ```
 
 NormalizeData : Normalize the count data present in a given assay.

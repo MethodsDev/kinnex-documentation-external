@@ -61,6 +61,8 @@ myst_enable_extensions = [
 
 myst_url_schemes = ("http", "https", "mailto")
 
+jupyter_execute_notebooks = "auto"
+execution_allow_errors=True 
 
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
@@ -75,7 +77,7 @@ html_theme_options = {
     "launch_buttons": {
         "binderhub_url": "https://mybinder.org",
         "colab_url": "https://colab.research.google.com/",
-        "notebook_interface": "jupyterlab",
+        "notebook_interface": "jupyterlab"
     },
     "icon_links": [
         {
