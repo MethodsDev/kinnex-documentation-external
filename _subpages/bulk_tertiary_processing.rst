@@ -4,7 +4,7 @@ Full Length Bulk Downstream Processing
 After performing QC on the aligned reads using LongRNAseqQC, 
 we can proceed to perform transcript analysis using an array of tools put togther by folks using Long read sequencing.
 
-There are multiple applications one can use for many of these sub-steps, below is the currenty recommended workflow.
+There are multiple applications one can use for many of these sub-steps, below is the currently recommended workflow.
 
 High-level Workflow for Bulk:
 -----------------------------
@@ -23,7 +23,7 @@ The current recommended high-level workflow is as below:
 
 `Test Data`
 ~~~~~~~~~~~
-The test dataset used for demonstarting downstream processing worklfows for Full Length correpsond to HG002 from the `Genome-in-a-Bottle project <https://www.nist.gov/programs-projects/genome-bottle>`_ 
+The test dataset used for demonstrating downstream processing workflows for Full Length correpsond to HG002 from the `Genome-in-a-Bottle project <https://www.nist.gov/programs-projects/genome-bottle>`_ 
 and `UHRR Universal Human Reference RNA <https://www.thermofisher.com/order/catalog/product/QS0639>`_ cell lines. 
 
 (Add information on the kits used here)
@@ -78,8 +78,8 @@ The workflow is designed to be run on a sample. Technical replicates must be mer
 
 `Stringtie`
 ~~~~~~~~~~~
-`StringTie tool <https://ccb.jhu.edu/software/stringtie/index.shtml?t=manual>`_  is run with the --merge option, with a list of GTF/GFF files as inpout. It merges/assembles the input transcripts into a non-redundant set of transcripts. 
-In the workflow stringtie is used to merge the reconstructed GTFs from Isoquant ID to create a new referrence.
+`StringTie tool <https://ccb.jhu.edu/software/stringtie/index.shtml?t=manual>`_  is run with the --merge option, with a list of GTF/GFF files as input. It merges/assembles the input transcripts into a non-redundant set of transcripts. 
+In the workflow stringtie is used to merge the reconstructed GTFs from Isoquant ID to create a new reference.
 
 Workflow configuration for runnning GffCompare on Terra can be found here:-
 
@@ -112,7 +112,7 @@ Trinity Toolkit also supports analysis of short read data. The overall workflow 
 
 `Gffcompare`
 ~~~~~~~~~~~~
-`GffCompare is a utility <https://ccb.jhu.edu/software/stringtie/gffcompare.shtml>`_ used to compare two GTF/GFF files, which in referrnce based ID, is a reconstructed GTF resulted from merging individual GTFs from Isoquant ID with stringtie to the referrence annotation GTF.
+`GffCompare is a utility <https://ccb.jhu.edu/software/stringtie/gffcompare.shtml>`_ used to compare two GTF/GFF files, which in reference based ID, is a reconstructed GTF resulted from merging individual GTFs from Isoquant ID with stringtie to the reference annotation GTF.
 The quick command is as below:
 
 
@@ -123,7 +123,7 @@ The quick command is as below:
   conda activate gffcompare
   gffcompare stringtie_merged.gtf -r gencode.vM32.annotation.gtf  
 
-The tracking file generated in results conatins the matching trasncripts between samples. 
+The tracking file generated in results contains the matching transcripts between samples. 
 As GffCompare here is run with `-r` option, the 3rd column contains information about the reference annotation transcript.
 
 `isoformSwitchAnalysisR`

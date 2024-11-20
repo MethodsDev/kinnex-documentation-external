@@ -5,9 +5,9 @@ Kinnex Single Cell
     :alt: Novel Methods and R&D
     :align: right
 
-The PacBio Kinnex™ single-cell RNA kit takes as input singlecell cDNA and outputs a sequencing-ready library that
+The PacBio Kinnex™ single-cell RNA kit takes as input single-cell cDNA and outputs a sequencing-ready library that
 results in a 16-fold throughput increase compared to
-regular single-cell Iso-Seq® libraries. More details on the sequecining platform can be found here: `PacBio's Single Cell FAQs <https://www.pacb.com/products-and-services/applications/rna-sequencing/single-cell-rna-sequencing/>`_
+regular single-cell Iso-Seq® libraries. More details on the sequencing platform can be found here: `PacBio's Single Cell FAQs <https://www.pacb.com/products-and-services/applications/rna-sequencing/single-cell-rna-sequencing/>`_
 
 Complete application note published by Pacbio can be found here:
 `Application note <https://www.pacb.com/wp-content/uploads/Application-note-Kinnex-single-cell-RNA-kit-for-single-cell-isoform-sequencing.pdf>`_
@@ -33,7 +33,7 @@ Kinnex Single Cell workflow overview:
 Preliminary analysis
 --------------------
 The pre-processing workflows extract clean s-reads using tools below which can then be provided to the alignment applications and other downstream workflows similar to those used to analyze Isoseq data.
-High level pre-processing is dopted from `Pacbio's CLI workflow <https://isoseq.how/umi/cli-workflow.html>`_
+High level pre-processing is adopted from `Pacbio's CLI workflow <https://isoseq.how/umi/cli-workflow.html>`_
 
    - `skera <https://skera.how/>`_ for de-concatenating the MAS arrays into individual cDNA molecules and generate segmented reads (s-reads),
    - `lima <https://lima.how/>`_ for removal of primers and identification of barcodes and orienting sequences in 5’ → 3’ orientation.
