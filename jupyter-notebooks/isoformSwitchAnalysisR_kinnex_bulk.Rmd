@@ -126,7 +126,6 @@ aSwitchList <- importRdata(
 )
 
 
-
 # aSwitchList2 <- preFilter(
 #     switchAnalyzeRlist = aSwitchList,
 #     geneExpressionCutoff = 1,
