@@ -58,6 +58,7 @@ to explore Kinnex datatypes.
    _subpages/readQC
    _subpages/single_cell_tertiary_processing
    jupyter-notebooks/id_mapping_from_gffcompare
+   jupyter-notebooks/isoformSwitchAnalysisR_kinnex_bulk.Rmd
    jupyter-notebooks/genomeview_demo
    _subpages/todo.rst
    
