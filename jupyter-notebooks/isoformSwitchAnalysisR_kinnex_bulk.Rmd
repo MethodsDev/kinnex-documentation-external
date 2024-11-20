@@ -596,7 +596,6 @@ Adding other nanotations to the SwitchR object:
 ```
 
 Adding DeepTMHMM:
-
 ```{r}
 aSwitchList <- analyzeDeepTMHMM(
     switchAnalyzeRlist   = aSwitchList,
