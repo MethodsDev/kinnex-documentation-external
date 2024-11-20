@@ -18,14 +18,14 @@ MDL documentation and resources for supporting Pacbio Kinnex
 
 The purpose of this documentation is to walk-through the various available computational methods and resources available for Kinnex products, 
 to establish standard best-practices to explore the resulting datatypes and 
-to introduce updated guides for analysing various Kinnex prodcuts. 
+to introduce updated guides for analysing various Kinnex products. 
 
-For additional information on Kinnex, here is the orginal Nature biotechnolgy publication for Kinnex or `MAS-ISO-seq` (Multiplexed ArrayS ISOform sequencing) as it was orginally called, authored by Aziz Al'Khafaji from the Methods Development Lab (MDL) at Broad and serves as a great resource to learn more about the protocol and the resulting datatypes :
+For additional information on Kinnex, here is the orginal Nature Biotechnology publication for Kinnex or `MAS-ISO-seq` (Multiplexed ArrayS ISOform sequencing) as it was orginally called, authored by Aziz Al'Khafaji from the Methods Development Lab (MDL) at Broad and serves as a great resource to learn more about the protocol and the resulting datatypes :
    `High-throughput RNA isoform sequencing using programmed cDNA concatenation <https://doi.org/10.1038/s41587-023-01815-7>`_
 
 From receiving sequencing data from `PacBio's Revio <https://www.pacb.com/revio/>`_ sequencing platform, 
 the document steps through various pre-processing workflows for obtaining cleaned s-reads suitable for downstream processing and 
-various tertiary analysis workflows and vigenttes developed by the `MDL team <https://methodsdevlab.org/>`_ at `Broad Clinical Labs <https://broadclinicallabs.org/>`_ 
+various tertiary analysis workflows and vignettes developed by the `MDL team <https://methodsdevlab.org/>`_ at `Broad Clinical Labs <https://broadclinicallabs.org/>`_ 
 to explore Kinnex datatypes.
 
 `Repository of Public Datasets for Kinnex, Sequel2e and previous MAS-ISO-seq versions <https://downloads.pacbcloud.com/public/dataset/>`_
