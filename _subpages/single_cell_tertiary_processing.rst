@@ -494,19 +494,8 @@ Note, this helps to have the gene-symbol annotated gene features.
 
     marker_genes = list()
 
-    marker_genes[["ExN"]] = c("RORB", "SLC17A6", "SLC17A7", "THEMIS")
+    marker_genes[["CD8"]] = c("CD8A","CD8B","GZMB","TRB","TRA","PRF1", "GZMB")
 
-    marker_genes[["InN"]] = c("GAD1","GAD2","PVALB","SST","VIP")
-
-    marker_genes[["MG"]] = c("APBB1IP","CD74","CSF1R", "CX3CR1", "ITGAM", "P2RY12", "PTPRC")
-
-    marker_genes[["Astro"]] =c("ALDH1L1", "AQP4", "COL5A3", "GFAP", "SLC1A2", "SLC1A3")
-
-    marker_genes[["Oligo"]] = c("CLDN11", "MBP", "MOBP", "OPALIN", "PLP1", "ST18")
-
-    marker_genes[["OPC"]] = c("LHFPL3", "MEGF11", "PCDH15", "PDGFRA", "VCAN")
-
-    marker_genes[["VC"]] = c("CLDN5", "COLEC12", "EPAS1", "VCAM1")
 
 .. code:: bash
 
@@ -535,7 +524,19 @@ Note, this helps to have the gene-symbol annotated gene features.
     #{r}
     # paint umaps according to the features of interest
 
-    feature_ids = get_feature_names_with_gene_symbols(marker_genes[["ExN"]])
+    feature_ids = get_feature_names_with_gene_symbols(marker_genes[["CD8"]])
 
     VlnPlot(seurat_obj, features = feature_ids)
     FeaturePlot( seurat_obj, features = feature_ids)
+
+
+.. figure:: ../_images/foi_VlnPlot.png
+    :height: 500px
+    :width: 1000px
+    :align: center
+
+
+.. figure:: ../_images/foi_FeaturePlot.png.png
+   :height: 500px
+   :width: 1000px
+   :align: center
