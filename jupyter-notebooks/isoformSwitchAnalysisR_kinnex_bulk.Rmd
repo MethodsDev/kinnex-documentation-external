@@ -1,0 +1,530 @@
+---
+title: "IsoformSwitchAnalysisR - Bulk Kinnex - Reference Guided track"
+output: html_notebook
+---
+
+Module to install packages:
+```{r}
+install_if_missing <- function(packages) {
+    if (length(setdiff(packages, rownames(installed.packages()))) > 0) {
+        install.packages(setdiff(packages, rownames(installed.packages())))
+    }
+}
+```
+Install tidyverse and edgeR:
+```{r}
+install_if_missing(c('tidyverse','stringr','dplyr', 'edgeR', 'ggrepel'))
+install.packages('ggrepel')
+```
+IsoformSwitchAnalyzeR
+```{r}
+if (!require("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+
+BiocManager::install(c("IsoformSwitchAnalyzeR","edgeR", "limma", "DESeq2", "ctc", "Biobase", "gplots", "ape", "argparse","dplyr"))
+
+```
+
+```{r}
+
+set.seed(2023)
+library(tidyverse)
+library(IsoformSwitchAnalyzeR)
+library(edgeR)
+library(dplyr)
+packageVersion('IsoformSwitchAnalyzeR')
+options(warn=-1)
+
+
+```
+Set working dir:
+```{r}
+pdir='/Users/akhorgad/Desktop/MDL/RTD/Kinnex_bulk/'
+setwd(pdir)
+
+counts = read_tsv(file.path(pdir, "isoquant_counts_combined_wRefids.tsv")) %>% as.data.frame()
+
+```
+exploring counts matrix:
+```{r}
+
+colnames(counts)
+length(counts$isoform_id)
+length(unique(counts$isoform_id))
+head(counts$isoform_id,3)
+```
+
+Reading in gtf:
+```{r}
+
+gtf = read_tsv(file.path(pdir,'stringtie_merged.wRefIds.gtf'), skip = 5, col_names = F) %>% filter(X3 == 'transcript')
+```
+
+Isoform id:
+```{r}
+##"; transcript_id " "MSTRG.5.2^ENSG00000228794.11^ENST00000445118.7^j"
+head(str_split_fixed(gtf$X9, '\\"',5) [,4],5)
+```
+Merging with gtf:
+```{r}
+#"gene_id \"MSTRG.1\"; transcript_id \"MSTRG.1^MSTRG.1.3^ENSG00000288531.1^ENST00000661463.1^j\";" 
+
+transcript_in_db = str_split_fixed(gtf$X9, '\\"',5) [,4] 
+```
+
+Check for NAs in counts:
+```{r}
+counts$isoform_id[!(counts$isoform_id %in% transcript_in_db)]
+```
+
+setting counts for transcript not in counts matrix to zero:
+```{r}
+counts2 = as_tibble(transcript_in_db) %>% left_join(as_tibble(counts), c('value' = 'isoform_id')) 
+counts2[is.na(counts2)] = 0
+```
+
+Create a df for counts in gtf:
+```{r}
+colnames(counts2) = c('isoform_id', colnames(counts2)[2:length(colnames(counts2))])
+counts = as.data.frame(counts2)
+```
+
+Computes counts per million (CPM) or reads per kilobase per million (RPKM) values
+```{r}
+
+cpm <- cpm(counts[,-1], log=FALSE)
+abundance = as.tibble(cbind(isoform_id = counts[,1],as.tibble(cpm)))
+
+```
+
+Colnames for design object:
+```{r}
+colnames(abundance)[-1][-1]
+```
+
+Creating Design object:
+```{r}
+myDesign <- data.frame(
+    sampleID = colnames(abundance)[-1][-1],
+    condition = c('wt','wt','wt','mut','mut','mut')
+)
+myDesign
+```
+
+importRdata fcuntion: Creates SwitchAnalyzeRlist From Standard R Objects
+isoformNtFasta obtained by running Gffread on the merged assembly as below:
+gffread stringtie_merged.wRefIds.gtf -g refs/GRCh38_no_alt.fa -w bulk_kinnex_stringtie_merged.wRefIds.fasta
+
+```{r}
+aSwitchList <- importRdata(
+    isoformCountMatrix   = counts,
+    isoformRepExpression = abundance,
+    designMatrix         = myDesign,
+    isoformExonAnnoation = file.path(pdir, "stringtie_merged.wRefIds.gtf"),
+    isoformNtFasta       = file.path(pdir,"bulk_kinnex_stringtie_merged.wRefIds.fasta"),
+    showProgress = FALSE
+)
+
+
+
+# aSwitchList2 <- preFilter(
+#     switchAnalyzeRlist = aSwitchList,
+#     geneExpressionCutoff = 1,
+#     isoformExpressionCutoff = 0,
+#     removeSingleIsoformGenes = TRUE
+# )
+
+```
+
+Terminal Output:
+Step 1 of 10: Checking data...
+Step 2 of 10: Obtaining annotation...
+    importing GTF (this may take a while)...
+Warning:    No CDS annotation was found in the GTF files meaning ORFs could not be annotated.
+     (But ORFs can still be predicted with the analyzeORF() function)Warning: The annotation and quantification (count/abundance matrix and isoform annotation) Seem to be slightly different. 
+Specifically:
+ 1 isoforms were only found in the annotation
+ 
+Please make sure this is on purpouse since differences will cause inaccurate quantification and thereby skew all analysis.
+ If you have quantified with Salmon this could be normal since it as default only keep one copy of identical sequnces (can be prevented using the --keepDuplicates option)
+ We strongly encurage you to go back and figure out why this is the case.
+
+    3 ( 0.01%) isoforms were removed since they were not expressed in any samples.
+Step 3 of 10: Fixing StringTie gene annoation problems...
+    There were no need to rescue any annotation
+Step 4 of 10: Calculating expression estimates from count data...
+    Skipped as user supplied expression via the "isoformRepExpression" argument...
+Step 5 of 10: Testing for unwanted effects...
+    Added 1 batch/covariates to the design matrix
+Step 6 of 10: Batch correcting expression estimates...
+Step 7 of 10: Extracting data from each condition...
+Step 8 of 10: Making comparisons...
+Step 9 of 10: Making switchAnalyzeRlist object...
+Step 10 of 10: Guestimating differential usage...
+
+
+##
+comparison        estimated_genes_with_dtu
+<chr>             <chr>
+mut vs wt	        42 - 70
+
+```{r}
+#default values:
+#dIF differential Isoform Usage cutoff (IF isoform fraction) required to consider an isoform switching = 0.1 10%
+#https://rdrr.io/bioc/IsoformSwitchAnalyzeR/man/preFilter.html
+
+aSwitchList2 <- preFilter(
+switchAnalyzeRlist = aSwitchList,
+IFcutoff=0.01,
+acceptedGeneBiotype = NULL,
+acceptedIsoformClassCode = NULL,
+removeSingleIsoformGenes = TRUE,
+reduceToSwitchingGenes=FALSE,
+reduceFurtherToGenesWithConsequencePotential = FALSE,
+onlySigIsoforms = FALSE,
+keepIsoformInAllConditions=FALSE,
+alpha=0.05,
+dIFcutoff = 0.1,
+quiet=FALSE
+)
+
+```
+
+Terminal Out:
+filtering removed 24317 ( 94.07% of ) transcripts. There is now 1534 isoforms left.
+
+```{r}
+dim(aSwitchList$isoformCountMatrix)
+dim(aSwitchList2$isoformCountMatrix)
+
+```
+Analyze ORF:
+
+```{r}
+### 2.2
+aSwitchList3 = analyzeORF(
+    aSwitchList2,
+    genomeObject = NULL,
+    minORFlength=100,
+    orfMethod = "longest",
+    cds = NULL,
+    PTCDistance = 25,
+    startCodons="ATG",
+    stopCodons=c("TAA", "TAG", "TGA"),
+    showProgress=TRUE,
+    quiet=FALSE
+)
+
+```
+
+Terminal Out:
+Step 1 of 3 : Extracting transcript sequences...
+Step 2 of 3 : Locating potential ORFs...
+  |================================================================================================================| 100%
+Step 3 of 3 : Scanning for PTCs...
+1532 putative ORFs were identified, analyzed and added.
+Done
+
+
+```{r}
+dim(aSwitchList$isoformCountMatrix)
+dim(aSwitchList2$isoformCountMatrix)
+dim(aSwitchList3$isoformCountMatrix)
+
+```
+
+[1] 25851     7
+[1] 1534    7
+[1] 1534    7
+
+```{r}
+group <- factor(aSwitchList3$designMatrix$condition)
+y <- DGEList(counts=aSwitchList3$isoformCountMatrix,group=group)
+y <- normLibSizes(y)
+design <- model.matrix(~group)
+y <- estimateDisp(y, design)
+y <- estimateTagwiseDisp(y)
+et <- exactTest(y, pair = c('wt','mut'))
+res1 = mutate(topTags(et, n = nrow(et$table))$table, condition_1 = 'wt', condition_2 = 'mut')
+res = rbind(res1)
+res = mutate(res, condition_join = paste(res$condition_1, res$condition_2, res$isoform_id, sep = '_'))
+
+```
+
+```{r}
+aSwitchList3$isoformFeatures
+```
+
+Isoform analyze Part1:
+https://bioconductor.org/packages/devel/bioc/manuals/IsoformSwitchAnalyzeR/man/IsoformSwitchAnalyzeR.pdf
+
+```{r}
+### 2.3
+aSwitchList_part1 <- isoformSwitchAnalysisPart1(
+    switchAnalyzeRlist   = aSwitchList3,
+    pathToGTF =  file.path(pdir, "stringtie_merged.wRefIds.gtf") ,
+    pathToOutput = file.path(pdir, "isoformSwitchAnalysisR/Output/isoformSwitchAnalysisPart1_results"),
+    outputSequences      = TRUE, # change to TRUE whan analyzing your own data 
+    prepareForWebServers = TRUE,  # change to TRUE if you will use webservers for external sequence analysis
+)
+
+summary(aSwitchList_part1)
+#saveRDS(aSwitchList_part1, 'aSwitchList.rds')
+```
+
+Terminal Out:
+
+Step 1 of 3 : Detecting isoform switches...
+Step 3 of 3 : Extracting (and outputting) sequences
+The 'removeLongAAseq' and 'removeShortAAseq' arguments:
+ Removed : 0 isoforms.
+ Trimmed : 1 isoforms (to only contain the first 1000 AA)
+The 'alsoSplitFastaFile' caused 1 fasta files, each with a subset of the data, to be created (each named X of Y).
+
+The number of isoform switches found were:
+The nucleotide and amino acid sequences of these isoforms have been outputted to the supplied directory. 
+These sequences enabling external analysis of protein domians (Pfam), coding potential (CPAT/CPC2) or signal peptides (SignalIP). 
+See ?analyzeCPAT, ?analyzeCPC2, ?analyzePFAM or?analyzeSignalIP (under details) for suggested ways of running these three tools.
+
+```{r}
+summary(aSwitchList_part1)
+```
+
+Terminal Out:
+
+This switchAnalyzeRlist list contains:
+ 72 isoforms from 33 genes
+ 1 comparison from 2 conditions (in total 6 samples)
+
+Switching features:
+
+Feature analyzed:
+[1] "Isoform Switch Identification, ntSequence, ORFs, aaSequence"
+
+Restart point:
+```{r}
+#aSwitchList_part1 = readRDS('aSwitchList.rds')
+```
+
+```{r}
+summary(aSwitchList_part1$isoformCountMatrix)
+dim(aSwitchList_part1$isoformCountMatrix)
+aSwitchList_part1$isoformCountMatrix
+```
+```{r}
+aSwitchList <- aSwitchList_part1
+group <- factor(aSwitchList$designMatrix$condition)
+group
+```
+
+DGEList function creates a DGEList object from a table of counts (rows=features, columns=samples), group indicator for each column, library size (optional) and a table of feature annotation (optional).
+
+
+normLibSizes - The normLibSizes function normalizes the library sizes in such a way to minimize the log-fold
+changes between the samples for most genes. The default method for computing these scale
+factors uses a trimmed mean of M-values (TMM) between each pair of samples.
+
+```{r}
+y <- DGEList(counts=aSwitchList$isoformCountMatrix,group=group)
+y <- normLibSizes(y)
+```
+
+```{r}
+~group
+design <- model.matrix(~group)
+design
+```
+
+estimateDisp: from edgeR package
+Maximizes the negative binomial likelihood to give the estimate of the common, trended and tagwise dispersions across all tags.
+
+```{r}
+estimateDisp(y, design)
+y <- estimateDisp(y, design)
+
+```
+
+estimateTagwiseDisp from edgeR:
+Estimates tagwise dispersion values by an empirical Bayes method based on weighted conditional maximum likelihood
+
+```{r}
+estimateTagwiseDisp(y)
+y <- estimateTagwiseDisp(y)
+```
+
+exactTest for edgeR:
+Compute genewise exact tests for differences in the means between two groups of negative-binomially distributed counts.
+
+```{r}
+et <- exactTest(y, pair = c('wt','mut'))
+et
+```
+
+```{r}
+res1 = mutate(topTags(et, n = nrow(et$table))$table, condition_1 = 'mut', condition_2 = 'wt')
+res = rbind(res1)
+res = mutate(res, condition_join = paste(res$condition_1, res$condition_2, res$isoform_id, sep = '_'))
+res
+
+```
+
+Mutating isoformSwitchObject:
+```{r}
+aSwitchList_condition_join = paste(aSwitchList$isoformFeatures$condition_1, aSwitchList$isoformFeatures$condition_2, aSwitchList$isoformFeatures$isoform_id, sep = '_')
+
+aSwitchList$isoformFeatures$iso_p_value = res$PValue[match(aSwitchList_condition_join, res$condition_join)]
+aSwitchList$isoformFeatures$iso_q_value = res$FDR[match(aSwitchList_condition_join, res$condition_join)]
+aSwitchList$isoformFeatures$iso_significant = res$FDR[match(aSwitchList_condition_join, res$condition_join)] < 0.05
+aSwitchList$isoformFeatures$iso_significant[aSwitchList$isoformFeatures$iso_significant == TRUE] = 'yes'
+aSwitchList$isoformFeatures$iso_significant[aSwitchList$isoformFeatures$iso_significant == FALSE] = 'no'
+
+```
+
+Isoform Object:
+```{r}
+summary(aSwitchList$isoformFeatures$isoform_switch_q_value)
+```
+
+Terminal Out:
+
+     Min.   1st Qu.    Median      Mean   3rd Qu.      Max. 
+0.0000000 0.0000164 0.0025780 0.0661114 0.0239945 0.8025542 
+
+```{r}
+summary(res$FDR[match(aSwitchList_condition_join, res$condition_join)] < 0.05)
+res$FDR[match(aSwitchList_condition_join, res$condition_join)] < 0.05
+```
+
+```{r}
+head(str_split_fixed(aSwitchList$isoformFeatures$isoform_id, '\\^',4))
+```
+
+Getting gene names and gene symbols:
+```{r}
+library('biomaRt')
+library('devtools')
+if(!require('annotables')) {
+  install.packages('annotables')
+  library('annotables')
+}
+BiocManager::install("org.Hs.eg.db")
+```
+
+Getting GRCh38 reference:
+```{r}
+if (!require("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+
+BiocManager::install("BSgenome.Hsapiens.NCBI.GRCh38")
+```
+
+EnsDb.Hsapiens.v86 reference database:
+```{r}
+if (!require("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+
+BiocManager::install("EnsDb.Hsapiens.v86")
+```
+
+This function returns a list of BioMart databases hosted by Ensembl. To establish a connection use the useMart function.
+```{r}
+listEnsembl()
+ensmbl <- useEnsembl(biomart = "genes")
+ensml_datasets <- listDatasets(ensmbl)
+```
+
+
+useMart func: Connects to the selected BioMart database and dataset
+```{r}
+mart = useMart("ensembl")
+mart = useMart(biomart="ensembl", dataset="hsapiens_gene_ensembl")
+```
+
+List attribute:
+```{r}
+attr <- listAttributes(mart)
+```
+
+List Filters:
+```{r}
+filters <- listFilters(mart)
+#ensembl_gene_id_version
+```
+
+Ref Ensmbl Ids in dataset:
+```{r}
+isoformFeatures_wIds <- aSwitchList$isoformFeatures
+isoformFeatures_wIds$ref_transcript_id <- str_split_fixed(isoformFeatures_wIds$isoform_id, '\\^',4)[,3]
+isoformFeatures_wIds$ref_gene_id <- str_split_fixed(isoformFeatures_wIds$isoform_id, '\\^',4)[,2]
+```
+
+
+```{r}
+refIds <- getBM(attributes = c('ensembl_gene_id_version','ensembl_transcript_id_version',
+                     'external_gene_name','external_transcript_name'),
+      filters = "ensembl_gene_id_version",
+      values = isoformFeatures_wIds$ref_gene_id,
+      mart = mart
+)
+```
+
+Unique ref ids:
+```{r}
+refIds <- refIds %>% unique()
+refIds
+colnames(refIds) = c('gene_id', 'transcript_id', 'gene_name', 'transcript_name')
+refIds
+```
+
+Merge with counts switch object:
+
+```{r}
+isoformFeatures_wIds <- left_join(isoformFeatures_wIds %>% dplyr::select(-c("gene_name")),
+                     refIds %>%
+                     unique(),
+           by=c("ref_transcript_id"="transcript_id", 
+                "ref_gene_id"="gene_id"))
+
+```
+
+Volcano like plot
+```{r}
+### Volcano like plot:
+library(ggrepel)
+
+ggplot(data=isoformFeatures_wIds, aes(x=dIF, y=-log10(isoform_switch_q_value)), label=aSwitchList$isoform_id) +
+     geom_point(
+        aes( color=abs(dIF) > 0.1 & isoform_switch_q_value < 0.05,), # default cutoff
+        size=1
+    ) + 
+    geom_hline(yintercept = -log10(0.1), linetype='dashed') + # default cutoff
+    geom_vline(xintercept = c(-0.001, 0.001), linetype='dashed') + # default cutoff
+    facet_wrap( ~ condition_2) +
+    #facet_grid(condition_1 ~ condition_2) + # alternative to facet_wrap if you have overlapping conditions
+    scale_color_manual('Signficant\nIsoform Switch', values = c('blue','orange')) +
+    labs(x='dIF', y='-Log10 ( Isoform Switch Q Value )') +
+    theme_bw()
+
+ggsave(filename='isoformSwitch_1.png',path='/Users/akhorgad/mdl-docs-external/_images/', plot = last_plot())
+```
+
+Switch vs Gene changes:
+```{r}
+### Switch vs Gene changes:
+
+ggplot(data=isoformFeatures_wIds, aes(x=gene_log2_fold_change, y=dIF)) +
+    geom_point(
+        aes( color=abs(dIF) > 0.1 & isoform_switch_q_value < 0.05 ), # default cutoff
+        size=1
+    ) + 
+    facet_wrap(~ condition_2) +
+    #facet_grid(condition_1 ~ condition_2) + # alternative to facet_wrap if you have overlapping conditions
+    geom_hline(yintercept = 0, linetype='dashed') +
+    geom_vline(xintercept = 0, linetype='dashed') +
+    scale_color_manual('Signficant\nIsoform Switch', values = c('blue','orange')) +
+    labs(x='Gene log2 fold change', y='dIF') +
+    theme_bw()
+ggsave(filename='isoformSwitch_2.png',path='/Users/akhorgad/mdl-docs-external/_images/', plot = last_plot())
+
+```
+

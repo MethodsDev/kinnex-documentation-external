@@ -536,7 +536,7 @@ Note, this helps to have the gene-symbol annotated gene features.
     :align: center
 
 
-.. figure:: ../_images/foi_FeaturePlot.png.png
+.. figure:: ../_images/foi_FeaturePlot.png
    :height: 500px
    :width: 1000px
    :align: center

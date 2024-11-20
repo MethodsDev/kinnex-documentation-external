@@ -346,6 +346,11 @@ return(gene_ids)
 feature_ids = get_feature_names_with_gene_symbols(marker_genes[["CD8"]])
 
 VlnPlot(seurat_obj, features = feature_ids)
+ggsave(filename='foi_VlnPlot.png',path='/Users/akhorgad/mdl-docs-external/_images/', plot = last_plot())
+
 FeaturePlot( seurat_obj, features = feature_ids)
+ggsave(filename='foi_FeaturePlot.png',path='/Users/akhorgad/mdl-docs-external/_images/', plot = last_plot())
+
+
 ```
 
