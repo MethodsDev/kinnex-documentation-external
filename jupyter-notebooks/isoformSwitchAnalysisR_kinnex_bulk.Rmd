@@ -524,13 +524,10 @@ nbaplot = ggplot(data=isoformFeatures_wIds, aes(x=dIF, y=-log10(isoform_switch_q
     theme_bw()
 
 nbaplot + 
-  geom_label_repel(aes(label=ifelse(-log10(isoform_switch_q_value)>0.1,as.character(isoformFeatures_wIds$transcript_name),'')),
+  geom_label_repel(aes(label=ifelse(-log10(isoform_switch_q_value)>0.1,as.character(aSwitchList4$isoformFeatures$),''),
                   box.padding   = 0.35, 
                   point.padding = 0.1,
-                  segment.color = 'grey40')
-
-ggsave(filename='isoformSwitch_1_wLabels.png',path='/Users/akhorgad/mdl-docs-external/_images/', plot = last_plot())
-
+                  segment.color = 'grey40'))
 ```
 
 
@@ -571,29 +568,16 @@ IUPred Intrinsically disordered proteins (IDPs) : https://iupred2a.elte.hu/
 
 SignalP Signal peptide and cleavage sites in gram+, gram- and eukaryotic amino acid sequences (signal pipetide at N terminus) : https://services.healthtech.dtu.dk/services/SignalP-5.0/
 
-
-```{r}
-aSwitchList <- analyzePFAM(
-    aSwitchList,
-    pathToPFAMresultFile = file.path(pdir, "isoformSwitchAnalysisR/Output/Pfam_out.txt"),
-    showProgress=TRUE,
-    quiet=FALSE
-)
-```
-
-
-
-
 ```{r}
 
  aSwitchList <- isoformSwitchAnalysisPart2(
    switchAnalyzeRlist        = aSwitchList,
    n                         = 10,    # if plotting was enabled, it would only output the top 10 switches
    removeNoncodinORFs        = TRUE,
-   pathToCPC2resultFile      = file.path(pdir, "isoformSwitchAnalysisR/Output/cpc2output.txt"),
-   pathToIUPred2AresultFile  = file.path(pdir, "isoformSwitchAnalysisR/Output/iupred2a_out.txt"), 
-   pathToSignalPresultFile   = file.path(pdir, "isoformSwitchAnalysisR/Output/prediction_results.txt"), 
-   pathToDeepTMHMMresultFile = file.path(pdir, "isoformSwitchAnalysisR/Output/TMRs.gff3"),
+   
+   pathToCPC2resultFile      = "isoformSwitchAnalysisR/Output/cpc2output.txt",
+   pathToIUPred2AresultFile  = "isoformSwitchAnalysisR/Output/iupred2a_out.txt",
+   pathToSignalPresultFile   = "isoformSwitchAnalysisR/Output/prediction_results.txt",
    outputPlots               = TRUE
  )
 
