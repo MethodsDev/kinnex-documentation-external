@@ -60,10 +60,11 @@ to explore Kinnex datatypes.
    jupyter-notebooks/id_mapping_from_gffcompare
    jupyter-notebooks/isoformSwitchAnalysisR_kinnex_bulk.Rmd
    jupyter-notebooks/genomeview_demo
-   _subpages/isoformSwitch_bulk
    _subpages/todo.rst
    
-g
+
+
+
 Doc set-up Notes
 =================
 To be removed during cleanup!!
