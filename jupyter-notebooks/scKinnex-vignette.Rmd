@@ -283,6 +283,7 @@ dplyr::filter(avg_log2FC > 1) %>% slice_head(n=20) %>% ungroup()
 top_20_markers
 ```
 
+
 ```{r}
 max_cluster <- max(as.numeric(top_20_markers$cluster)) - 1
 
@@ -304,6 +305,47 @@ Run above list through: http://xteam.xbio.top/ACT to get cell type predictions.
 Select Tissue type blood
 
 ```{r}
+# example definition of marker genes for certain cell types
 
+marker_genes = list()
+
+marker_genes[["CD8"]] = c("CD8A","CD8B","GZMB","TRB","TRA","PRF1", "GZMB")
+
+```
+
+# function to extract gene ids with the relevant gene symbols
+
+```{r}
+#{r}
+
+# function to extract gene ids with the relevant gene symbols
+
+
+feature_names = rownames(seurat_obj@assays$RNA$counts)
+
+get_feature_names_with_gene_symbols = function(gene_symbols) {
+
+gene_ids = c()
+
+for (gene_symbol in gene_symbols) {
+    found_genes = grep(paste0(gene_symbol,"\\^"), feature_names, value=T)
+ if (length(found_genes) > 0) {
+        gene_ids = c(gene_ids, found_genes)
+    }
+}
+return(gene_ids)
+}
+
+```
+
+# paint umaps according to the features of interest
+
+```{r}
+# paint umaps according to the features of interest
+
+feature_ids = get_feature_names_with_gene_symbols(marker_genes[["CD8"]])
+
+VlnPlot(seurat_obj, features = feature_ids)
+FeaturePlot( seurat_obj, features = feature_ids)
 ```
 
