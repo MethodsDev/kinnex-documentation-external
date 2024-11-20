@@ -14,6 +14,14 @@ To-do Tasks/ Feedback
 
 |:stop_sign:| - blocked
 
+
+Outstanding tasks as of Nov 20th:
+---------------------------------
+1. Integrate ITV - git lfs
+2. isoformSwitchAnalysisR - for bulk debug pfam
+3. isoformSwitchAnalyzeR - for single-cell - pseudo-bulk approach
+
+
 Sep4th:
 -------
 1. Can we add/Should add toctree in Index left side panel? Yes we can we'd like. |:salad:|

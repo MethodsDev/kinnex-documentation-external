@@ -568,17 +568,40 @@ IUPred Intrinsically disordered proteins (IDPs) : https://iupred2a.elte.hu/
 
 SignalP Signal peptide and cleavage sites in gram+, gram- and eukaryotic amino acid sequences (signal pipetide at N terminus) : https://services.healthtech.dtu.dk/services/SignalP-5.0/
 
+
+analyzePFAM object:
+```{r}
+
+analyzePFAM(
+    aSwitchList,
+    pathToPFAMresultFile = file.path(pdir, "isoformSwitchAnalysisR/Output/pfam_out"),
+    showProgress=TRUE,
+    quiet=FALSE
+)
+```
+
+Adding other nanotations to the SwitchR object:
 ```{r}
 
  aSwitchList <- isoformSwitchAnalysisPart2(
    switchAnalyzeRlist        = aSwitchList,
    n                         = 10,    # if plotting was enabled, it would only output the top 10 switches
    removeNoncodinORFs        = TRUE,
-   
-   pathToCPC2resultFile      = "isoformSwitchAnalysisR/Output/cpc2output.txt",
-   pathToIUPred2AresultFile  = "isoformSwitchAnalysisR/Output/iupred2a_out.txt",
-   pathToSignalPresultFile   = "isoformSwitchAnalysisR/Output/prediction_results.txt",
+   pathToCPC2resultFile      = file.path(pdir, "isoformSwitchAnalysisR/Output/cpc2output.txt"),
+   pathToIUPred2AresultFile  = file.path(pdir, "isoformSwitchAnalysisR/Output/iupred2a_out.txt"),
+   pathToSignalPresultFile   = file.path(pdir, "isoformSwitchAnalysisR/Output/prediction_results.txt"),
    outputPlots               = TRUE
  )
+
+```
+
+Adding DeepTMHMM:
+
+```{r}
+aSwitchList <- analyzeDeepTMHMM(
+    switchAnalyzeRlist   = aSwitchList,
+    pathToDeepTMHMMresultFile = file.path(pdir, "isoformSwitchAnalysisR/Output/TMRs.gff3"),
+    showProgress=FALSE
+)
 
 ```

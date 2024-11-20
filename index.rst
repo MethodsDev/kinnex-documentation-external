@@ -60,6 +60,7 @@ to explore Kinnex datatypes.
    jupyter-notebooks/id_mapping_from_gffcompare
    _subpages/isoformSwitch_bulk
    jupyter-notebooks/genomeview_demo
+   _subpages/citations.rst
    _subpages/todo.rst
    
 

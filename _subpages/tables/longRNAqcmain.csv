@@ -2,9 +2,11 @@
  sampleName,this.sample_name,"Replace ""sample_name"" with the column that contains the name of the samples in the sample table. "
  inputBAM,this.sorted_BAM,"Replace ""sorted_BAM"" with the column that contains the path to the sorted BAM alignment in the sample table. "
  inputBAMIndex,this.sorted_BAM_index,"Replace ""sorted_BAM_index"" with the column that contains the path to the sorted BAM alignment index in the sample table. "
- chromosomesList,"""chr1,chr2,chr3,chr4,chr5,chr6,chr7,chr8,chr9,chr10,chr11,chr12,chr13,chr14,chr15,chr16,chr17,chr18,chr19,chr20,chr21,chr22,chr23,chrX,chrY""",Comma-separated list of chromosome names as named in the reference you used for the alignments and provide as input in this workflow. Any read aligning outside of these chromosomes will be filtered. 
+ chromosomesList,"""chr1,chr2,chr3,chr4,chr5,chr6,chr7,chr8,chr9,chr10,
+chr11,chr12,chr13,chr14,chr15,chr16,chr17,chr18,
+chr19,chr20,chr21,chr22,chr23,chrX,chrY""",Comma-separated list of chromosome names as named in the reference you used for the alignments and provide as input in this workflow. Any read aligning outside of these chromosomes will be filtered. 
  dataType,"""pacbio_ccs""","Argument of the same name in IsoQuant, one of ""assembly"", ""pacbio_ccs"", ""nanopore"". "
- allowNonPrimary,false,(true/false) Whether to process non primary alignments as additional duplicate reads for the Sqanti3 classification. 
+ allowNonPrimary,FALSE,(true/false) Whether to process non primary alignments as additional duplicate reads for the Sqanti3 classification. 
  BAMToGTFConversionMethod,"""cDNACupcake""","One of ""cDNACupcake"" or ""CTAT-LR"". Defines which tool is used for the BAM to GTF conversion to provide a GTF as input to Sqanti3. "
  cagePeak,"""refs/refTSS/refTSS_v4.1_human_coordinate.hg38.bed""",Reference CAGE peak file from refTSS specific to the organism. Hg38 and mm39 are available in the mdl-refs buckets. 
  polyAMotifs,"""refs/polyA_motifs/mouse_and_human.polyA_motif.txt""",File with a list of known polyA motifs in Human and Mouse (one entry per line). 

@@ -12,7 +12,7 @@ from pathlib import Path
 
 project = 'kinnex-docs-external'
 copyright = '2024, Methods Dev Lab'
-author = 'akhorgad@broadinstitute.org'
+author = 'mdl@broadinstitute.org'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
