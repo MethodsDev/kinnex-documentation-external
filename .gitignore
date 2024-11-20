@@ -1,3 +1,4 @@
 _build
 .vscode
 .DS_Store
+jupyter-notebooks/ITV_demo_vignette.ipynb
