@@ -492,7 +492,7 @@ Volcano like plot
 ### Volcano like plot:
 library(ggrepel)
 
-ggplot(data=isoformFeatures_wIds, aes(x=dIF, y=-log10(isoform_switch_q_value)), label=aSwitchList$isoform_id) +
+ggplot(data=isoformFeatures_wIds, aes(x=dIF, y=-log10(isoform_switch_q_value)), label=isoformFeatures_wIds$isoform_id) +
      geom_point(
         aes( color=abs(dIF) > 0.1 & isoform_switch_q_value < 0.05,), # default cutoff
         size=1
@@ -507,6 +507,30 @@ ggplot(data=isoformFeatures_wIds, aes(x=dIF, y=-log10(isoform_switch_q_value)), 
 
 ggsave(filename='isoformSwitch_1.png',path='/Users/akhorgad/mdl-docs-external/_images/', plot = last_plot())
 ```
+
+```{r}
+library(ggrepel)
+
+nbaplot = ggplot(data=isoformFeatures_wIds, aes(x=dIF, y=-log10(isoform_switch_q_value)), label=isoformFeatures_wIds$isoform_id) +
+     geom_point(
+        aes( color=abs(dIF) > 0.01 & isoform_switch_q_value < 0.05,), # default cutoff
+        size=1
+    ) + 
+    geom_hline(yintercept = -log10(0.1), linetype='dashed') + # default cutoff
+    geom_vline(xintercept = c(-0.001, 0.001), linetype='dashed') + # default cutoff
+    facet_wrap( ~ condition_2) +
+    #facet_grid(condition_1 ~ condition_2) + # alternative to facet_wrap if you have overlapping conditions
+    scale_color_manual('Signficant\nIsoform Switch', values = c('blue','orange')) +
+    labs(x='dIF', y='-Log10 ( Isoform Switch Q Value )') +
+    theme_bw()
+
+nbaplot + 
+  geom_label_repel(aes(label=ifelse(-log10(isoform_switch_q_value)>0.1,as.character(aSwitchList4$isoformFeatures$),''),
+                  box.padding   = 0.35, 
+                  point.padding = 0.1,
+                  segment.color = 'grey40'))
+```
+
 
 Switch vs Gene changes:
 ```{r}
@@ -528,3 +552,34 @@ ggsave(filename='isoformSwitch_2.png',path='/Users/akhorgad/mdl-docs-external/_i
 
 ```
 
+Restart point:
+```{r}
+#saveRDS(aSwitchList_part1, 'aSwitchList.rds')
+#aSwitchList_part1 = readRDS('aSwitchList.rds')
+```
+
+isoformSwitchAnalysisPart2 : adds the results of the external sequence analysis supplied and then analyzes alternative splicing.
+
+Pfam annotations are required, in addition we can provide annotations generated with the tools below.
+CPC2 Coding Potential Calculator : https://cpc2.gao-lab.org/
+
+Pfam - domain annotation `pfam_scan.pl -as -dir isoformSwitchAnalysisPart1_results -fasta isoformSwitchAnalyzeR_isoform_AA_complete.fasta -cpu 4 -e_seq 10.0 -e_dom 10.0 > Pfam_result.txt`
+
+IUPred Intrinsically disordered proteins (IDPs) : https://iupred2a.elte.hu/
+
+SignalP Signal peptide and cleavage sites in gram+, gram- and eukaryotic amino acid sequences (signal pipetide at N terminus) : https://services.healthtech.dtu.dk/services/SignalP-5.0/
+
+```{r}
+
+ aSwitchList <- isoformSwitchAnalysisPart2(
+   switchAnalyzeRlist        = aSwitchList,
+   n                         = 10,    # if plotting was enabled, it would only output the top 10 switches
+   removeNoncodinORFs        = TRUE,
+   
+   pathToCPC2resultFile      = "isoformSwitchAnalysisR/Output/cpc2output.txt",
+   pathToIUPred2AresultFile  = "isoformSwitchAnalysisR/Output/iupred2a_out.txt",
+   pathToSignalPresultFile   = "isoformSwitchAnalysisR/Output/prediction_results.txt",
+   outputPlots               = TRUE
+ )
+
+```
