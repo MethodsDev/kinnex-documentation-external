@@ -165,7 +165,7 @@ Step 10 of 10: Guestimating differential usage...
 ##
 comparison        estimated_genes_with_dtu
 <chr>             <chr>
-mut vs wt	        42 - 70
+mut vs wt	        49 - 82
 
 ```{r}
 #default values:
@@ -310,6 +310,8 @@ summary(aSwitchList_part1$isoformCountMatrix)
 dim(aSwitchList_part1$isoformCountMatrix)
 aSwitchList_part1$isoformCountMatrix
 ```
+
+
 ```{r}
 aSwitchList <- aSwitchList_part1
 group <- factor(aSwitchList$designMatrix$condition)
@@ -406,35 +408,25 @@ if(!require('annotables')) {
   install.packages('annotables')
   library('annotables')
 }
-BiocManager::install("org.Hs.eg.db")
+
 ```
 
-Getting GRCh38 reference:
-```{r}
-if (!require("BiocManager", quietly = TRUE))
-    install.packages("BiocManager")
-
-BiocManager::install("BSgenome.Hsapiens.NCBI.GRCh38")
-```
-
-EnsDb.Hsapiens.v86 reference database:
-```{r}
-if (!require("BiocManager", quietly = TRUE))
-    install.packages("BiocManager")
-
-BiocManager::install("EnsDb.Hsapiens.v86")
-```
 
 This function returns a list of BioMart databases hosted by Ensembl. To establish a connection use the useMart function.
 ```{r}
 listEnsembl()
-ensmbl <- useEnsembl(biomart = "genes")
-ensml_datasets <- listDatasets(ensmbl)
+ensembl <- useEnsembl(biomart = "genes")
+
+datasets <- listDatasets(ensembl)
+head(datasets)
+
+searchDatasets(mart = ensembl, pattern = "hsapiens")
 ```
 
 
 useMart func: Connects to the selected BioMart database and dataset
 ```{r}
+ensembl <- useDataset(dataset = "hsapiens_gene_ensembl", mart = ensembl)
 mart = useMart("ensembl")
 mart = useMart(biomart="ensembl", dataset="hsapiens_gene_ensembl")
 ```
@@ -506,7 +498,7 @@ ggplot(data=isoformFeatures_wIds, aes(x=dIF, y=-log10(isoform_switch_q_value)), 
 
 ggsave(filename='isoformSwitch_1.png',path='/Users/akhorgad/mdl-docs-external/_images/', plot = last_plot())
 ```
-
+label genes:
 ```{r}
 library(ggrepel)
 
@@ -524,8 +516,8 @@ nbaplot = ggplot(data=isoformFeatures_wIds, aes(x=dIF, y=-log10(isoform_switch_q
     theme_bw()
 
 nbaplot + 
-  geom_label_repel(aes(label=ifelse(-log10(isoform_switch_q_value)>0.1,as.character(aSwitchList4$isoformFeatures$),''),
-                  box.padding   = 0.35, 
+  geom_label_repel(aes(label=ifelse(-log10(isoform_switch_q_value)>0.1,as.character(isoformFeatures_wIds$transcript_name),''),
+        box.padding   = 0.35, 
                   point.padding = 0.1,
                   segment.color = 'grey40'))
 ```
@@ -557,6 +549,33 @@ Restart point:
 #aSwitchList_part1 = readRDS('aSwitchList.rds')
 ```
 
+Extracting Ref Ids
+```{r}
+isoformFeatures_wIds[,c("isoform_id","gene_name")]
+isoformFeatures_wIds[which(is.na(isoformFeatures_wIds$gene_name)),c("isoform_id","gene_name")]
+
+
+#aSwitchList$isoformFeatures$gene_name
+#aSwitchList$switchConsequence$gene_name
+#aSwitchList$exons$gene_name
+
+nrow(isoformFeatures_wIds)
+nrow(aSwitchList$isoformFeatures)
+nrow(aSwitchList$switchConsequence)
+aSwitchList_wRefIds <- aSwitchList
+
+#aSwitchList_wRefIds$isoformFeatures$gene_name <- isoformFeatures_wIds$gene_name
+
+aSwitchList_wRefIds$isoformFeatures <- merge(aSwitchList_wRefIds$isoformFeatures[,!(colnames(aSwitchList_wRefIds$isoformFeatures) == "gene_name")] ,isoformFeatures_wIds[,c("isoform_id","gene_name")],by="isoform_id") 
+aSwitchList_wRefIds$isoformFeature
+
+```
+
+
+
+
+
+
 isoformSwitchAnalysisPart2 : adds the results of the external sequence analysis supplied and then analyzes alternative splicing.
 
 Pfam annotations are required, in addition we can provide annotations generated with the tools below.
@@ -569,12 +588,20 @@ IUPred Intrinsically disordered proteins (IDPs) : https://iupred2a.elte.hu/
 SignalP Signal peptide and cleavage sites in gram+, gram- and eukaryotic amino acid sequences (signal pipetide at N terminus) : https://services.healthtech.dtu.dk/services/SignalP-5.0/
 
 
+```{r}
+options(keep.source.pkgs=TRUE)
+options(keep.source=TRUE)
+install.packages("/Users/akhorgad/isoformSwitchpkg/IsoformSwitchAnalyzeR-master", repos=NULL, type="source", INSTALL_opts = "--with-keep.source")
+detach("package:IsoformSwitchAnalyzeR", unload=T)
+library(IsoformSwitchAnalyzeR)
+```
+
 analyzePFAM object:
 ```{r}
 
-analyzePFAM(
-    aSwitchList,
-    pathToPFAMresultFile = file.path(pdir, "isoformSwitchAnalysisR/Output/pfam_out"),
+aSwitchList_wRefIds <- analyzePFAM(
+    aSwitchList_wRefIds,
+    pathToPFAMresultFile = file.path(pdir, "isoformSwitchAnalysisR/Output/pfam_out.txt"),
     showProgress=TRUE,
     quiet=FALSE
 )
@@ -583,10 +610,11 @@ analyzePFAM(
 Adding other nanotations to the SwitchR object:
 ```{r}
 
- aSwitchList <- isoformSwitchAnalysisPart2(
-   switchAnalyzeRlist        = aSwitchList,
+ aSwitchList_wRefIds <- isoformSwitchAnalysisPart2(
+   switchAnalyzeRlist        = aSwitchList_wRefIds,
    n                         = 10,    # if plotting was enabled, it would only output the top 10 switches
    removeNoncodinORFs        = TRUE,
+   pathToPFAMresultFile      = file.path(pdir, "isoformSwitchAnalysisR/Output/pfam_out.txt"),
    pathToCPC2resultFile      = file.path(pdir, "isoformSwitchAnalysisR/Output/cpc2output.txt"),
    pathToIUPred2AresultFile  = file.path(pdir, "isoformSwitchAnalysisR/Output/iupred2a_out.txt"),
    pathToSignalPresultFile   = file.path(pdir, "isoformSwitchAnalysisR/Output/prediction_results.txt"),
@@ -603,4 +631,223 @@ aSwitchList <- analyzeDeepTMHMM(
     showProgress=FALSE
 )
 
+```
+
+
+
+
+
+Adding DeepTMHMM:
+```{r}
+aSwitchList_wRefIds <- analyzeDeepTMHMM(
+    switchAnalyzeRlist   = aSwitchList_wRefIds,
+    pathToDeepTMHMMresultFile = file.path(pdir, "isoformSwitchAnalysisR/Output/TMRs.gff3"),
+    showProgress=FALSE
+)
+
+```
+
+```{r}
+library(stringr)
+deeploc <- read.csv(file.path(pdir, "isoformSwitchAnalysisR/Output/DeepLoc_results.csv"))
+deeploc$Protein_ID <- str_replace_all(deeploc$Protein_ID, fixed("_"), "^")
+names(deeploc)
+names(deeploc) <- gsub("\\.", " ", names(deeploc))
+names(deeploc)
+write.csv(deeploc,file.path(pdir, "isoformSwitchAnalysisR/Output/DeepLoc_results_wCarets.csv"), row.names = FALSE)
+```
+
+```{r}
+aSwitchList_wRefIds <- analyzeDeepLoc2(
+    switchAnalyzeRlist = aSwitchList_wRefIds,
+    pathToDeepLoc2resultFile = file.path(pdir, "isoformSwitchAnalysisR/Output/DeepLoc_results_wCarets.csv"),
+    quiet = FALSE
+)
+```
+Terminal Out:
+Added subcellular information to 60 (83.33%) transcripts
+
+extracted all switches
+```{r}
+ extractTopSwitches(aSwitchList_wRefIds, filterForConsequences = TRUE, n=10)
+```
+
+
+
+analyzeSwitchConsequences
+```{r}
+analyzeSwitchConsequences(aSwitchList_wRefIds, consequencesToAnalyze = 'all')
+```
+
+
+
+ 
+```{r}
+#str_split_fixed(aSwitchList_wRefIds$switchConsequence$isoformUpregulated, '\\^',4)[,2]!=str_split_fixed(aSwitchList_wRefIds$switchConsequence$isoformDownregulated, '\\^',4)[,2]
+```
+
+Splitting the Long Ids in it's constituent parts:
+```{r}
+#str_split_fixed(aSwitchList$isoformFeatures$isoform_id, '\\^',4)
+#str_split_fixed(aSwitchList_wRefIds$isoformFeatures$isoform_id, '\\^',5)[,2]
+#str_split_fixed(aSwitchList_wRefIds$isoformFeatures$isoform_id, '\\^',5)[,3]
+#str_split_fixed(aSwitchList_wRefIds$isoformFeatures$isoform_id, '\\^',5)[,4]
+```
+
+Renaming Isoform Id by Transcript ID and Gffcompare class codes
+```{r}
+
+aSwitchList_wRefIds$isoformFeatures$isoform_id <- paste(str_split_fixed(aSwitchList_wRefIds$isoformFeatures$isoform_id, '\\^',4)[,3],str_split_fixed(aSwitchList_wRefIds$isoformFeatures$isoform_id, '\\^',4)[,4], sep = "_")
+
+aSwitchList_wRefIds$isoformCountMatrix$isoform_id <- paste(str_split_fixed(aSwitchList_wRefIds$isoformCountMatrix$isoform_id, '\\^',4)[,3],str_split_fixed(aSwitchList_wRefIds$isoformCountMatrix$isoform_id, '\\^',4)[,4], sep = "_")
+
+aSwitchList_wRefIds$isoformRepExpression$isoform_id <- paste(str_split_fixed(aSwitchList_wRefIds$isoformRepExpression$isoform_id, '\\^',4)[,3],str_split_fixed(aSwitchList_wRefIds$isoformRepExpression$isoform_id, '\\^',4)[,4], sep = "_")
+
+aSwitchList_wRefIds$isoformRepIF$isoform_id <- paste(str_split_fixed(aSwitchList_wRefIds$isoformRepIF$isoform_id, '\\^',4)[,3],str_split_fixed(aSwitchList_wRefIds$isoformRepIF$isoform_id, '\\^',4)[,4], sep = "_")
+
+aSwitchList_wRefIds$orfAnalysis$isoform_id <- paste(str_split_fixed(aSwitchList_wRefIds$orfAnalysis$isoform_id, '\\^',4)[,3],str_split_fixed(aSwitchList_wRefIds$orfAnalysis$isoform_id , '\\^',4)[,4], sep = "_")
+
+aSwitchList_wRefIds$isoformSwitchAnalysis$isoform_id <- paste(str_split_fixed(aSwitchList_wRefIds$isoformSwitchAnalysis$isoform_id, '\\^',4)[,3],str_split_fixed(aSwitchList_wRefIds$isoformSwitchAnalysis$isoform_id , '\\^',4)[,4], sep = "_")
+
+aSwitchList_wRefIds$topologyAnalysis$isoform_id <- paste(str_split_fixed(aSwitchList_wRefIds$topologyAnalysis$isoform_id, '\\^',4)[,3],str_split_fixed(aSwitchList_wRefIds$topologyAnalysis$isoform_id , '\\^',4)[,4], sep = "_")
+
+```
+Renaming Isoform Id by Transcript ID and Gffcompare class codes - part 2
+```{r}
+aSwitchList_wRefIds$domainAnalysis$isoform_id <- paste(str_split_fixed(aSwitchList_wRefIds$domainAnalysis$isoform_id, '\\^',4)[,3], str_split_fixed(aSwitchList_wRefIds$domainAnalysis$isoform_id , '\\^',4)[,4], sep = "_")
+
+aSwitchList_wRefIds$idrAnalysis$isoform_id <- paste(str_split_fixed(aSwitchList_wRefIds$idrAnalysis$isoform_id, '\\^',4)[,3], str_split_fixed(aSwitchList_wRefIds$idrAnalysis$isoform_id , '\\^',4)[,4], sep = "_")
+
+aSwitchList_wRefIds$signalPeptideAnalysis$isoform_id <- paste(str_split_fixed(aSwitchList_wRefIds$signalPeptideAnalysis$isoform_id, '\\^',4)[,3], str_split_fixed(aSwitchList_wRefIds$signalPeptideAnalysis$isoform_id , '\\^',4)[,4], sep = "_")
+
+aSwitchList_wRefIds$AlternativeSplicingAnalysis$isoform_id <- paste(str_split_fixed(aSwitchList_wRefIds$AlternativeSplicingAnalysis$isoform_id, '\\^',4)[,3], str_split_fixed(aSwitchList_wRefIds$AlternativeSplicingAnalysis$isoform_id , '\\^',4)[,4], sep = "_")
+  
+aSwitchList_wRefIds$subCellLocationAnalysis$isoform_id <- paste(str_split_fixed(aSwitchList_wRefIds$subCellLocationAnalysis$isoform_id, '\\^',4)[,3], str_split_fixed(aSwitchList_wRefIds$subCellLocationAnalysis$isoform_id , '\\^',4)[,4], sep = "_")
+
+aSwitchList_wRefIds$switchConsequence$isoformUpregulated <- paste(str_split_fixed(aSwitchList_wRefIds$switchConsequence$isoformUpregulated, '\\^',4)[,3], str_split_fixed(aSwitchList_wRefIds$switchConsequence$isoformUpregulated , '\\^',4)[,4], sep = "_")
+
+aSwitchList_wRefIds$switchConsequence$isoformDownregulated <- paste(str_split_fixed(aSwitchList_wRefIds$switchConsequence$isoformDownregulated, '\\^',4)[,3], str_split_fixed(aSwitchList_wRefIds$switchConsequence$isoformDownregulated , '\\^',4)[,4], sep = "_")
+
+```
+
+
+
+ntSequence 
+```{r}
+aSwitchList_wRefIds$isoformFeatures
+```
+
+
+```{r}
+
+names(aSwitchList_wRefIds$aaSequence) <- paste(str_split_fixed(names(aSwitchList$aaSequence), '\\^',4)[,3], str_split_fixed(names(aSwitchList$aaSequence), '\\^',4)[,4], sep = "_")
+
+
+names(aSwitchList_wRefIds$ntSequence) <- paste(str_split_fixed(names(aSwitchList$ntSequence), '\\^',4)[,3], str_split_fixed(names(aSwitchList$ntSequence), '\\^',4)[,4], sep = "_")
+ 
+
+aSwitchList_wRefIds$exons$isoform_id <- paste(str_split_fixed(aSwitchList$exons$isoform_id, '\\^',4)[,3], str_split_fixed(aSwitchList$exons$isoform_id, '\\^',4)[,4], sep = "_")
+
+```
+gene ids
+```{r}
+aSwitchList_wRefIds$isoformFeatures
+```
+Setting gene symbols as gene_ids for plotting:
+```{r}
+#aSwitchList_wRefIds$isoformFeatures$gene_id
+
+aSwitchList_wRefIds$isoformFeatures[which(!is.na(aSwitchList_wRefIds$isoformFeatures$gene_name)),]$gene_id <- 
+aSwitchList_wRefIds$isoformFeatures[which(!is.na(aSwitchList_wRefIds$isoformFeatures$gene_name)),c("gene_name")]
+
+```
+
+
+```{r}
+aSwitchList_wRefIds$isoformFeatures$gene_id
+```
+plotting "CAPG" out:
+```{r}
+ options(repr.plot.width = 10, repr.plot.height = 5, repr.plot.res = 200)
+ switchPlot(
+     aSwitchList_wRefIds,
+     gene = 'CAPG',
+     condition1 = 'mutant',
+     condition2 = 'wt',
+ )
+```
+
+plotting "RPS24" out:
+```{r}
+ options(repr.plot.width = 10, repr.plot.height = 5, repr.plot.res = 200)
+ switchPlot(
+     aSwitchList_wRefIds,
+     gene = 'RPS24',
+     condition1 = 'mutant',
+     condition2 = 'wt',
+ )
+```
+DDX5:
+```{r}
+ options(repr.plot.width = 10, repr.plot.height = 5, repr.plot.res = 200)
+ switchPlot(
+     aSwitchList_wRefIds,
+     gene = 'DDX5',
+     condition1 = 'mutant',
+     condition2 = 'wt',
+ )
+```
+
+TSEN15:
+```{r}
+ options(repr.plot.width = 10, repr.plot.height = 5, repr.plot.res = 200)
+ switchPlot(
+     aSwitchList_wRefIds,
+     gene = 'TSEN15',
+     condition1 = 'mutant',
+     condition2 = 'wt',
+ )
+```
+
+NDUFB10
+```{r}
+ options(repr.plot.width = 10, repr.plot.height = 5, repr.plot.res = 200)
+ switchPlot(
+     aSwitchList_wRefIds,
+     gene = 'NDUFB10',
+     condition1 = 'mutant',
+     condition2 = 'wt',
+ )
+```
+
+FAH
+```{r}
+ options(repr.plot.width = 10, repr.plot.height = 5, repr.plot.res = 200)
+ switchPlot(
+     aSwitchList_wRefIds,
+     gene = 'FAH',
+     condition1 = 'mutant',
+     condition2 = 'wt',
+ )
+```
+CANX
+```{r}
+ options(repr.plot.width = 10, repr.plot.height = 5, repr.plot.res = 200)
+ switchPlot(
+     aSwitchList_wRefIds,
+     gene = 'CANX',
+     condition1 = 'mutant',
+     condition2 = 'wt',
+ )
+```
+
+MSTRG.10466
+```{r}
+ options(repr.plot.width = 10, repr.plot.height = 5, repr.plot.res = 200)
+ switchPlot(
+     aSwitchList_wRefIds,
+     gene = 'MSTRG.10466',
+     condition1 = 'mutant',
+     condition2 = 'wt',
+ )
 ```
