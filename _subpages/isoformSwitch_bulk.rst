@@ -727,7 +727,7 @@ plotting "FAH" out:
       condition2 = 'wt',
  )
 
- .. image:: ../_images/FAH.png
+.. image:: ../_images/FAH.png
    :align: center
 
 
@@ -745,7 +745,7 @@ plotting "TSEN15" out:
  )
 
 
- .. image:: ../_images/TSEN15.png
+.. image:: ../_images/TSEN15.png
    :align: center
 
 
@@ -763,5 +763,5 @@ plotting "NDUFB10" out:
  )
 
 
- .. image:: ../_images/NDUFB10.png
+.. image:: ../_images/NDUFB10.png
    :align: center
