@@ -590,3 +590,178 @@ SignalP Signal peptide and cleavage sites in gram+, gram- and eukaryotic amino a
    outputPlots               = TRUE
     )
 
+For DeepLoc annotations, we add a small custom code to format input annotations file:
+
+The input file should have column names in format as below:
+
+.. code:: bash 
+
+   #{r} 
+   library(stringr)
+   deeploc <- read.csv(file.path(pdir, "isoformSwitchAnalysisR/Output/DeepLoc_results.csv"))
+   deeploc$Protein_ID <- str_replace_all(deeploc$Protein_ID, fixed("_"), "^")
+   names(deeploc)
+   names(deeploc) <- gsub("\\.", " ", names(deeploc))
+   names(deeploc)
+   write.csv(deeploc,file.path(pdir, "isoformSwitchAnalysisR/Output/DeepLoc_results_wCarets.csv"), row.names = FALSE)
+
+Reading the results in:
+
+.. code:: bash
+
+   #{r}
+   aSwitchList_wRefIds <- analyzeDeepLoc2(
+      switchAnalyzeRlist = aSwitchList_wRefIds,
+      pathToDeepLoc2resultFile = file.path(pdir, "isoformSwitchAnalysisR/Output/DeepLoc_results_wCarets.csv"),
+      quiet = FALSE
+)
+
+Terminal Out:
+Added subcellular information to 60 (83.33%) transcripts
+
+extracted all switches
+
+.. code:: bash
+
+   #{r} 
+   extractTopSwitches(aSwitchList_wRefIds, filterForConsequences = TRUE, n=10)
+
+
+analyzeSwitchConsequences:
+.. code:: bash
+
+   #{r} 
+   analyzeSwitchConsequences(aSwitchList_wRefIds, consequencesToAnalyze = 'all')
+
+.. image:: ../_images/common_switch_consequences.png
+   :align: center
+
+Splitting the Long Ids in it's constituent parts:
+Renaming Isoform Id by Transcript ID and Gffcompare class codes
+
+.. code:: bash
+
+   #{r} 
+   aSwitchList_wRefIds$isoformFeatures$isoform_id <- paste(str_split_fixed(aSwitchList_wRefIds$isoformFeatures$isoform_id, '\\^',4)[,3],str_split_fixed(aSwitchList_wRefIds$isoformFeatures$isoform_id, '\\^',4)[,4], sep = "_")
+   aSwitchList_wRefIds$isoformCountMatrix$isoform_id <- paste(str_split_fixed(aSwitchList_wRefIds$isoformCountMatrix$isoform_id, '\\^',4)[,3],str_split_fixed(aSwitchList_wRefIds$isoformCountMatrix$isoform_id, '\\^',4)[,4], sep = "_")
+   aSwitchList_wRefIds$isoformRepExpression$isoform_id <- paste(str_split_fixed(aSwitchList_wRefIds$isoformRepExpression$isoform_id, '\\^',4)[,3],str_split_fixed(aSwitchList_wRefIds$isoformRepExpression$isoform_id, '\\^',4)[,4], sep = "_")
+   aSwitchList_wRefIds$isoformRepIF$isoform_id <- paste(str_split_fixed(aSwitchList_wRefIds$isoformRepIF$isoform_id, '\\^',4)[,3],str_split_fixed(aSwitchList_wRefIds$isoformRepIF$isoform_id, '\\^',4)[,4], sep = "_")
+   aSwitchList_wRefIds$orfAnalysis$isoform_id <- paste(str_split_fixed(aSwitchList_wRefIds$orfAnalysis$isoform_id, '\\^',4)[,3],str_split_fixed(aSwitchList_wRefIds$orfAnalysis$isoform_id , '\\^',4)[,4], sep = "_")
+   aSwitchList_wRefIds$isoformSwitchAnalysis$isoform_id <- paste(str_split_fixed(aSwitchList_wRefIds$isoformSwitchAnalysis$isoform_id, '\\^',4)[,3],str_split_fixed(aSwitchList_wRefIds$isoformSwitchAnalysis$isoform_id , '\\^',4)[,4], sep = "_")
+   aSwitchList_wRefIds$topologyAnalysis$isoform_id <- paste(str_split_fixed(aSwitchList_wRefIds$topologyAnalysis$isoform_id, '\\^',4)[,3],str_split_fixed(aSwitchList_wRefIds$topologyAnalysis$isoform_id , '\\^',4)[,4], sep = "_")
+
+
+plotting "CAPG" out:
+.. code:: bash
+
+   #{r} 
+   options(repr.plot.width = 10, repr.plot.height = 5, repr.plot.res = 200)
+   switchPlot(
+      aSwitchList_wRefIds,
+      gene = 'CAPG',
+      condition1 = 'mutant',
+      condition2 = 'wt',
+   )
+
+.. image:: ../_images/CAPG.png
+   :align: center
+
+plotting "RPS24" out:
+
+.. code:: bash
+
+   #{r} 
+    options(repr.plot.width = 10, repr.plot.height = 5, repr.plot.res = 200)
+    switchPlot(
+      aSwitchList_wRefIds,
+      gene = 'RPS24',
+      condition1 = 'mutant',
+      condition2 = 'wt',
+ )
+
+.. image:: ../_images/RPS24.png
+   :align: center
+
+
+plotting "DDX5" out:
+
+.. code:: bash
+
+   #{r} 
+    options(repr.plot.width = 10, repr.plot.height = 5, repr.plot.res = 200)
+    switchPlot(
+      aSwitchList_wRefIds,
+      gene = 'DDX5',
+      condition1 = 'mutant',
+      condition2 = 'wt',
+ )
+
+.. image:: ../_images/DDX5.png
+   :align: center
+
+
+plotting "CANX" out:
+.. code:: bash
+
+   #{r} 
+    options(repr.plot.width = 10, repr.plot.height = 5, repr.plot.res = 200)
+    switchPlot(
+      aSwitchList_wRefIds,
+      gene = 'CANX',
+      condition1 = 'mutant',
+      condition2 = 'wt',
+ )
+
+ .. image:: ../_images/CANX.png
+   :align: center
+
+plotting "FAH" out:
+.. code:: bash
+
+   #{r} 
+    options(repr.plot.width = 10, repr.plot.height = 5, repr.plot.res = 200)
+    switchPlot(
+      aSwitchList_wRefIds,
+      gene = 'FAH',
+      condition1 = 'mutant',
+      condition2 = 'wt',
+ )
+
+ .. image:: ../_images/FAH.png
+   :align: center
+
+
+plotting "TSEN15" out:
+
+.. code:: bash
+
+   #{r} 
+    options(repr.plot.width = 10, repr.plot.height = 5, repr.plot.res = 200)
+    switchPlot(
+      aSwitchList_wRefIds,
+      gene = 'TSEN15',
+      condition1 = 'mutant',
+      condition2 = 'wt',
+ )
+
+
+ .. image:: ../_images/TSEN15.png
+   :align: center
+
+
+plotting "NDUFB10" out:
+
+.. code:: bash
+
+   #{r} 
+    options(repr.plot.width = 10, repr.plot.height = 5, repr.plot.res = 200)
+    switchPlot(
+      aSwitchList_wRefIds,
+      gene = 'NDUFB10',
+      condition1 = 'mutant',
+      condition2 = 'wt',
+ )
+
+
+ .. image:: ../_images/NDUFB10.png
+   :align: center
