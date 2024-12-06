@@ -10,3 +10,15 @@ seaborn==0.13.2
 matplotlib==3.9.2
 mamba==0.11.3
 firecloud==0.16.37
+google-cloud-storage==2.19.0
+pprintpp==0.4.0
+pysam==0.22.1
+Cython==3.0.11
+pyBigWig==0.3.23
+biopython==1.84
+resvg==0.1.2
+CairoSVG==2.7.1
+ipywidgets==8.1.5
+intervaltree==3.1.0
+py-open-fonts==0.7.0
+git+https://github.com/MethodsDev/ITV.git@master
