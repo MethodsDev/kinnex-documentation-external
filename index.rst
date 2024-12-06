@@ -57,9 +57,10 @@ to explore Kinnex datatypes.
    _subpages/bulk_tertiary_processing
    _subpages/readQC
    _subpages/single_cell_tertiary_processing
+   jupyter-notebooks/subsampling.nb.html
    jupyter-notebooks/id_mapping_from_gffcompare
    _subpages/isoformSwitch_bulk
-   jupyter-notebooks/genomeview_demo
+   jupyter-notebooks/demo-ITV
    _subpages/citations.rst
    _subpages/todo.rst
    
