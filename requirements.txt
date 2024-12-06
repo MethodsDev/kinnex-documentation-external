@@ -8,3 +8,5 @@ numpy==2.1.3
 pyranges==0.0.129
 seaborn==0.13.2
 matplotlib==3.9.2
+mamba==2.0.4
+firecloud==0.16.37
