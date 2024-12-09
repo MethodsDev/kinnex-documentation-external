@@ -1,4 +1,4 @@
-Welcome to MDL Kinnex Reosurces
+Welcome to MDL Kinnex Resources
 ================================
 
 |build-status| |binder| |ITV|
@@ -8,7 +8,7 @@ Purpose
 -------
 
 Repository to house ReadTheDocs pages and source code for public, external documentation to support Kinnex and MDL built tools, vignettes and recommended best practices.
-Index landing page for documenattaion: https://kinnex-documentation-external.readthedocs.io/en/latest/index.html
+Index landing page for documenatation: https://kinnex-documentation-external.readthedocs.io/en/latest/index.html
 
 
 .. |build-status| image:: https://readthedocs.org/projects/kinnex-documentation-external/badge/?version=latest

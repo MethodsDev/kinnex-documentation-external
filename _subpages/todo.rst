@@ -15,8 +15,15 @@ To-do Tasks/ Feedback
 |:stop_sign:| - blocked
 
 
-Outstanding tasks as of Nov 20th:
+Outstanding tasks as of Dec 9th:
 ---------------------------------
+1. single cell vignette update static images with Full dataset
+2. add in pseudo-bulk vignette (RMD plus html for static viewing)
+3. isoformSwitch for single cell
+4. add static plots in ipynb for ITV below respective code blocks
+
+Nov 20th:
+----------
 1. Integrate ITV - git lfs
 2. isoformSwitchAnalysisR - for bulk debug pfam
 3. isoformSwitchAnalyzeR - for single-cell - pseudo-bulk approach
