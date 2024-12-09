@@ -6,6 +6,7 @@
 import os
 from urllib.request import urlopen
 from pathlib import Path
+from recommonmark.parser import CommonMarkParser
 
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
@@ -19,10 +20,17 @@ author = 'mdl@broadinstitute.org'
 
 # -- General configuration ---------------------------------------------------
 
+source_parsers = {
+    '.md': CommonMarkParser,
+}
+source_suffix = ['.rst', '.md']
+
+
+
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = ["sphinx_design", "myst_nb",  "sphinxemoji.sphinxemoji"]
+extensions = ["sphinx_design", "myst_nb", "sphinxemoji.sphinxemoji", "sphinx_thebe"]
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ["_templates"]
@@ -61,8 +69,8 @@ myst_enable_extensions = [
 
 myst_url_schemes = ("http", "https", "mailto")
 
-jupyter_execute_notebooks = "auto"
-execution_allow_errors=True 
+nb_execution_mode = "auto"
+nb_execution_allow_errors=True 
 
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
@@ -75,9 +83,11 @@ html_theme_options = {
     "repository_url": "https://github.com/MethodsDev/kinnex-documentation-external",
     "repository_branch": "main",
     "launch_buttons": {
-        "binderhub_url": "https://mybinder.org",
+        "binderhub_url": "https://notebooks.gesis.org/binder/",
         "colab_url": "https://colab.research.google.com/",
-        "notebook_interface": "jupyterlab"
+        "deepnote_url": "https://deepnote.com/",
+        "notebook_interface": "jupyterlab",
+        "thebe": True,
     },
     "icon_links": [
         {
@@ -95,3 +105,6 @@ html_theme_options = {
 }
 
 
+thebe_config = {
+   "codemirror-theme": "material-palenight"
+}
