@@ -132,12 +132,7 @@ As GffCompare here is run with `-r` option, the 3rd column contains information 
 The `isoformSwitchAnalyzeR <https://www.bioconductor.org/packages/release/bioc/html/IsoformSwitchAnalyzeR.html>`_ is an R package developed to enable statistical identification of isoform switching and alternative isoform usage.
 The vignete here is based on the `isoformAnlayzeR tutorial provided <https://bioconductor.statistik.tu-dortmund.de/packages/3.8/bioc/vignettes/IsoformSwitchAnalyzeR/inst/doc/IsoformSwitchAnalyzeR.html>`_
 
-.. toctree::
-   :maxdepth: 1 
-   :caption: isoformSwitchAnalysisR:
-
-   ./isoformSwitch_bulk
-
+`Vignette for analyzing and plotting isoform Switching for Kinnex Full Length <https://kinnex-documentation-external.readthedocs.io/en/latest/_subpages/isoformSwitch_bulk.html>`_
 
 `Generating functional annotations`
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

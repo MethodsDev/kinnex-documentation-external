@@ -48,22 +48,50 @@ to explore Kinnex datatypes.
 
 .. toctree::
    :maxdepth: 2
-   :numbered:
-   :caption: Index:
+   :titlesonly:
+   :caption: Index : 
 
    _subpages/pb_guidelines
    _subpages/preprocessing_index
-   _subpages/secondary_processing
+
+
+.. toctree::
+   :maxdepth: 2
+   :numbered:
+   :titlesonly:
+   :caption: Kinnex Full Length :
+
+   _subpages/preprocessing_bulk
    _subpages/bulk_tertiary_processing
    _subpages/readQC
-   _subpages/single_cell_tertiary_processing
-   jupyter-notebooks/subsampling.nb.html
    jupyter-notebooks/id_mapping_from_gffcompare
    _subpages/isoformSwitch_bulk
    jupyter-notebooks/demo-ITV
    _subpages/citations.rst
    _subpages/todo.rst
-   
+
+
+.. toctree::
+   :maxdepth: 2
+   :numbered:
+   :titlesonly:
+   :caption: Kinnex Single Cell :
+
+   _subpages/preprocessing_sc
+   _subpages/secondary_processing
+   _subpages/readQC
+   _subpages/single_cell_tertiary_processing
+   jupyter-notebooks/subsampling.nb.html
+   jupyter-notebooks/demo-ITV
+
+
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Citations :
+
+   _subpages/citations.rst
+   _subpages/todo.rst
 
 
 Doc set-up Notes

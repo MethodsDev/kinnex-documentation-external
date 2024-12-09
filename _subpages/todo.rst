@@ -21,6 +21,7 @@ Outstanding tasks as of Dec 9th:
 2. add in pseudo-bulk vignette (RMD plus html for static viewing)
 3. isoformSwitch for single cell
 4. add static plots in ipynb for ITV below respective code blocks
+5. revise toctree structure 
 
 Nov 20th:
 ----------
