@@ -1,5 +1,5 @@
-Read-level Quality Controls
-+++++++++++++++++++++++++++
+2.2. Read-level Quality Controls
+==================================
 
 LongRNAqc+ is a workflow intended to look at base reads quality rather than collapsed reads, and to easily compare multiple samples on Terra. 
 Taking an aligned BAM as input for a sample, it runs a long-read adapted version of RNAqc<>, `SQANTI3 <https://www.nature.com/articles/s41592-024-02229-2>`_, and optionally IsoQuant. 

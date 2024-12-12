@@ -1,5 +1,5 @@
-Kinnex Single Cell
-===================
+1. Kinnex Single Cell
+=======================
 .. image:: ../_images/kinnex_sc_pb.png
     :scale: 45%
     :alt: Novel Methods and R&D
@@ -30,8 +30,8 @@ Kinnex Single Cell workflow overview:
    :align: left
 
 
-Preliminary analysis
---------------------
+1. Preliminary analysis
+-------------------------
 The pre-processing workflows extract clean s-reads using tools below which can then be provided to the alignment applications and other downstream workflows similar to those used to analyze Isoseq data.
 High level pre-processing is adopted from `Pacbio's CLI workflow <https://isoseq.how/umi/cli-workflow.html>`_
 
@@ -42,8 +42,8 @@ High level pre-processing is adopted from `Pacbio's CLI workflow <https://isoseq
    - `isoseq correct <https://isoseq.how/umi/isoseq-correct.html>`_ for correcting errors in cell barcodes, the total number of usable reads increased (typically ~5%)
 
 
-`pbskera`
-~~~~~~~~~
+1.1. `pbskera`
+~~~~~~~~~~~~~~
 The pbskera workflow, as detailed below, processes raw HiFi reads generated with Sequel2e and Revio Long Read sequencers. The HiFi reads are a current default, and can be plugged in directly into the workflow to get segmented s-reads. 
 
 Workflow configuration for runnning these over cloud platforms supporting Cromwell like Terra can be found here:-
@@ -93,8 +93,8 @@ In addition, to the readlength plot, the concatenation histogram should also ind
 The ligation heatmap distributes the number of reads by adapter pairs found in the array. They should cleanly align along the diagonal for a well-performing array.
 
 
-`pblima  + isoseq tag + isoseq refine + isoseq correct`
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1.2 `pblima  + isoseq tag + isoseq refine + isoseq correct`
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. figure:: ../_images/sc_schematic_worklfow.png
    :scale: 45%
@@ -121,4 +121,4 @@ Workflow configuration for runnning these over cloud platforms supporting Cromwe
    "pb_sc_lima_isoseq.gcs_output_dir": "${this.out_path}",
    "pb_sc_lima_isoseq.skera_bam": "${this.skera_bam}",
    "pb_sc_lima_isoseq.read_design": "T-12U-16B"
-}
+   }

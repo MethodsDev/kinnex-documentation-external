@@ -1,5 +1,5 @@
-Vignette for analyzing and plotting isoform Switching for Kinnex Full Length
-============================================================================
+1.3.6. Vignette for analyzing and plotting isoform Switching for Kinnex Full Length
+===================================================================================
 
 The `isoformSwitchAnalyzeR <https://www.bioconductor.org/packages/release/bioc/html/IsoformSwitchAnalyzeR.html>`_ is an R package developed to enable statistical identification of isoform switching and alternative isoform usage.
 This vignette is based on the `isoformAnlayzeR tutorial provided <https://bioconductor.statistik.tu-dortmund.de/packages/3.8/bioc/vignettes/IsoformSwitchAnalyzeR/inst/doc/IsoformSwitchAnalyzeR.html>`_
@@ -19,7 +19,7 @@ Setting the environment:
     if (length(setdiff(packages, rownames(installed.packages()))) > 0) {
         install.packages(setdiff(packages, rownames(installed.packages())))
     }
-}
+   }
 
 
 Install tidyverse, IsoformSwitchAnalyzeR and edgeR
@@ -443,7 +443,7 @@ Ref Ensmbl Ids in dataset
       filters = "ensembl_gene_id_version",
       values = isoformFeatures_wIds$ref_gene_id,
       mart = mart
-)
+   )
 
 .. code:: bash 
 
@@ -614,7 +614,7 @@ Reading the results in:
       switchAnalyzeRlist = aSwitchList_wRefIds,
       pathToDeepLoc2resultFile = file.path(pdir, "isoformSwitchAnalysisR/Output/DeepLoc_results_wCarets.csv"),
       quiet = FALSE
-)
+   )
 
 Terminal Out:
 Added subcellular information to 60 (83.33%) transcripts
@@ -652,6 +652,7 @@ Renaming Isoform Id by Transcript ID and Gffcompare class codes
 
 
 plotting "CAPG" out:
+
 .. code:: bash
 
    #{r} 
@@ -701,6 +702,7 @@ plotting "DDX5" out:
 
 
 plotting "CANX" out:
+
 .. code:: bash
 
    #{r} 
@@ -716,6 +718,7 @@ plotting "CANX" out:
    :align: center
 
 plotting "FAH" out:
+
 .. code:: bash
 
    #{r} 

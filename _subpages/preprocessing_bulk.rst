@@ -1,5 +1,5 @@
-Kinnex Full Length (bulk) sequencing
-====================================
+1. Kinnex Full Length (bulk) sequencing
+========================================
 
 .. image:: ../_images/kinnex_bulk_pb.png
    :scale: 45%
@@ -29,14 +29,14 @@ Here is a schematic representation of the multi-plexing scheme:
    :align: right
 
 Overall Workflow in a nutshell
-------------------------------
+--------------------------------
 
 .. figure:: ../_images/kinnex_bulk.png
    :alt: Novel Methods and R&D
    :align: left
 
 Preliminary analysis
---------------------
+---------------------
 The pre-processing workflows extract clean s-reads using 3 tools as below which can then be provided to the alignment applications and other downstream workflows similar to those used to analyze Isoseq data.
 
    - `skera <https://skera.how/>`_ for de-concatenating the MAS arrays into individual cDNA molecules and generate segmented reads (s-reads),
@@ -44,8 +44,8 @@ The pre-processing workflows extract clean s-reads using 3 tools as below which 
    - `isoseq refine <https://isoseq.how/getting-started.html>`_ for trimming poly(A) tails and extracting Full length non-concatemer reads (FLNC) from s-reads.
    - `samtools merge <https://www.htslib.org/doc/samtools-merge.html>`_ - only applicable in case technical replicates are generated to boost yeild by sequencing over mulitple flowcells, in which case the reads for each biological sample would require to me merged together.
 
-`pbskera`
-~~~~~~~~~
+1.1. `pbskera`
+~~~~~~~~~~~~~~~~
 The pbskera workflow, as detailed below, processes raw HiFi reads generated with Sequel2e and Revio Long Read sequencers. The HiFi reads are a current default, and can be plugged in directly into the workflow to get segmented s-reads. 
 
 Workflow configuration for runnning these over cloud platforms supporting Cromwell like Terra can be found here:-
@@ -97,8 +97,8 @@ In addition, to the readlength plot, the concatenation histogram should also ind
 The ligation heatmap distributes the number of reads by adapter pairs found in the array. They should cleanly align along the diagonal for a well-performing array.
 
 
-`lima demux + isoseq refine`
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1.2. `lima demux + isoseq refine`
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 This workflow uses 2 tools to extract clean s-reads from the skera.bam received above. 
 
 Workflow configuration for runnning these over cloud platforms supporting Cromwell like Terra can be found here:-
@@ -123,8 +123,8 @@ The direct command executed here is:
    :file: ../_subpages/tables/lima_refine_bulk.csv
    :header-rows: 1
 
-`merge`
-~~~~~~~
+1.3. `merge`
+~~~~~~~~~~~~~~
 The merge_refine_bams workflow, as detailed below, merges refined clean s-reads generated with workflows above for various technical replicates. It is an optional workflow and can be replaced by merging replicates by hand which is recommended if custom edits are to be made before merging like adding custom tags to the bam for each replicate.
 
 Workflow configuration for runnning these over cloud platforms supporting Cromwell like Terra can be found here:-

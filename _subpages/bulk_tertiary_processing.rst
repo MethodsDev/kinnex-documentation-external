@@ -28,8 +28,8 @@ and `UHRR Universal Human Reference RNA <https://www.thermofisher.com/order/cata
 
 (Add information on the kits used here)
 
-`minimap2`
-~~~~~~~~~~
+1.2.1. `minimap2`
+~~~~~~~~~~~~~~~~~
 The minimap2 workflow, as detailed below, maps long reads or their assemblies to a reference genome.
 The details and parameters can be found in the `minimap2 manual <https://lh3.github.io/minimap2/minimap2.html>`_ 
 
