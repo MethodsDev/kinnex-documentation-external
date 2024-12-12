@@ -1,5 +1,5 @@
-Vignette for Tertiary processing for SC-Kinnex
-===============================================
+2.3.Vignette for Tertiary processing for SC-Kinnex
+==================================================
 
 This vigentte leverages various parts of the `Seurat package <https://satijalab.org/seurat/>`_ and follows along in parts the `"Seurat - Guided Clustering Tutorial" <https://satijalab.org/seurat/articles/pbmc3k_tutorial.html>`_
 The standalone utility scIsoseqUtil.py, developed at MDL, creates sparce matrices from Isoquant Outs namely, transcript_model_reads and transcript_models_gtfs. 

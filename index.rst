@@ -52,37 +52,33 @@ to explore Kinnex datatypes.
    :caption: Index : 
 
    _subpages/pb_guidelines
-   _subpages/preprocessing_index
 
 
 .. toctree::
    :maxdepth: 2
-   :numbered:
    :titlesonly:
    :caption: Kinnex Full Length :
 
    _subpages/preprocessing_bulk
    _subpages/bulk_tertiary_processing
+   jupyter-notebooks/demo-ITV
    _subpages/readQC
    jupyter-notebooks/id_mapping_from_gffcompare
    _subpages/isoformSwitch_bulk
-   jupyter-notebooks/demo-ITV
-   _subpages/citations.rst
-   _subpages/todo.rst
 
 
 .. toctree::
    :maxdepth: 2
-   :numbered:
    :titlesonly:
    :caption: Kinnex Single Cell :
 
    _subpages/preprocessing_sc
    _subpages/secondary_processing
+   jupyter-notebooks/demo-ITV
    _subpages/readQC
    _subpages/single_cell_tertiary_processing
    jupyter-notebooks/subsampling.nb.html
-   jupyter-notebooks/demo-ITV
+
 
 
 

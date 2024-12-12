@@ -1,6 +1,6 @@
 
-Single Cell Downstream Processing
-==================================
+2.Single Cell Downstream Processing
+=====================================
 The cleaned s-read obtained from the Primary analysis can then be aligned to reference genome using  minimap2 `(publication link here) <https://academic.oup.com/bioinformatics/article/34/18/3094/4994778>`_.
 As good practice the aligned reads should be QCed 
 
@@ -25,8 +25,8 @@ More information on the dataset and other example datasets provided by PacBio fo
 Here is the `ATCC guide on PBMCs <https://www.atcc.org/cell-products/primary-cells/immune-cells/peripheral-blood-mononuclear-cells#t=productTab&numberOfResults=24>`_ 
 
 
-`minimap2`
-~~~~~~~~~~
+2.1. `minimap2`
+~~~~~~~~~~~~~~~~~
 The minimap2 workflow, as detailed below, maps long reads or their assemblies to a reference genome.
 The details and parameters can be found in the `minimap2 manual <https://lh3.github.io/minimap2/minimap2.html>`_ 
 
