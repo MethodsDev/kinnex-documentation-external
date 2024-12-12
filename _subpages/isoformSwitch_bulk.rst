@@ -1,4 +1,4 @@
-1.3.6. Vignette for analyzing and plotting isoform Switching for Kinnex Full Length
+3.6. Vignette for analyzing and plotting isoform Switching for Kinnex Full Length
 ===================================================================================
 
 The `isoformSwitchAnalyzeR <https://www.bioconductor.org/packages/release/bioc/html/IsoformSwitchAnalyzeR.html>`_ is an R package developed to enable statistical identification of isoform switching and alternative isoform usage.
