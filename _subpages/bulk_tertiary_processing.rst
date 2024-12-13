@@ -1,5 +1,5 @@
-Full Length Bulk Downstream Processing
-=======================================
+3. Full Length Bulk Downstream Processing
+=========================================
 
 After performing QC on the aligned reads using LongRNAseqQC, 
 we can proceed to perform transcript analysis using an array of tools put togther by folks using Long read sequencing.
@@ -23,52 +23,12 @@ The current recommended high-level workflow is as below:
 
 `Test Data`
 ~~~~~~~~~~~
-The test dataset used for demonstrating downstream processing workflows for Full Length correpsond to HG002 from the `Genome-in-a-Bottle project <https://www.nist.gov/programs-projects/genome-bottle>`_ 
-and `UHRR Universal Human Reference RNA <https://www.thermofisher.com/order/catalog/product/QS0639>`_ cell lines. 
-
-(Add information on the kits used here)
-
-1.2.1. `minimap2`
-~~~~~~~~~~~~~~~~~
-The minimap2 workflow, as detailed below, maps long reads or their assemblies to a reference genome.
-The details and parameters can be found in the `minimap2 manual <https://lh3.github.io/minimap2/minimap2.html>`_ 
-
-Workflow configuration for runnning the minimap2 workflow over cloud platforms supporting Cromwell like Terra can be found here:-
-The workflow is designed to be run on a sample. Technical replicates must be merged before.
+The test dataset used for demonstrating downstream processing workflows for Full Length correspond to HG002 from the `Genome-in-a-Bottle project <https://www.nist.gov/programs-projects/genome-bottle>`_ 
+and K562 cell lines. 
 
 
-      | Dockstore : `Minimap2_LR.wdl <https://dockstore.org/workflows/github.com/broadinstitute/MDL-workflows/Minimap2_LR>`_
-      | Github: `minimap2_LR <https://github.com/broadinstitute/MDL-workflows/blob/main/LR-tools/minimap2_LR/minimap2_LR.wdl>`_
-      | Test Data can be found here (public, requester-pays) : `add file path`
-
-
-.. csv-table:: minimap2
-   :file: ../_subpages/tables/minimap2.csv
-   :header-rows: 1
-
-
-**Example of input arguments for minimap2 workflow for alignment with Human Ref genome**
-
-.. code:: bash
-  :number-lines: 
-
-
-   {
-    "Minimap2_LR.Minimap2Task.cpu" : "${8}",
-    "Minimap2_LR.Minimap2Task.diskSizeGB" : "${500}",
-    "Minimap2_LR.inputReads" : "${this.ubam}",
-    "Minimap2_LR.referenceGenome" : "gs://mdl-refs/GRCh38/GRCh38_no_alt.fa",
-    "Minimap2_LR.juncBED" : "gs://mdl-refs/GRCh38/GRCh38.gencode.v39.annotation.sorted.bed",
-    "Minimap2_LR.sampleName" : "${this.sample_id}",
-    "Minimap2_LR.readType" : "PacBioIsoSeq",
-    "Minimap2_LR.customArguments" : "-G 1250k",
-    "Minimap2_LR.keepUnmapped" : "true",
-    "Minimap2_LR.allowSecondary" : "false",
-    "Minimap2_LR.preemptible_tries" : "${3}"
-  }
-
-`Isoquant - Isoform Discovery`
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+3.1 `Isoquant - Isoform Discovery`
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 .. csv-table:: Isoquant
@@ -76,8 +36,8 @@ The workflow is designed to be run on a sample. Technical replicates must be mer
   :widths: 20,25,55
   :header-rows: 1
 
-`Stringtie`
-~~~~~~~~~~~
+3.2 `Stringtie`
+~~~~~~~~~~~~~~~~
 `StringTie tool <https://ccb.jhu.edu/software/stringtie/index.shtml?t=manual>`_  is run with the --merge option, with a list of GTF/GFF files as input. It merges/assembles the input transcripts into a non-redundant set of transcripts. 
 In the workflow stringtie is used to merge the reconstructed GTFs from Isoquant ID to create a new reference.
 
@@ -88,8 +48,8 @@ Workflow configuration for runnning GffCompare on Terra can be found here:-
       | Test Data can be found here (public, requester-pays) : `add file path` 
 
 
-`Differential Expression with DEseq2`
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+3.3 `Differential Expression with DEseq2`
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 For performing differential expression analysis, `DEseq2 <http://bioconductor.org/packages/release/bioc/html/DESeq2.html>`_  implementation from Trinity RNA-seq project is detailed here.
 Trinity provides support for other differential expression analysis tools namely, edgeR, limma/voom and ROTS.
@@ -110,8 +70,8 @@ Trinity Toolkit also supports analysis of short read data. The overall workflow 
   --samples_file samples_desc.txt
 
 
-`Gffcompare`
-~~~~~~~~~~~~
+3.4 `Gffcompare`
+~~~~~~~~~~~~~~~~~
 `GffCompare is a utility <https://ccb.jhu.edu/software/stringtie/gffcompare.shtml>`_ used to compare two GTF/GFF files, which in reference based ID, is a reconstructed GTF resulted from merging individual GTFs from Isoquant ID with stringtie to the reference annotation GTF.
 The quick command is as below:
 
@@ -125,6 +85,17 @@ The quick command is as below:
 
 The tracking file generated in results contains the matching transcripts between samples. 
 As GffCompare here is run with `-r` option, the 3rd column contains information about the reference annotation transcript.
+
+
+3.5 `Extracting Long IDs`
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+Gffcompare gives us the Ensemble ids, which we can then reference back to the ids in the recontructed ref (MSTRG ids or Stringtie ids).
+We use the vignette to extract ids that are a combination of Reference gene ids, Reference Transcript Ids and Stringtie Gene Ids, String Tie Transcripts ids and the Gffcompare code used for matching.
+
+The format of long Ids like below:
+
+.. code:: bash
+  Stringtie.Gene.Id^Stringtie.Transcript.Id^Reference.Gene.Id^Reference.Transcript.Id^GffcompareCode
 
 `isoformSwitchAnalysisR`
 ~~~~~~~~~~~~~~~~~~~~~~~~~

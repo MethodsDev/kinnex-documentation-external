@@ -33,13 +33,13 @@ to explore Kinnex datatypes.
 .. grid:: 2 
 
     .. grid-item-card::  Kinnex Full Length 
-      :link: _subpages/preprocessing_bulk 
+      :link: _subpages/bulk_landing_page
       :link-type: doc
 
       ``Pre-processing workflows`` for ``bulk`` data
 
     .. grid-item-card::  Kinnex Single Cell
-      :link: _subpages/preprocessing_sc
+      :link: _subpages/sc_landing_page
       :link-type: doc
 
       Single-cell ``preliminary processing`` workflows
@@ -59,6 +59,7 @@ to explore Kinnex datatypes.
    :titlesonly:
    :caption: Kinnex Full Length :
 
+   _subpages/bulk_landing_page
    _subpages/preprocessing_bulk
    _subpages/bulk_tertiary_processing
    jupyter-notebooks/demo-ITV
@@ -72,6 +73,7 @@ to explore Kinnex datatypes.
    :titlesonly:
    :caption: Kinnex Single Cell :
 
+   _subpages/sc_landing_page
    _subpages/preprocessing_sc
    _subpages/secondary_processing
    jupyter-notebooks/demo-ITV

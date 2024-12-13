@@ -1,5 +1,5 @@
-2.3.Vignette for Tertiary processing for SC-Kinnex
-==================================================
+2.3 Vignette for Tertiary processing for SC-Kinnex
+===================================================
 
 This vigentte leverages various parts of the `Seurat package <https://satijalab.org/seurat/>`_ and follows along in parts the `"Seurat - Guided Clustering Tutorial" <https://satijalab.org/seurat/articles/pbmc3k_tutorial.html>`_
 The standalone utility scIsoseqUtil.py, developed at MDL, creates sparce matrices from Isoquant Outs namely, transcript_model_reads and transcript_models_gtfs. 
@@ -42,6 +42,19 @@ The code below is an ``R`` code, blocks can be copied to ``Rmd`` to excute local
 
 .. code:: bash
 
+    install_if_missing <- function(packages) {
+    if (length(setdiff(packages, rownames(installed.packages()))) > 0) {
+        install.packages(setdiff(packages, rownames(installed.packages())))
+        }
+    }
+
+    install_if_missing(c('tidyverse','stringr','dplyr','edgeR','ggrepel','DESeq2','Seurat','clustermole'))
+
+
+
+
+.. code:: bash
+
     # {r setup, include=FALSE}
         knitr::opts_chunk$set(echo = TRUE)
         library(tidyverse)
@@ -71,6 +84,38 @@ Reading data in using Read10x()
                unique.features = TRUE,
                strip.suffix = FALSE)
 
+
+UMI counts per cell:
+~~~~~~~~~~~~~~~~~~~~~
+
+.. code:: bash
+
+    #{r}
+        umi_counts_per_cell = colSums(data)
+
+
+sorting:
+~~~~~~~~
+
+.. code:: bash
+
+    #{r}
+        umi_counts_per_cell = sort(umi_counts_per_cell, decreasing = T)
+
+plotting :
+~~~~~~~~~~~
+
+.. code:: bash
+
+    #{r}
+        plot(umi_counts_per_cell, log='xy')
+        ggsave(filename='PBMC_complete_umi_counts_per_cell.png',path=data_dir, plot = last_plot())
+
+
+.. image:: ../_images/PBMC_complete_umi_counts_per_cell.png
+   :align: center
+
+
 Creating seurat object from counts matrix
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -83,8 +128,8 @@ Creating seurat object from counts matrix
 
 Terminal Out:
 
-11390 features across 500 samples within 1 assay 
-Active assay: RNA (11390 features, 0 variable features)
+30015 features across 12850 samples within 1 assay 
+Active assay: RNA (30015 features, 0 variable features)
 1 layer present: counts
 
 .. code:: bash
@@ -98,56 +143,65 @@ Terminal Out:
 
 median(nCount_RNA)        median(nFeature_RNA)
 <dbl>                     <dbl>
-2794.17                   799
+1904.405                   842
 
 
-Filtering on UMI counts
+PercentageFeatureSet - Calculate the percentage of all counts that belong to a given set of features
+
+.. code:: bash
+
+    #{r}
+        seurat_obj[["percent.mt"]] <- PercentageFeatureSet(seurat_obj, pattern = "^MT-")
+
+
+Exploring seurat object:
+
+
+.. code:: bash
+
+    #{r}
+        seurat_obj
+        seurat_obj@meta.data %>% head()
+
+
+UMI counts per cell
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code:: bash
 
     #{r}
-    UMI_count_high = 15000
-    UMI_count_low = 1500
-
-    
-    seurat_obj@meta.data %>% select(nCount_RNA) %>% arrange(desc(nCount_RNA)) %>% mutate(i=row_number()) %>%
-    ggplot(aes(x=i, y=nCount_RNA)) + geom_point() + theme_bw() + scale_y_continuous(trans='log10') +
-    ggtitle("nCount_RNA: UMI counts per cell") + 
-
-    geom_hline(yintercept=UMI_count_high) +
-    geom_hline(yintercept=UMI_count_low) 
+    seurat_obj@meta.data %>% dplyr::select(nCount_RNA) %>% 
+    arrange(desc(nCount_RNA)) %>% 
+    dplyr::mutate(i=row_number()) %>%
+    ggplot(aes(x=i, y=nCount_RNA)) + geom_point() + theme_bw() + 
+    scale_y_continuous(trans='log10') +
+    scale_x_continuous(trans='log10') +
+    ggtitle("nCount_RNA: UMI counts per cell")
 
 
-.. image:: ../_images/sc_vi1-nCountRNA.png
+.. image:: ../_images/PBMC_complete_nCount_RNA-umi_counts_per_cell.png
    :align: center
 
 
-Filtering on feature counts
+Feature counts per cell:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code:: bash
 
     #{r}
-    feature_count_high = 2000
-    feature_count_low = 300
+        seurat_obj@meta.data %>% dplyr::select(nFeature_RNA) %>% arrange(desc(nFeature_RNA)) %>% dplyr::mutate(i=row_number()) %>%
+        ggplot(aes(x=i, y=nFeature_RNA)) + geom_point() + theme_bw() + 
+        scale_y_continuous(trans='log10') +
+        scale_x_continuous(trans='log10') +
+        ggtitle("nFeature_RNA: gene count per cell") 
 
-    
-    seurat_obj@meta.data %>% select(nFeature_RNA) %>% arrange(desc(nFeature_RNA)) %>% mutate(i=row_number()) %>%
-    ggplot(aes(x=i, y=nFeature_RNA)) + geom_point() + theme_bw() + scale_y_continuous(trans='log10') +
-    ggtitle("nFeature_RNA: gene count per cell") + 
-
-    geom_hline(yintercept=feature_count_high) +
-    geom_hline(yintercept=feature_count_low)
-
-.. image:: ../_images/sc_vi2-nFeatureRNA.png
+.. image:: ../_images/PBMC_complete_nFeature_RNA-gene_count_per_cell.png
    :align: center
 
 
-.. code:: bash
+Visualize QC metrics as a violin plot
 
-    #{r}
-    seurat_obj[["percent.mt"]] <- PercentageFeatureSet(seurat_obj, pattern = "^MT-")
+VlnPlot: Draws a violin plot of single cell data (gene expression, metrics, PC scores, etc.)
 
 .. code:: bash
 
@@ -155,7 +209,7 @@ Filtering on feature counts
     # Visualize QC metrics as a violin plot
     VlnPlot(seurat_obj, features = c("nFeature_RNA", "nCount_RNA", "percent.mt"), ncol = 3)
 
-.. image:: ../_images/VlnPlot.png
+.. image:: ../_images/PBMC_complete_VlnPlot.png
    :align: center
 
 
@@ -166,9 +220,50 @@ Filtering on feature counts
     plot2 <- FeatureScatter(seurat_obj, feature1 = "nCount_RNA", feature2 = "nFeature_RNA")
     plot1 + plot2
 
-.. image:: ../_images/FeatureScatter.png
+.. image:: ../_images/PBMC_complete_FeatureScatter.png
    :align: center
 
+
+
+Saving object.RDS
+
+.. code:: bash
+
+    #{r}
+    #saveRDS(seurat_obj, file = paste0(data_dir, output_prefix, "-seurat_obj-preCellFiltering.rds"))
+
+
+filtering cells on percent Mitochondria:
+
+.. code:: bash
+
+    #{r}
+    #### filtering cells on 
+    length(seurat_obj$percent.mt < 15)
+    seurat_obj <- subset(seurat_obj, 
+                     percent.mt < 15)
+    seurat_obj
+
+
+
+Terminal Out:
+An object of class Seurat 
+30015 features across 12850 samples within 1 assay 
+Active assay: RNA (30015 features, 0 variable features)
+1 layer present: counts
+
+Summarize:
+
+.. code:: bash
+
+    #{r}
+        seurat_obj@meta.data %>% summarize(median(nCount_RNA), median(nFeature_RNA))
+
+
+Terminal Output:
+median(nCount_RNA)      median(nFeature_RNA)
+<dbl>                   <int>
+1904.405	                842
 
 NormalizeData : Normalize the count data present in a given assay.
 Normalization methods =
@@ -205,67 +300,6 @@ Feature variance is then calculated on the standardized values after clipping to
    :align: center
 
 
-Saving object.RDS
-~~~~~~~~~~~~~~~~~
-.. code:: bash
-
-    #{r}
-    # save before filtering
-
-    saveRDS(seurat_obj, file = paste0(output_prefix, "-seurat_obj-preCellFiltering.rds"))
-
-.. code:: bash
-
-    length(seurat_obj$percent.mt < 15)
-    feature_count_low
-    feature_count_high
-    UMI_count_low
-    UMI_count_high
-
-Terminal Out:
-
-[1] 415
-[1] 500
-[1] 1200
-[1] 1900
-[1] 5000
-
-.. code:: bash
-
-    #{r}
-    # filter cells
-
-    #### examine the above plots to decide on filtering thresholds below
-
-
-    seurat_obj <- subset(seurat_obj, 
-                        subset = nFeature_RNA > feature_count_low & nFeature_RNA < feature_count_high &
-                        nCount_RNA > UMI_count_low & nCount_RNA < UMI_count_high & 
-                        percent.mt < 15)
-
-    seurat_obj
-
-
-Temrinal Output:
-
-An object of class Seurat 
-11390 features across 415 samples within 1 assay 
-Active assay: RNA (11390 features, 2000 variable features)
-1 layer present: counts
-
-
-.. code:: bash
-
-    #{r}
-    # after filtering
-    seurat_obj@meta.data %>% summarize(median(nCount_RNA), median(nFeature_RNA))
-
-
-Temrinal Output:
-
-median(nCount_RNA)      median(nFeature_RNA)
-<dbl>                   <int>
-2838.12	                811	
 
 ScaleData: 
 Scales and centers features in the dataset. 
@@ -296,13 +330,13 @@ Graphs the output of a dimensional reduction technique (PCA by default). Cells a
     ElbowPlot(seurat_obj)
 
 
-.. figure:: ../_images/DimPlot.png
+.. figure:: ../_images/PBMC_complete_DimPlot.png
     :height: 500px
     :width: 1000px
     :align: center
 
 
-.. figure:: ../_images/ElbowPlot.png
+.. figure:: ../_images/PBMC_complete_ElbowPlot.png
    :height: 500px
    :width: 1000px
    :align: center
@@ -330,13 +364,13 @@ Feature Count plots from terminal out:
 .. list-table:: 
     :widths: 50 50 
 
-    * - .. figure:: ../_images/UMAP_DimPlot.png
-           :alt: UMAP_DimPlot.png
+    * - .. figure:: ../_images/PBMC_complete_UMAP_DimPlot.png
+           :alt: PBMC_complete_UMAP_DimPlot.png
 
            UMAP_DimPlot
 
-      - .. figure:: ../_images/nFeature_RNA_FeaturePlot.png
-           :alt: nFeature_RNA_FeaturePlot.png
+      - .. figure:: ../_images/PBMC_complete_nFeature_RNA_FeaturePlot.png
+           :alt: PBMC_complete_nFeature_RNA_FeaturePlot.png
 
            nFeature_RNA_FeaturePlot
 
@@ -345,12 +379,12 @@ Feature Count plots from terminal out:
 .. list-table:: 
     :widths: 50 50
 
-    * - .. figure:: ../_images/nFeature_RNA_FeaturePlot.png
+    * - .. figure:: ../_images/PBMC_complete_nCount_RNA_FeaturePlot.png
            :alt: nFeature_RNA_FeaturePlot
 
            nFeature_RNA_FeaturePlot
 
-      - .. figure:: ../_images/percent_mt_FeaturePlot.png
+      - .. figure:: ../_images/PBMC_complete_percent_mt_FeaturePlot.png
            :alt: percent_mt_FeaturePlot
 
            percent_mt_FeaturePlot
@@ -372,10 +406,16 @@ Terminal Out:
 
 seurat_clusters n frac
 <fctr> <int> <dbl>
-0	219	0.52771084	
-1	128	0.30843373		
-2	45	0.10843373	
-3	23	0.05542169	
+0	2314	0.180077821		
+1	2123	0.165214008		
+2	1940	0.150972763		
+3	1822	0.141789883		
+4	1604	0.124824903		
+5	1062	0.082645914		
+6	1035	0.080544747		
+7	281	0.021867704		
+8	280	0.021789883		
+9	235	0.018287938		
 
 
 DE, find markers:
@@ -482,6 +522,63 @@ The detailed report can be navigated using `"Help" <http://xteam.xbio.top/ACT/he
 
     #{r}
     saveRDS(seurat_obj, file = paste0(output_prefix, "-seurat_obj.rds"))
+
+
+Installing clustermole:
+https://cran.rstudio.com/web/packages/clustermole/vignettes/clustermole-intro.html
+
+.. code:: bash
+
+    #{r}
+    #BiocManager::install("igordot/clustermole", update = FALSE)
+
+
+using clustermole to add annotations:
+
+.. code:: bash
+
+    #{r}
+    library(clustermole)
+    clustermole_results = NULL
+
+    for (clnum in 0:max_cluster) {
+        cluster = top_20_markers %>% filter(cluster == clnum)
+
+        gene.symbols = sapply(cluster$gene, function(x) { str_split(x, "\\^")[[1]][1] })
+
+        gene.symbols = grep("ENSG|ENST|novel", gene.symbols, value=T, invert=T)
+
+
+    tryCatch(
+        expr = {
+
+        cat(paste0(clnum,":"))
+        cat(gene.symbols, sep=",")
+        cat("\n")
+
+        my_overlaps <- clustermole_overlaps(genes = gene.symbols, species = "hs")
+
+        clustermole_results = bind_rows(
+            clustermole_results,
+                                  my_overlaps %>% mutate(clnum = clnum))
+        },
+        error = function(e){
+        message("Error: ", e)
+        },
+        warning = function(w){
+        message("Warning: ", w)
+        }
+    )
+    }
+
+
+    clustermole_summary = clustermole_results  %>% filter(db == "PanglaoDB") %>%
+    group_by(clnum) %>% arrange(p_value) %>% filter(row_number() == 1) %>% arrange(clnum) %>%
+    ungroup() %>%
+    dplyr::select(clnum, organ, celltype, fdr)
+    
+    clustermole_summary
+
 
 
 Examining specific gene sets example
