@@ -494,12 +494,12 @@ Note - the tedious code below, which can use an R proficient R, worksaround the 
     #{r}
     #head(merged_sm, 3)
     write.table(as.matrix(merged_sm), 
-            file ="/Users/akhorgad/Desktop/MDL/RTD/kinnex_sc/complete_dataset/pseudo_bulk_counts.tsv",
+            file ="kinnex_sc/complete_dataset/pseudo_bulk_counts.tsv",
             row.names=TRUE,
             sep="\t")
 
     # temp <-
-    # read.table(file ="/Users/akhorgad/Desktop/MDL/RTD/kinnex_sc/complete_dataset/pseudo_bulk_counts.tsv",
+    # read.table(file ="kinnex_sc/complete_dataset/pseudo_bulk_counts.tsv",
     #            sep="\t")
     # 
     # 
@@ -507,6 +507,6 @@ Note - the tedious code below, which can use an R proficient R, worksaround the 
     # head(temp)
     # 
     # write.table(temp,
-    #             file ="/Users/akhorgad/Desktop/MDL/RTD/kinnex_sc/complete_dataset/pseudo_bulk_counts.tsv",col.names = TRUE,
+    #             file ="kinnex_sc/complete_dataset/pseudo_bulk_counts.tsv",col.names = TRUE,
     #             sep="\t")
 
