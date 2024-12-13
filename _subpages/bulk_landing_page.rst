@@ -1,4 +1,4 @@
-A. Kinnex Full Length (bulk) sequencing
+A. Kinnex Full Length (bulk) - Overview
 ========================================
 
 .. image:: ../_images/kinnex_bulk_pb.png
