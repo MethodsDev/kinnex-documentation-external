@@ -1,4 +1,4 @@
-3. Vignette for Tertiary processing for SC-Kinnex
+3.1 Vignette for Tertiary processing for SC-Kinnex
 ===================================================
 
 This vigentte leverages various parts of the `Seurat package <https://satijalab.org/seurat/>`_ and follows along in parts the `"Seurat - Guided Clustering Tutorial" <https://satijalab.org/seurat/articles/pbmc3k_tutorial.html>`_
