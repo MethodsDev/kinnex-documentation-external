@@ -1,5 +1,5 @@
-B. Kinnex Single Cell
-=======================
+B. Kinnex Single Cell - Overview
+=================================
 .. image:: ../_images/kinnex_sc_pb.png
     :scale: 45%
     :alt: Novel Methods and R&D
