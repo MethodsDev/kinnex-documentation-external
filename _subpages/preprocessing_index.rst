@@ -8,7 +8,7 @@ Most workflows have WDL wrappers publicly accessible via Dockstore with test dat
    :maxdepth: 1 
    :caption: Product Types:
    
-   preprocessing_bulk
-   preprocessing_sc
+   bulk_landing_page
+   sc_landing_page
 
 

@@ -1,5 +1,5 @@
 
-2.Single Cell Downstream Processing
+2. Single Cell Downstream Processing
 =====================================
 The cleaned s-read obtained from the Primary analysis can then be aligned to reference genome using  minimap2 `(publication link here) <https://academic.oup.com/bioinformatics/article/34/18/3094/4994778>`_.
 As good practice the aligned reads should be QCed 
