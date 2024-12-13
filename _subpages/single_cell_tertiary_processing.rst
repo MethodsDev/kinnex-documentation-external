@@ -52,7 +52,6 @@ The code below is an ``R`` code, blocks can be copied to ``Rmd`` to excute local
 
 
 
-
 .. code:: bash
 
     # {r setup, include=FALSE}
@@ -194,6 +193,7 @@ Feature counts per cell:
         scale_y_continuous(trans='log10') +
         scale_x_continuous(trans='log10') +
         ggtitle("nFeature_RNA: gene count per cell") 
+
 
 .. image:: ../_images/PBMC_complete_nFeature_RNA-gene_count_per_cell.png
    :align: center
