@@ -95,10 +95,11 @@ We use the vignette to extract ids that are a combination of Reference gene ids,
 The format of long Ids like below:
 
 .. code:: bash
+
   Stringtie.Gene.Id^Stringtie.Transcript.Id^Reference.Gene.Id^Reference.Transcript.Id^GffcompareCode
 
-`isoformSwitchAnalysisR`
-~~~~~~~~~~~~~~~~~~~~~~~~~
+3.6 `isoformSwitchAnalysisR`
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The `isoformSwitchAnalyzeR <https://www.bioconductor.org/packages/release/bioc/html/IsoformSwitchAnalyzeR.html>`_ is an R package developed to enable statistical identification of isoform switching and alternative isoform usage.
 The vignete here is based on the `isoformAnlayzeR tutorial provided <https://bioconductor.statistik.tu-dortmund.de/packages/3.8/bioc/vignettes/IsoformSwitchAnalyzeR/inst/doc/IsoformSwitchAnalyzeR.html>`_
