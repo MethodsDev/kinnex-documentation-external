@@ -76,7 +76,7 @@ to explore Kinnex datatypes.
    _subpages/secondary_processing
    _subpages/readQC
    jupyter-notebooks/demo-ITV
-   _subpages/single_cell_tertiary_processing
+   _subpages/single_cell_tertiary_processing_500cells
    _subpages/sc_subsampling.rst
 
 
