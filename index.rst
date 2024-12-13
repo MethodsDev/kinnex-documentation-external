@@ -80,7 +80,7 @@ to explore Kinnex datatypes.
    _subpages/readQC
    jupyter-notebooks/demo-ITV
    _subpages/single_cell_tertiary_processing
-   jupyter-notebooks/subsampling.nb.html
+   _subpages/sc_subsampling.rst
 
 
 .. toctree::
