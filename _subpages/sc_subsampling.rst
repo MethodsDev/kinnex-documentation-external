@@ -13,7 +13,7 @@ Pseudo-bulk ref : https://hbctraining.github.io/scRNA-seq_online/lessons/pseudob
 Other Refs:
 
 - Seurat Cheatsheet: https://hbctraining.github.io/scRNA-seq_online/lessons/seurat_cheatsheet.html
-- Seuart commands: https://satijalab.org/seurat/articles/essential_commands.html#fetchdata
+- Seurat commands: https://satijalab.org/seurat/articles/essential_commands.html#fetchdata
 
 
 
