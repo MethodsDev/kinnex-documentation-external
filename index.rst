@@ -48,7 +48,6 @@ to explore Kinnex datatypes.
 
 .. toctree::
    :maxdepth: 2
-   :titlesonly:
    :caption: Index : 
 
    _subpages/pb_guidelines
@@ -56,7 +55,6 @@ to explore Kinnex datatypes.
 
 .. toctree::
    :maxdepth: 4
-   :titlesonly:
    :caption: Kinnex Full Length :
 
    _subpages/bulk_landing_page
@@ -71,7 +69,6 @@ to explore Kinnex datatypes.
 
 .. toctree::
    :maxdepth: 4
-   :titlesonly:
    :caption: Kinnex Single Cell :
 
    _subpages/sc_landing_page
