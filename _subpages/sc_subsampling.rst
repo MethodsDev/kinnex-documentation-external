@@ -8,9 +8,10 @@ For easy sub-sampling, we will annotate sample names as 'Sample_R+cluster.id+rep
 
 We follow the pseudo-bulk vignette here closely:
 
-Pseudo-bulk ref: vignette:https://hbctraining.github.io/scRNA-seq_online/lessons/pseudobulk_DESeq2_scrnaseq.html
+Pseudo-bulk ref : https://hbctraining.github.io/scRNA-seq_online/lessons/pseudobulk_DESeq2_scrnaseq.html
 
 Other Refs:
+
 - Seurat Cheatsheet: https://hbctraining.github.io/scRNA-seq_online/lessons/seurat_cheatsheet.html
 - Seuart commands: https://satijalab.org/seurat/articles/essential_commands.html#fetchdata
 
