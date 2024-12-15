@@ -25,8 +25,6 @@ source_parsers = {
 }
 source_suffix = ['.rst', '.md']
 
-
-
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
@@ -104,6 +102,9 @@ html_theme_options = {
     "use_sidenotes": True
 }
 
+html_css_files = [
+    'css/custom.css',
+]
 
 thebe_config = {
    "codemirror-theme": "material-palenight"
