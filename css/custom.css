@@ -1,4 +1,5 @@
 svg {
-    max-width: 500%;
+    width: 500px;
+    border: 1px;
     height: auto;
   }
