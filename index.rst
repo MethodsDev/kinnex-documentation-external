@@ -3,8 +3,9 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-.. raw:: html
-  :file: _images/MDL_RTD.svg
+.. image:: _images/MDL_RTD.png
+   :align: center
+   :scale: 25%
 
 Resource for long-read RNA isoform sequencing analysis
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
