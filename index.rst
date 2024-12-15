@@ -3,29 +3,21 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-.. figure:: _images/mdl_logo.png
-   :alt: Novel Methods and R&D
-   :scale: 25 %
-   :align: center
+.. raw:: html
+  :file: _images/MDL_RTD.svg
 
-.. image:: _images/kinnex_logo.png
-   :alt: Novel Methods and R&D
-   :scale:  75% 
-   :align: center
-
-MDL documentation and resources for supporting Pacbio Kinnex
+Resource for long-read RNA isoform sequencing analysis
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-The purpose of this documentation is to walk-through the various available computational methods and resources available for Kinnex products, 
-to establish standard best-practices to explore the resulting datatypes and 
-to introduce updated guides for analysing various Kinnex products. 
+This website serves as an updated resource for bulk and single-cell RNA isoform sequencing analysis from Kinnex data. 
+Using latest methods and best practices, we have compiled a series of workflows and notebook vignettes to facilitate data processing and analysis. 
+We hope this resource will serve as a useful guide for this new and feature rich data type.
 
-For additional information on Kinnex, here is the orginal Nature Biotechnology publication for Kinnex or `MAS-ISO-seq` (Multiplexed ArrayS ISOform sequencing) as it was orginally called, authored by Aziz Al'Khafaji from the Methods Development Lab (MDL) at Broad and serves as a great resource to learn more about the protocol and the resulting datatypes :
+The Kinnex protocol is based on the MAS-ISO-seq method, developed at the Broad. For information on the approach, please reference the original publication in Nature Biotechnology:
    `High-throughput RNA isoform sequencing using programmed cDNA concatenation <https://doi.org/10.1038/s41587-023-01815-7>`_
 
 From receiving sequencing data from `PacBio's Revio <https://www.pacb.com/revio/>`_ sequencing platform, 
-the document steps through various pre-processing workflows for obtaining cleaned s-reads suitable for downstream processing and 
-various tertiary analysis workflows and vignettes developed by the `MDL team <https://methodsdevlab.org/>`_ at `Broad Clinical Labs <https://broadclinicallabs.org/>`_ 
+the document steps through various pre-processing workflows for obtaining cleaned s-reads suitable for downstream processing and tertiary analysis workflows and vignettes developed by the `MDL team <https://methodsdevlab.org/>`_ at `Broad Clinical Labs <https://broadclinicallabs.org/>`_ 
 to explore Kinnex datatypes.
 
 `Repository of Public Datasets for Kinnex, Sequel2e and previous MAS-ISO-seq versions <https://downloads.pacbcloud.com/public/dataset/>`_
@@ -36,13 +28,13 @@ to explore Kinnex datatypes.
       :link: _subpages/bulk_landing_page
       :link-type: doc
 
-      ``Pre-processing workflows`` for ``bulk`` data
+      ``Overview and workflow`` 
 
     .. grid-item-card::  Kinnex Single Cell
       :link: _subpages/sc_landing_page
       :link-type: doc
 
-      Single-cell ``preliminary processing`` workflows
+      ``Overview and workflow``
 
 
 
