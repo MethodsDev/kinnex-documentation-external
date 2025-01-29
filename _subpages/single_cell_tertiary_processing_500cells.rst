@@ -1,4 +1,4 @@
-3.1 Vignette for Tertiary processing for SC-Kinnex
+3.2 Vignette for Tertiary processing for SC-Kinnex
 ===================================================
 
 (The subsamples dataset used in this vignette has since been archived, and is currently in the process of being replaced with larger complete PBMC dataset.)
