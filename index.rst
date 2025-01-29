@@ -3,9 +3,9 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-.. image:: _images/MDL_RTD.png
+.. figure:: _images/MDL_RTD.png
    :align: center
-   :scale: 25%
+   :scale: 20%
 
 Resource for long-read RNA isoform sequencing analysis
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -81,39 +81,6 @@ to explore Kinnex datatypes.
    _subpages/todo.rst
 
 
-Doc set-up Notes
-=================
-To be removed during cleanup!!
-
-1. Link to best practices for Kinnex
-
-   a. Guidelines - PacBio SMRT link v13 guide for Kinnex product documentation - Troubleshooting guide - Wetlab perspective
-
-2. Processing the reads - Divide by Product type
-
-   a. PacBio documentation 
-   b. Our workflows with Dockstore links
-   c. Cleaned S-reads → downstream bioinformatic analyses 
-
-3. Read-level Quality Controls : 
-   
-   a. Read level SQANTI with RNAQC+
-
-4. Analysis Vignettes for Kinnex Full Length product type: 
-
-   a. Aligning to the genome - minimap2
-   b. Isoform ID with IsoQuant 
-   c. isoformQC
-   d. Isoform Quantification
-   e. Isoform Annotation - gffcompare, mdl- functional annotations attr vignette
-   f. Visualization - IGV, Genomeview
-   g. Differential Expression DEseq2
-   h. isoformSwitchAnlysisR
-
-5. Analysis Vignettes for Kinnex Single Cell Isoform analysis
-
-
-
 Indices and tables
 ==================
 
@@ -121,12 +88,5 @@ Indices and tables
 * :ref:`search`
 
 
-Foot Note
-==========
 
-This is a dev-test version of rtd-website to house MDL documentation. First we are trying to create the scanpy theme.
-The theme for scanpy is sphinx-book-theme, with patches for readthedocs-sphinx-search
-
-Next, we'll create the layout for the documentation and all the subsequent .rst pages. 
-Once done with the the landing index page and we'll add/edit the relevant information to corresponding pages.
 
