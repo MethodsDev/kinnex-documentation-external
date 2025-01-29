@@ -1,4 +1,4 @@
-3.2 Vignette for creating pseudo-bulk counts matrix 
+3.3 Vignette for creating pseudo-bulk counts matrix 
 ====================================================
 
 In order to perform isoform switching analysis downstream, we would create psuedo samples by breaking/sub-sampling from each cluster into 3 to create replicates.
