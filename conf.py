@@ -78,6 +78,8 @@ html_logo = "_images/bcl_logo.png"
 html_favicon = "_images/mdl_logo.png"
 
 html_theme_options = {
+    'body_max_width' : 'none',
+    'page_width': 'auto',
     "repository_url": "https://github.com/MethodsDev/kinnex-documentation-external",
     "repository_branch": "main",
     "launch_buttons": {
@@ -102,10 +104,11 @@ html_theme_options = {
     "use_sidenotes": True
 }
 
-html_css_files = [
-    'css/custom.css',
-]
-
 thebe_config = {
    "codemirror-theme": "material-palenight"
 }
+
+def setup(app):
+    app.add_css_file('my_theme.css')
+
+html_static_path = ['_static']
