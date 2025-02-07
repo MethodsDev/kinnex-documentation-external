@@ -1,11 +1,11 @@
 
 2. Single Cell Downstream Processing
 =====================================
-The cleaned s-reads obtained from the prelimimary analysis can then be aligned to reference genome using  minimap2 `(publication link here) <https://academic.oup.com/bioinformatics/article/34/18/3094/4994778>`_.
-As good practice the aligned reads should be QCed before proceeding furtgher. The recommended tool to perform QC on long reads is Long LongRNAseqQC detailed in the Kinnex Full Length workflow.
+The cleaned s-reads obtained from the preliminary analysis can then be aligned to reference genome using  minimap2 `(publication link here) <https://academic.oup.com/bioinformatics/article/34/18/3094/4994778>`_.
+As good practice the aligned reads should be QCed before proceeding further. The recommended tool to perform QC on long reads is Long LongRNAseqQC detailed in the Kinnex Full Length workflow.
 
    - `minimap2 <https://lh3.github.io/minimap2/minimap2.html>`_ for aligning reads
-   - LongRNAseqQC 
+   - LongRNAqcPlus 
    - ITV Integrative Transcriptomics View for inspecting read support (link notebook here)
 
 `isoseq master code: https://github.com/PacificBiosciences/IsoSeq/tree/master`
@@ -45,7 +45,7 @@ The workflow is designed to be run on a sample. Technical replicates must be mer
    :header-rows: 1
 
 
-**Example of input arguments for minimap2 workflow for alognment with human ref genome**
+**Example of input arguments for minimap2 workflow for alignment with human ref genome**
 
 .. code:: bash
   :number-lines: 
@@ -66,5 +66,6 @@ The workflow is designed to be run on a sample. Technical replicates must be mer
     "Minimap2_LR.preemptible_tries" : "${3}"
   }
 
-Please note, for the dowbstream processing with the single cell vigenette, it is important that minimap2 is run with config as above including tagsToExtract "CB,XM". This will retain the cell barcode (CB) and UMI (XM) in the minimap2 aligned bam which are later leveraged by the single cell analysis vignette 
+Please note, for the downstream processing with the single cell vignette, it is important that minimap2 is run with config as above including 
+tagsToExtract "CB,XM". This will retain the cell barcode (CB) and UMI (XM) in the minimap2 aligned bam which are later leveraged by the single cell analysis vignette 
 

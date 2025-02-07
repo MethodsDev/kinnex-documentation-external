@@ -70,7 +70,7 @@ to explore Kinnex datatypes.
    _subpages/readQC
    jupyter-notebooks/demo-ITV
    _subpages/LRAA_for_sc.rst
-   _subpages/single_cell_tertiary_processing_500cells
+   _subpages/single_cell_tertiary_processing
    _subpages/sc_subsampling.rst
 
 
