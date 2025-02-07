@@ -1,4 +1,4 @@
-3.1 Vignette for Tertiary processing for SC-Kinnex
+3.2 Vignette for Tertiary processing for SC-Kinnex
 ===================================================
 
 This vigentte leverages various parts of the `Seurat package <https://satijalab.org/seurat/>`_ and follows along in parts the `"Seurat - Guided Clustering Tutorial" <https://satijalab.org/seurat/articles/pbmc3k_tutorial.html>`_
@@ -124,11 +124,10 @@ Creating seurat object from counts matrix
     seurat_obj <- CreateSeuratObject(counts = data, project = "project", min.cells = 3, min.features = 200)
     seurat_obj
 
-
-Terminal Out:
-
-30015 features across 12850 samples within 1 assay 
-Active assay: RNA (30015 features, 0 variable features)
+Output:
+An object of class Seurat 
+25943 features across 12851 samples within 1 assay 
+Active assay: RNA (25943 features, 0 variable features)
 1 layer present: counts
 
 .. code:: bash
@@ -142,7 +141,7 @@ Terminal Out:
 
 median(nCount_RNA)        median(nFeature_RNA)
 <dbl>                     <dbl>
-1904.405                   842
+2250.01                    1087
 
 
 PercentageFeatureSet - Calculate the percentage of all counts that belong to a given set of features
@@ -245,11 +244,10 @@ filtering cells on percent Mitochondria:
     seurat_obj
 
 
-
 Terminal Out:
 An object of class Seurat 
-30015 features across 12850 samples within 1 assay 
-Active assay: RNA (30015 features, 0 variable features)
+25943 features across 12851 samples within 1 assay 
+Active assay: RNA (25943 features, 0 variable features)
 1 layer present: counts
 
 Summarize:
@@ -263,7 +261,7 @@ Summarize:
 Terminal Output:
 median(nCount_RNA)      median(nFeature_RNA)
 <dbl>                   <int>
-1904.405	                842
+2250.01	                1087
 
 NormalizeData : Normalize the count data present in a given assay.
 Normalization methods =
@@ -295,8 +293,9 @@ Feature variance is then calculated on the standardized values after clipping to
     plot1 <- VariableFeaturePlot(seurat_obj)
     plot2 <- LabelPoints(plot = plot1, points = top10, repel = TRUE)
     plot1 + plot2
+    
 
-.. image:: ../_images/sc_vi5-top10RNA.png
+.. image:: ../_images/PBMC_complete_VariableFeatures.png
    :align: center
 
 
@@ -316,15 +315,35 @@ Performing  PCA :
 ~~~~~~~~~~~~~~~~~
 
 RunPCA: Run Principal Component Analysis on gene expression using IRLBA. For details about stored PCA calculation parameters, see `PrintPCAParams`.
+
+.. code:: bash
+
+    #{r}
+    seurat_obj <- RunPCA(seurat_obj, features = VariableFeatures(object = seurat_obj))
+
+
+
 VizDimLoadings: Visualize top genes associated with reduction components
+
+.. code:: bash
+
+    #{r}
+
+    VizDimLoadings(seurat_obj, dims = 1:2, reduction = "pca")
+
+.. figure:: ../_images/PBMC_complete_VizDim.png
+    :height: 500px
+    :width: 1000px
+    :align: center
+
+
 DimPlot:
 Graphs the output of a dimensional reduction technique (PCA by default). Cells are colored by their identity class.
 
 .. code:: bash
 
     #{r}
-    seurat_obj <- RunPCA(seurat_obj, features = VariableFeatures(object = seurat_obj))
-    VizDimLoadings(seurat_obj, dims = 1:2, reduction = "pca")
+
     DimPlot(seurat_obj, reduction = "pca") + NoLegend()
     DimHeatmap(seurat_obj, dims = 1:3, cells = 500, balanced = TRUE)
     ElbowPlot(seurat_obj)
@@ -348,9 +367,9 @@ Generating UMAP :
 .. code:: bash
 
     #{r}
-    seurat_obj <- FindNeighbors(seurat_obj, dims = 1:10)
-    seurat_obj <- FindClusters(seurat_obj, resolution = 0.5)
-    seurat_obj <- RunUMAP(seurat_obj, dims = 1:10)
+    seurat_obj <- FindNeighbors(seurat_obj, dims = 1:8)
+    seurat_obj <- FindClusters(seurat_obj, resolution = 0.8)
+    seurat_obj <- RunUMAP(seurat_obj, dims = 1:8)
     DimPlot(seurat_obj, reduction = "umap")
 
     FeaturePlot(seurat_obj, features = c("nFeature_RNA"))
@@ -406,16 +425,20 @@ Terminal Out:
 
 seurat_clusters n frac
 <fctr> <int> <dbl>
-0	2314	0.180077821		
-1	2123	0.165214008		
-2	1940	0.150972763		
-3	1822	0.141789883		
-4	1604	0.124824903		
-5	1062	0.082645914		
-6	1035	0.080544747		
-7	281	0.021867704		
-8	280	0.021789883		
-9	235	0.018287938		
+0	2243	0.174538946
+1	1765	0.137343397	
+2	1693	0.131740721	
+3	1476	0.114854875	
+4	1358	0.105672710	
+5	1112	0.086530231	
+6	1040	0.080927554	
+7	979	0.076180842	
+8	523	0.040697222	
+9	262	0.020387518	
+10	218	0.016963660		
+11	102	0.007937126		
+12	54	0.004202008
+13	26	0.002023189	
 
 
 DE, find markers:
@@ -466,71 +489,20 @@ find markers for every cluster compared to all remaining cells, report only the 
 
     Terminal Out:
 
-    0:IL7R,LTB,PRKCQ-AS1,RPL34,RCAN3,GAS5,TCF7,LEF1,MAL,CD27,CCR7,ANKRD44-AS1,RGCC,RGS10,NOSIP,TMEM123,CAMK4
-    1:NKG7,GZMH,CST7,GZMA,GNLY,FGFBP2,CCL5,CCL4,PRF1,EFHD2,PLEK,HOPX,PFN1,GZMM,CALM1,GZMB,SH3BGRL3,CTSW,XCL2,TRGC2
-    2:CD79A,IGHM,CD79B,BANK1,HLA-DQA1,BCL11A,HLA-DRA,TCL1A,TNFRSF13C,HLA-DMB,HLA-DRB1,SWAP70,VPREB3,RALGPS2
-    3:CSTA,SERPINA1,CFD,VCAN,RGS2,MNDA,CD68,CYP27A1,RETN,CPVL,CLEC12A,LMO2,GRN,LST1,CYBB,NCF2,LILRA5,FCN1
-
-
-Run above list through: http://xteam.xbio.top/ACT to get cell type predictions.
-To read more on the ACT tool, the publication can be found here, 
-`"Annotation of cell types (ACT): a convenient web server for cell type annotation". <https://genomemedicine.biomedcentral.com/articles/10.1186/s13073-023-01249-5>`_
-The detailed report can be navigated using `"Help" <http://xteam.xbio.top/ACT/help.jsp>`_ page for ACT. 
-
-
-.. figure:: ../_images/cluster0_genelist.png
-   :scale: 90%
-   :align: center
-
-.. figure:: ../_images/Treeofcellontology_cluster0.png
-   :scale: 100%
-   :align: center
-
-.. figure:: ../_images/cluster1_genelist.png
-   :scale: 90%
-   :align: center
-
-.. figure:: ../_images/Treeofcellontology_cluster1.png
-   :scale: 100%
-   :align: center
-
-
-.. figure:: ../_images/cluster2_genelist.png
-   :scale: 90%
-   :align: center
-
-.. figure:: ../_images/Treeofcellontology_cluster2.png
-   :scale: 100%
-   :align: center
-
-.. figure:: ../_images/cluster3_genelist.png
-   :scale: 90%
-   :align: center
-
-.. figure:: ../_images/Treeofcellontology_cluster3.png
-   :scale: 100%
-   :align: center
-
-.. code:: bash
-
-    #{r}
-    # save files for later read/cell tracking
-
-    write.table( Idents(seurat_obj), paste0(output_prefix, "-cell_cluster_assignments.tsv"), quote=F, row.names=T, sep="\t")
-
-.. code:: bash
-
-    #{r}
-    saveRDS(seurat_obj, file = paste0(output_prefix, "-seurat_obj.rds"))
-
-
-Installing clustermole:
-https://cran.rstudio.com/web/packages/clustermole/vignettes/clustermole-intro.html
-
-.. code:: bash
-
-    #{r}
-    #BiocManager::install("igordot/clustermole", update = FALSE)
+    0:LTB,IL7R,RNU1-125P,NOSIP,TNFRSF4,LDHB,AQP3,RGCC,KLRB1,IL7R,GZMK,CD40LG,GPR171,TRADD,CCR4,NPDC1,MAL,IFNG-AS1,CD69
+    1:NKG7,GZMA,CCL5,LINC00987,A2M,GZMK,RNU1-125P,RNU6-1257P,SAMD3,PZP,TGFBR3,DUSP2,PYHIN1,GZMM,CCL4,KLRD1,GZMH,LINC01871,TRGV3,KLRC1
+    2:LEF1,CCR7,LINC02446,LRRN3,RPS16,RPS6,MIR7111,RPS3A,RPL19,RPL35A,ARL6IP1,RPL32,RPS28,SNORD38B,RPL34,TPT1,RPS23,RPL13,RPS12,RPS14
+    3:INPP4B,CDC14A,KLF12,LINC-PINT,ARHGAP15,PAG1,SKAP1,TC2N,CABYR,SERINC5,HIVEP2,STARD4-AS1,ANK3,BCL11B,CDC42SE2,BCL2,CYTH1,HELZ-AS1
+    4:NKG7,GNLY,GZMA,CCL5,KLRC1,RNU6-1257P,GZMH,KLRD1,TGFBR3,FGFBP2,GZMB,TRGV3,SAMD3,PYHIN1,CCL4,TRDC,GZMM,KLRF1,CX3CR1,HOPX
+    5:S100A8,MNDA,VCAN,CST3,FCN1,CD36,PLXDC2,TYROBP,RGS2,MS4A6A,CYBB,FOS,FGL2,CD14,LST1,CEBPD,AIF1,LYZ,ODF3B
+    6:BANK1,IGHV5-51,RALGPS2,AFF3,FCRL1,MS4A1,MEF2C,HLA-DRA,HLA-DPA1,HLA-DQA1,MARCHF1,CD79B,HLA-DMA,CD79A,HLA-DPB1,LYN,STX7,CD74,IGKV2-30,AFF3
+    7:LEF1,HELZ-AS1,BACH2,FHIT,MAML2,EIF4E3,CYP2R1,STARD4-AS1,TXK,SERINC5,MLLT3,MBNL1,BCL11B,C6orf132,FHIT,PDE7A,IL6ST,ARHGAP15,SATB1
+    8:MNDA,CST3,FCN1,PLXDC2,FGL2,CD36,LST1,MS4A6A,TYROBP,SPI1,PSAP,IGSF6,VCAN,CYBB,AIF1,HLA-DRA,CPPED1,GPX1
+    9:PLXDC2,RBM47,VCAN,ZEB2,SLC8A1,LRMDA,LYN,TBXAS1,AOAH,CPPED1,ARHGAP26,DMXL2,GRK3,CD36,MARCHF1,ATG7,NAMPT,DPYD
+    10:FCGR3A,MS4A14,PELATON,SERPINA1,IFITM3,CSF1R,LILRB2,LRRC25,CLN6,LINC02432,MYOF,CD300H,CTSL,NDUFB9,MS4A4A,HMOX1,LYPD2,CKB,CDKN1C,TCF7L2
+    11:FCER1A,CD1C,ENHO,CLEC10A,ATP1B1,CLIC2,FLT3,MIR511,PLD4,TIFAB,ZNF366,HLA-DPB2,IL18,CD1E,FCGR2B,TNFSF15
+    12:MZB1,CLEC4C,DERL3,PTPRS,SCT,PTCRA,PTPRS,LRRC26,SLC35F3,CUX2,PPP1R14B-AS1,SLC12A3,GLDC,SCAMP5,PHEX
+    13:GPRIN1,FCRL1,ADAM28,BANK1,LINC00926,g:chr1:-:comp-25443,OSBPL10,MS4A1,CD79A,MTARC2,CPNE5,FAM30A,LINC02397,FCGR1A,NMNAT1,PLEKHG1,CD40,COBLL1
 
 
 using clustermole to add annotations:
@@ -579,6 +551,46 @@ using clustermole to add annotations:
     
     clustermole_summary
 
+clnum organ celltype fdr
+<int> <chr> <chr> <dbl>
+0	Immune system	T cells	1.338613e-03	
+1	Immune system	NK cells	7.001437e-17	
+2	Immune system	T memory cells	2.180756e-02	
+3	Immune system	T memory cells	7.487984e-04	
+4	Immune system	NK cells	1.397130e-25	
+5	Immune system	Macrophages	1.327224e-08	
+6	Immune system	B cells	4.417823e-09	
+7	Immune system	T memory cells	1.208889e-02	
+8	Immune system	Macrophages	8.000349e-09	
+9	Blood	Reticulocytes	2.323308e-01	
+10	Immune system	Dendritic cells	2.491410e-01	
+11	Immune system	Dendritic cells	1.833132e-02	
+12	Immune system	Plasmacytoid dendritic cells	8.752285e-06	
+13	Immune system	B cells naive	1.240425e-06	
+
+
+.. code:: bash
+
+    #{r}
+    # save files for later read/cell tracking
+
+    write.table( Idents(seurat_obj), paste0(output_prefix, "-cell_cluster_assignments.tsv"), quote=F, row.names=T, sep="\t")
+
+.. code:: bash
+
+    #{r}
+    saveRDS(seurat_obj, file = paste0(output_prefix, "-seurat_obj.rds"))
+
+
+Installing clustermole:
+https://cran.rstudio.com/web/packages/clustermole/vignettes/clustermole-intro.html
+
+.. code:: bash
+
+    #{r}
+    #BiocManager::install("igordot/clustermole", update = FALSE)
+
+
 
 
 Examining specific gene sets example
@@ -591,7 +603,7 @@ Note, this helps to have the gene-symbol annotated gene features.
 
     marker_genes = list()
 
-    marker_genes[["CD8"]] = c("CD8A","CD8B","GZMB","TRB","TRA","PRF1", "GZMB")
+    marker_genes[["Tcells"]] = c("CD8A","CD8B","CD3","CD4","CD127","PRF1", "GZMB", "CD28","LTB")
 
 
 .. code:: bash
@@ -620,20 +632,83 @@ Note, this helps to have the gene-symbol annotated gene features.
 
     #{r}
     # paint umaps according to the features of interest
+    feature_ids = get_feature_names_with_gene_symbols(marker_genes[["Tcells"]])
+    
+    VlnPlot(seurat_obj, features = feature_ids, combine=FALSE)
 
-    feature_ids = get_feature_names_with_gene_symbols(marker_genes[["CD8"]])
 
-    VlnPlot(seurat_obj, features = feature_ids)
+
+
+.. list-table:: 
+    :widths: 33 33 33
+
+    * - .. figure:: ../_images/PBMC_complete_CD8A.png
+           :alt: CD8A
+
+           CD8A 
+
+      - .. figure:: ../_images/PBMC_complete_CD8B.png
+           :alt: CD8B
+
+           CD8B
+
+      - .. figure:: ../_images/PBMC_complete_CD28.png
+           :alt: CD4
+
+           CD4
+
+
+
+.. list-table:: 
+    :widths: 50 50
+
+    * - .. figure:: ../_images/PBMC_complete_CD4.png
+           :alt: CD88
+
+           CD88
+
+      - .. figure:: ../_images/PBMC_complete_GZMB.png
+           :alt: GZMB
+
+           GZMB
+
+
+.. code:: bash
+
+    #{r}
+
     FeaturePlot( seurat_obj, features = feature_ids)
 
+.. list-table:: 
+    :widths: 33 33 33
 
-.. figure:: ../_images/foi_VlnPlot.png
-    :height: 500px
-    :width: 1000px
-    :align: center
+    * - .. figure:: ../_images/PBMC_complete_FeaturePlot_CD8A.png
+           :alt: CD8A
+
+           CD8A 
+
+      - .. figure:: ../_images/PBMC_complete_FeaturePlot_CD8B.png
+           :alt: CD8B
+
+           CD8B
+
+      - .. figure:: ../_images/PBMC_complete_FeaturePlot_CD28.png
+           :alt: CD28
+
+           CD28
 
 
-.. figure:: ../_images/foi_FeaturePlot.png
-   :height: 500px
-   :width: 1000px
-   :align: center
+
+.. list-table:: 
+    :widths: 50 50
+
+    * - .. figure:: ../_images/PBMC_complete_FeaturePlot_PRF1.png
+           :alt: PRF1
+
+           PRF1
+
+      - .. figure:: ../_images/PBMC_complete_FeaturePlot_GZMB.png
+           :alt: GZMB
+
+           GZMB
+
