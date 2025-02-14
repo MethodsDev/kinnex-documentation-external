@@ -29,19 +29,42 @@ and K562 cell lines.
 
 3.1 `Isoquant - Isoform Discovery`
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Isoquant was introduced in 2023 as genome-based analysis tool for isoform discovery and quantification with long reads. 
+The original `Isoquant paper <https://www.nature.com/articles/s41587-022-01565-y>`_ describes the tool and various modes
+in which one can leverage it for long read analysis. 
+Below is the WDLized and containerized workflow built around the `Isoquant base code <https://github.com/ablab/IsoQuant>`_ to enable scaling on various Dockstore-supporting cloud platforms.
 
 
-.. csv-table:: Isoquant
-  :file: ../_subpages/tables/isoquant.csv
-  :widths: 20,25,55
-  :header-rows: 1
+Workflow configuration for running Isoquant for Isoform Discovery in Reference Guided mode on Terra can be found here:-
+
+      | Dockstore : `IsoQuant Quantify:main <https://dockstore.org/workflows/github.com/broadinstitute/MDL-workflows/IsoQuantQuantify>`_
+      | Github: `Isoquant wdls <https://github.com/broadinstitute/MDL-workflows/tree/main/LR-tools/IsoQuant>`_
+      | Test Data can be found here (public, requester-pays) : `add file path` 
+
+Configurations required for reference guided isoform reconstruction:
+
+.. code:: bash
+  :number-lines: 
+
+  {
+    "isoquantQuantify.readGroup": "${}",
+    "isoquantQuantify.noModelConstruction": "false",
+    "isoquantQuantify.inputBAMIndex": "${this.minimap2_bam_index}",
+    "isoquantQuantify.sampleName": "${this.sample_id}",
+    "isoquantQuantify.isCompleteGeneDB": "true",
+    "isoquantQuantify.dataType": "pacbio_ccs",
+    "isoquantQuantify.referenceAnnotation": "gs://mdl-refs/GRCh38/GRCh38.gencode.v39.annotation.gtf",
+    "isoquantQuantify.inputBAM": "${this.minimap2_bam}",
+    "isoquantQuantify.referenceFasta": "gs://mdl-refs/GRCh38/GRCh38_no_alt.fa"
+  }
+
 
 3.2 `Stringtie`
 ~~~~~~~~~~~~~~~~
 `StringTie tool <https://ccb.jhu.edu/software/stringtie/index.shtml?t=manual>`_  is run with the --merge option, with a list of GTF/GFF files as input. It merges/assembles the input transcripts into a non-redundant set of transcripts. 
 In the workflow stringtie is used to merge the reconstructed GTFs from Isoquant ID to create a new reference.
 
-Workflow configuration for runnning GffCompare on Terra can be found here:-
+Workflow configuration for running GffCompare on Terra can be found here:-
 
       | Dockstore : `stringtie_merge:main <https://dockstore.org/workflows/github.com/broadinstitute/MDL-workflows/StringTieMerge>`_
       | Github: `stringtie_merge_and_reestimate.wdl <https://github.com/broadinstitute/MDL-workflows/blob/main/LR-tools/stringtie_merge/stringtie_merge_and_reestimate.wdl>`_
