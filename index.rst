@@ -23,6 +23,11 @@ to explore Kinnex datatypes.
 
 `Repository of Public Datasets for Kinnex, Sequel2e and previous MAS-ISO-seq versions <https://downloads.pacbcloud.com/public/dataset/>`_
 
+.. admonition:: How do I get more information on available sequencing capabilities?
+
+   For more information on sequencing products, services and support available for Kinnex Products visit the `BCL website. <https://broadclinicallabs.org/mas-seq-services/>`_
+
+
 .. grid:: 2 
 
     .. grid-item-card::  Kinnex Full Length 
