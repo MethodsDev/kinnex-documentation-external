@@ -11,7 +11,7 @@ crcmod==1.7
 pyranges==0.0.129
 seaborn==0.13.2
 matplotlib==3.9.2
-mamba==2.0.6
+mamba==0.11.3
 firecloud==0.16.37
 google-cloud-storage==2.19.0
 pprintpp==0.4.0
