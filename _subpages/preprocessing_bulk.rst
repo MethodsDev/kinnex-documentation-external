@@ -81,7 +81,7 @@ The direct command executed here is:
 
        isoseq refine --require-polya -j 8 sample_id.lima.bam bulk_barcodes.fasta sample_id.refine.bam 
 
-**Input arguments for pbskera_main**
+**Input arguments for bulk_demux**
 
 .. csv-table:: `bulk lima+refine`
    :file: ../_subpages/tables/lima_refine_bulk.csv
@@ -116,7 +116,7 @@ The workflow calls the script below which leverages pysam utils to merge reads a
             -mergeReplicates \
             -setTitleSamplePlot ~{datasetId} 
 
-**Input arguments for pbskera_main**
+**Input arguments for merge_refine_bams**
 
 .. csv-table:: bulk - merge
    :file: ../_subpages/tables/merge_bulk.csv
