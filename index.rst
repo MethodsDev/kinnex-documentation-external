@@ -60,6 +60,7 @@ to explore Kinnex datatypes.
    _subpages/bulk_secondary_processing
    _subpages/readQC
    jupyter-notebooks/demo-ITV
+   _subpages/ctat_lr_fusion.rst
    _subpages/bulk_tertiary_processing
    jupyter-notebooks/id_mapping_from_gffcompare
    _subpages/isoformSwitch_bulk
