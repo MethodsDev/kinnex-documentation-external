@@ -31,6 +31,3 @@ Developer documentation
 - `SMRT Link v13.0 API use cases <https://www.pacb.com/wp-content/uploads/SMRT-Link-Web-Services-API-Use-Cases-v13.0.pdf>`_
 - `SMRT Link Python API reference v13.0 <https://www.pacb.com/wp-content/uploads/SMRT-Link-Python-API-Reference-v13.0.pdf>`_
 
-
-Special Notes from MDL:
-~~~~~~~~~~~~~~~~~~~~~~~
