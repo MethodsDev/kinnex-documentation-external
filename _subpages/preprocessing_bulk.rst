@@ -1,5 +1,7 @@
 1. Preliminary analysis - Bulk
 ===============================
+1. Preliminary analysis - Bulk
+===============================
 
 The pre-processing workflows extract clean s-reads using 3 tools as below which can then be provided to the alignment applications and other downstream workflows similar to those used to analyze Isoseq data.
 
