@@ -17,7 +17,7 @@ The pbskera workflow, as detailed below, processes raw HiFi reads generated with
 
 Workflow configuration for runnning these over cloud platforms supporting Cromwell like Terra can be found here:-
 
-      | Dockstore : `skera_w_QCplots.wdl <https://dockstore.org/my-workflows/github.com/MethodsDev/masseq_data_processing/pbskera_main>`_
+      | Dockstore : `skera_w_QCplots.wdl <https://dockstore.org/workflows/github.com/MethodsDev/masseq_data_processing/pbskera_main:main?tab=info>`_
       | Github: `Kinnex Preliminary Processing <https://github.com/MethodsDev/masseq_data_processing>`_
       | Test Data can be found here (public, requester-pays) : `gs://fc-secure-6b69ce23-e507-4375-929c-75ab7213f277/kinnex_sc/m84014_240128_083549_s3_sub0005.hifi_reads.bcM0003.bam`
 
@@ -73,8 +73,8 @@ This workflow uses 2 tools to extract clean s-reads from the skera.bam received 
 
 Workflow configuration for runnning these over cloud platforms supporting Cromwell like Terra can be found here:-
    
-      | Dockstore : `sc_kinnex_lima_plus_isoseq.wdl <https://dockstore.org/workflows/github.com/MethodsDev/masseq_data_processing/sc_kinnex_lima_plus_isoseq:main>`_
-      | Github : `Kinnex Single Cell Preliminary Processing <https://github.com/MethodsDev/masseq_data_processing/blob/main/wdl/pb_sc_lima_plus_isoseq.wdl>`_
+      | Dockstore : `sc_kinnex_lima_plus_isoseq.wdl <>`_
+      | Github : `Kinnex Single Cell Preliminary Processing <https://dockstore.org/workflows/github.com/MethodsDev/masseq_data_processing/sc_kinnex_lima_plus_isoseq:main?tab=info>`_
       | Test Data: `gs://fc-secure-6b69ce23-e507-4375-929c-75ab7213f277/kinnex_sc/m84014_240128_083549_s3_sub0005.bcM0003.skera.bam` (public, requester-pays)
 
 

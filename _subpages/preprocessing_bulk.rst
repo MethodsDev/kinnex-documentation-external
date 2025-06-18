@@ -14,7 +14,7 @@ The pbskera workflow, as detailed below, processes raw HiFi reads generated with
 
 Workflow configuration for runnning these over cloud platforms supporting Cromwell like Terra can be found here:-
 
-      | Dockstore : `skera_w_QCplots.wdl <https://dockstore.org/my-workflows/github.com/MethodsDev/masseq_data_processing/pbskera_main>`_
+      | Dockstore : `skera_w_QCplots.wdl <https://dockstore.org/workflows/github.com/MethodsDev/masseq_data_processing/pbskera_main:main?tab=info>`_
       | Github: `Kinnex Preliminary Processing <https://github.com/MethodsDev/masseq_data_processing>`_
       | Test Data can be found here (public, requester-pays) : `gs://mdl-preprocess-refs/test_data/m12345_123456_123456_s1.hifi_reads.bcM0003.bam` 
 
@@ -67,7 +67,7 @@ This workflow uses 2 tools to extract clean s-reads from the skera.bam received 
 
 Workflow configuration for runnning these over cloud platforms supporting Cromwell like Terra can be found here:-
    
-      | Dockstore : `bulk_demux.wdl <https://dockstore.org/workflows/github.com/MethodsDev/masseq_data_processing/bulk_demux>`_
+      | Dockstore : `bulk_demux.wdl <https://dockstore.org/workflows/github.com/MethodsDev/masseq_data_processing/bulk_demux:main?tab=info>`_
       | Github : `Kinnex Preliminary Processing <https://github.com/MethodsDev/masseq_data_processing>`_
       | Test Data: `gs://mdl-preprocess-refs/test_data/m12345_123456_123456_s1.hifi_reads.bcM0003.bam` (public, requester-pays)
 
@@ -93,7 +93,7 @@ The merge_refine_bams workflow, as detailed below, merges refined clean s-reads 
 
 Workflow configuration for runnning these over cloud platforms supporting Cromwell like Terra can be found here:-
 
-      | Dockstore : `merge_refine_bams.wdl <https://dockstore.org/workflows/github.com/MethodsDev/masseq_data_processing/merge_main>`_
+      | Dockstore : `merge_refine_bams.wdl <https://dockstore.org/workflows/github.com/MethodsDev/masseq_data_processing/merge_main:main?tab=info>`_
       | Github: `Kinnex Preliminary Processing <https://github.com/MethodsDev/masseq_data_processing/blob/main/wdl/merge_refine_bams.wdl>`_
       | Test Data can be found here (public, requester-pays) : `gs://mdl-preprocess-refs/test_data/m12345_123456_123456_s1.hifi_reads.bcM0003.bam` 
 
