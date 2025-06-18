@@ -13,7 +13,7 @@ seaborn==0.13.2
 matplotlib==3.9.2
 mamba==0.11.3
 gsutil==5.34
-google-cloud-storage==2.19.0
+#google-cloud-storage==2.19.0
 pprintpp==0.4.0
 pysam==0.22.1
 Cython==3.0.11
