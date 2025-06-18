@@ -4,7 +4,7 @@
 The pre-processing workflows extract clean s-reads using tools below which can then be provided to the alignment applications and other downstream workflows similar to those used to analyze Isoseq data.
 High level pre-processing is adopted from `Pacbio's CLI workflow <https://isoseq.how/umi/cli-workflow.html>`_
 
-   - `skera <https://skera.how/>`_ for de-concatenating the MAS arrays into individual cDNA molecules and generate segmented reads (s-reads),
+   - `skera <https://skera.how/>`_ for deconcatenating the MAS arrays into individual cDNA molecules and generate segmented reads (s-reads),
    - `lima <https://lima.how/>`_ for removal of primers and identification of barcodes and orienting sequences in 5’ → 3’ orientation.
    - `isoseq tag <https://isoseq.how/umi/umi-barcode-design.html#umibarcode-designs>`_  to clip tags (cell barcode, UMI, Gs). Supports design presets and custom experimental designs.
    - `isoseq refine <https://isoseq.how/getting-started.html>`_ for trimming poly(A) tails and extracting Full length non-concatemer reads (FLNC) from s-reads.
